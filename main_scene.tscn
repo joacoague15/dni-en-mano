@@ -1,0 +1,74 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5aa8bbwpr8mm"]
+
+[ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
+[ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
+
+[node name="Character" type="Node2D"]
+position = Vector2(570, 330)
+script = ExtResource("1_3f8pj")
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+position = Vector2(-280, -50)
+scale = Vector2(0.5, 0.5)
+
+[node name="AcceptButton" type="Button" parent="."]
+offset_left = -394.0
+offset_top = 193.0
+offset_right = -262.0
+offset_bottom = 294.0
+text = "Pasa"
+
+[node name="RejectButton" type="Button" parent="."]
+offset_left = -552.0
+offset_top = 198.0
+offset_right = -421.0
+offset_bottom = 287.0
+text = "No pasas"
+
+[node name="DNIInformation" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -19.0
+offset_top = -39.0
+offset_right = 535.0
+offset_bottom = 287.0
+script = ExtResource("2_m835h")
+
+[node name="ColorRect" type="ColorRect" parent="DNIInformation"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+color = Color(0, 0, 0, 1)
+
+[node name="NameLabel" type="Label" parent="DNIInformation"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 48.0
+
+[node name="BornDateLabel" type="Label" parent="DNIInformation"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 88.0
+
+[node name="DueDateLabel" type="Label" parent="DNIInformation"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 90.0
+offset_right = 500.0
+offset_bottom = 128.0
+
+[node name="PhotoSprite" type="Sprite2D" parent="DNIInformation"]
+position = Vector2(100, 100)
+scale = Vector2(0.2, 0.2)
+
+[connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
