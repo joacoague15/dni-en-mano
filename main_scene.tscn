@@ -70,21 +70,23 @@ offset_bottom = 128.0
 position = Vector2(100, 100)
 scale = Vector2(0.2, 0.2)
 
-[node name="ChangeToVectorButton" type="Button" parent="."]
-offset_left = 440.0
-offset_top = -320.0
-offset_right = 511.0
-offset_bottom = -285.0
-text = "Vector"
+[node name="CorrectCharacterLabel" type="Label" parent="."]
+offset_left = 355.0
+offset_top = -312.0
+offset_right = 395.0
+offset_bottom = -289.0
 
-[node name="ChangeToPixelArtButton" type="Button" parent="."]
-offset_left = 337.0
-offset_top = -317.0
-offset_right = 409.0
-offset_bottom = -286.0
-text = "Pixel art"
+[node name="IncorrectCharacterLabel" type="Label" parent="."]
+offset_left = 353.0
+offset_top = -264.0
+offset_right = 393.0
+offset_bottom = -241.0
+
+[node name="ResultLabel" type="Label" parent="."]
+offset_left = -222.0
+offset_top = 235.0
+offset_right = -182.0
+offset_bottom = 258.0
 
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
-[connection signal="pressed" from="ChangeToVectorButton" to="." method="_on_change_to_vector_button_pressed"]
-[connection signal="pressed" from="ChangeToPixelArtButton" to="." method="_on_change_to_pixel_art_button_pressed"]
