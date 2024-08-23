@@ -88,5 +88,12 @@ offset_top = 235.0
 offset_right = -182.0
 offset_bottom = 258.0
 
+[node name="CurrentDateLabel" type="Label" parent="."]
+offset_left = -552.0
+offset_top = -318.0
+offset_right = -396.0
+offset_bottom = -295.0
+text = "Fecha: 23 / 08 / 2024"
+
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]

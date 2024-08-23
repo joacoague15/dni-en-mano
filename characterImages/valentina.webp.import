@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dp67efprpfycj"
-path="res://.godot/imported/sofia.svg-5983bc45e3972fd7c10b20f3af717996.ctex"
+uid="uid://kctsm5sxuklk"
+path="res://.godot/imported/valentina.webp-5b9a5740dec287b845dbd43860088736.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characterVectors/sofia.svg"
-dest_files=["res://.godot/imported/sofia.svg-5983bc45e3972fd7c10b20f3af717996.ctex"]
+source_file="res://characterImages/valentina.webp"
+dest_files=["res://.godot/imported/valentina.webp-5b9a5740dec287b845dbd43860088736.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

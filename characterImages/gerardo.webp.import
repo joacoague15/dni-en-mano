@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btssobuswcvud"
-path="res://.godot/imported/marcos.svg-052f682e3c4f3c86972cfb8d1fc33e81.ctex"
+uid="uid://c8s4877dbogj8"
+path="res://.godot/imported/gerardo.webp-8e49fa02eccb2095dd1ae7f4c9cf041b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characterVectors/marcos.svg"
-dest_files=["res://.godot/imported/marcos.svg-052f682e3c4f3c86972cfb8d1fc33e81.ctex"]
+source_file="res://characterImages/gerardo.webp"
+dest_files=["res://.godot/imported/gerardo.webp-8e49fa02eccb2095dd1ae7f4c9cf041b.ctex"]
 
 [params]
 
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

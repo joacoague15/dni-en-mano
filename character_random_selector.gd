@@ -11,7 +11,11 @@ var persons = [
 	{"name": "Victoria", "image": preload("res://characterImages/victoria.webp"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "25-07-1995", "due_date": "01-12-2028", "document_photo": preload("res://characterImages/victoria.webp")}},
 	{"name": "Juan", "image": preload("res://characterImages/juan.webp"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25-07-2008", "due_date": "05-05-2030", "document_photo": preload("res://characterImages/juan.webp")}},
 	{"name": "Lucas", "image": preload("res://characterImages/lucas.webp"), "problem": "due_date", "dni": {"name": "Lucas Vitz", "born_date": "13-11-1997", "due_date": "14-03-2024", "document_photo": preload("res://characterImages/lucas.webp")}},
-	{"name": "Rosa", "image": preload("res://characterImages/rosa.webp"), "problem": null, "dni": {"name": "Rosa Yung", "born_date": "20-07-1995", "due_date": "10-10-2026", "document_photo": preload("res://characterImages/rosa.webp")}}
+	{"name": "Rosa", "image": preload("res://characterImages/rosa.webp"), "problem": null, "dni": {"name": "Rosa Yung", "born_date": "20-07-1995", "due_date": "10-10-2026", "document_photo": preload("res://characterImages/rosa.webp")}},
+	{"name": "Claudio", "image": preload("res://characterImages/claudio.webp"), "problem": null, "dni": {"name": "Claudio Fernandez", "born_date": "10-06-1998", "due_date": "10-12-2024", "document_photo": preload("res://characterImages/claudio.webp")}},
+	{"name": "Gerardo", "image": preload("res://characterImages/gerardo.webp"), "problem": null, "dni": {"name": "Gerardo Gonzalez", "born_date": "01-05-1999", "due_date": "10-01-2025", "document_photo": preload("res://characterImages/gerardo.webp")}},
+	{"name": "Romina", "image": preload("res://characterImages/romina.webp"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "01-05-1996", "due_date": "10-07-2024", "document_photo": preload("res://characterImages/romina.webp")}},
+	{"name": "Valentina", "image": preload("res://characterImages/valentina.webp"), "problem": null, "dni": {"name": "Valentina Gomez", "born_date": "01-05-1996", "due_date": "10-07-2025", "document_photo": preload("res://characterImages/valentina.webp")}}
 ]
 
 var current_videogame_date = "23-08-2024"
