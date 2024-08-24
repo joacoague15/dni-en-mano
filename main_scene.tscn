@@ -1,7 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=6 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1eb6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e6sb"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60xdp"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
@@ -25,6 +34,13 @@ offset_right = -421.0
 offset_bottom = 287.0
 text = "No pasas"
 
+[node name="ShowRulesButton" type="Button" parent="."]
+offset_left = -235.0
+offset_top = 195.0
+offset_right = -84.0
+offset_bottom = 297.0
+text = "Mostrar reglas"
+
 [node name="DNIInformation" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -37,11 +53,13 @@ script = ExtResource("2_m835h")
 [node name="ColorRect" type="ColorRect" parent="DNIInformation"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
+anchor_left = -0.083
+anchor_top = 0.003
+anchor_right = 0.917
 anchor_bottom = 1.0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = -1.0
+offset_left = -0.0179977
+offset_top = 0.022
+offset_right = -0.0180359
 offset_bottom = 1.0
 color = Color(0, 0, 0, 1)
 
@@ -83,10 +101,11 @@ offset_right = 393.0
 offset_bottom = -241.0
 
 [node name="ResultLabel" type="Label" parent="."]
-offset_left = -222.0
-offset_top = 235.0
-offset_right = -182.0
-offset_bottom = 258.0
+visible = false
+offset_left = 211.0
+offset_top = -297.0
+offset_right = 251.0
+offset_bottom = -274.0
 
 [node name="CurrentDateLabel" type="Label" parent="."]
 offset_left = -552.0
@@ -95,5 +114,25 @@ offset_right = -396.0
 offset_bottom = -295.0
 text = "Fecha: 23 / 08 / 2024"
 
+[node name="RulesLabel" type="Label" parent="."]
+visible = false
+offset_left = -361.0
+offset_top = -303.0
+offset_right = 326.0
+offset_bottom = 142.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_f1eb6")
+
+[node name="VerticalBar" type="ProgressBar" parent="."]
+offset_left = 516.0
+offset_top = -34.0
+offset_right = 556.0
+offset_bottom = 291.0
+theme_override_styles/background = SubResource("StyleBoxFlat_0e6sb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_60xdp")
+min_value = -100.0
+fill_mode = 3
+show_percentage = false
+
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
+[connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
