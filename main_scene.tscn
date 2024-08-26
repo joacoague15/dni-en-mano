@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=7 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
+[ext_resource type="Script" path="res://DialogueControl.gd" id="3_sps78"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1eb6"]
 bg_color = Color(0, 0, 0, 1)
@@ -132,6 +133,32 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_60xdp")
 min_value = -100.0
 fill_mode = 3
 show_percentage = false
+
+[node name="DialogueControl" type="Node" parent="."]
+script = ExtResource("3_sps78")
+
+[node name="PlayerDialogueLabel" type="Label" parent="DialogueControl"]
+anchors_preset = -1
+anchor_left = 0.038
+anchor_top = 0.11
+anchor_right = 0.082
+anchor_bottom = 0.151
+offset_left = 0.223999
+offset_top = -0.280006
+offset_right = 0.535995
+offset_bottom = 0.151993
+
+[node name="CharacterDialogueLabel" type="Label" parent="DialogueControl"]
+anchors_preset = -1
+anchor_left = 0.089
+anchor_top = 0.156
+anchor_right = 0.161
+anchor_bottom = 0.224
+offset_left = 0.472
+offset_top = -0.0880051
+offset_right = 0.527985
+offset_bottom = -0.152008
+horizontal_alignment = 2
 
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
