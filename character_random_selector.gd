@@ -7,6 +7,7 @@ extends Node2D
 @onready var rules_label = $RulesLabel
 @onready var show_rules_button = $ShowRulesButton
 @onready var vertical_bar = $VerticalBar
+@onready var character_animation_player := $CharacterSprite/AnimationPlayer
 
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/camila.webp"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/camila.webp")}},
@@ -51,12 +52,27 @@ func select_random_person():
 	
 func update_person_image():
 	if selected_index != -1 and persons.size() > 0:
-		var selected_person = persons[selected_index]
-		$CharacterSprite.texture = selected_person["image"]
-		$CharacterSprite.visible = true
+		if character_animation_player.is_playing():
+			return
+			
+		if $CharacterSprite.visible:
+			character_animation_player.play("slide_and_fade")
+		else:
+			_show_and_slide_in()
 	else:
 		$CharacterSprite.visible = false
 		print("No valid person or list is empty.")
+		
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "slide_and_fade":
+		var selected_person = persons[selected_index]
+		$CharacterSprite.texture = selected_person["image"]
+		$CharacterSprite.modulate.a = 1.0
+		_show_and_slide_in()
+		
+func _show_and_slide_in():
+	$CharacterSprite.visible = true
+	character_animation_player.play("slide_and_appear")
 		
 func update_correct_incorrect_count():
 	correct_label.text = "Aciertos: %d" % correct_characters

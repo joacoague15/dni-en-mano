@@ -1,8 +1,96 @@
-[gd_scene load_steps=7 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=11 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
 [ext_resource type="Script" path="res://DialogueControl.gd" id="3_sps78"]
+
+[sub_resource type="Animation" id="Animation_1bwfy"]
+resource_name = "slide_and_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-650, -50), Vector2(-260, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_51mvr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-280, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_pku3k"]
+resource_name = "slide_and_fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-260, -50), Vector2(100, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3vq8n"]
+_data = {
+"RESET": SubResource("Animation_51mvr"),
+"slide_and_appear": SubResource("Animation_1bwfy"),
+"slide_and_fade": SubResource("Animation_pku3k")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1eb6"]
 bg_color = Color(0, 0, 0, 1)
@@ -20,6 +108,11 @@ script = ExtResource("1_3f8pj")
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 position = Vector2(-280, -50)
 scale = Vector2(0.5, 0.5)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_3vq8n")
+}
 
 [node name="AcceptButton" type="Button" parent="."]
 offset_left = -394.0
@@ -160,6 +253,7 @@ offset_right = 0.527985
 offset_bottom = -0.152008
 horizontal_alignment = 2
 
+[connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
