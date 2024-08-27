@@ -7,7 +7,8 @@ extends Node2D
 @onready var rules_label = $RulesLabel
 @onready var show_rules_button = $ShowRulesButton
 @onready var vertical_bar = $VerticalBar
-@onready var character_animation_player := $CharacterSprite/AnimationPlayer
+@onready var character_animation_player = $CharacterSprite/AnimationPlayer
+@onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
 
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/camila.webp"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/camila.webp")}},
@@ -63,12 +64,20 @@ func update_person_image():
 		$CharacterSprite.visible = false
 		print("No valid person or list is empty.")
 		
+func _on_animation_player_animation_started(anim_name):
+	if anim_name == "slide_and_fade" and persons.size() > 0:
+		dni_animation_player.play("dni_disappear")
+		
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "slide_and_fade" and persons.size() > 0:
 		var selected_person = persons[selected_index]
 		$CharacterSprite.texture = selected_person["image"]
 		$CharacterSprite.modulate.a = 1.0
 		_show_and_slide_in()
+	if anim_name == "slide_and_appear":
+		var current_dialogue_index = 0
+		$DialogueControl.show_dialogue(current_dialogue_index)
+		dni_animation_player.play("dni_appear")
 		
 func _show_and_slide_in():
 	$CharacterSprite.visible = true
@@ -133,8 +142,6 @@ func apply_rules():
 	
 	rules_label.text = rules_text
 		
-
-
 func _on_show_rules_button_pressed():
 	rules_label.visible = not rules_label.visible
 	if rules_label.visible:
