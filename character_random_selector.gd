@@ -38,7 +38,7 @@ func _ready():
 	
 func select_random_person():
 	if persons.size() == 0:
-		print("No more persons available.")
+		print("No more persons available. Result screen")
 		$CharacterSprite.visible = false
 		return
 		
@@ -64,7 +64,7 @@ func update_person_image():
 		print("No valid person or list is empty.")
 		
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == "slide_and_fade":
+	if anim_name == "slide_and_fade" and persons.size() > 0:
 		var selected_person = persons[selected_index]
 		$CharacterSprite.texture = selected_person["image"]
 		$CharacterSprite.modulate.a = 1.0
@@ -73,6 +73,9 @@ func _on_animation_player_animation_finished(anim_name):
 func _show_and_slide_in():
 	$CharacterSprite.visible = true
 	character_animation_player.play("slide_and_appear")
+	persons.remove_at(selected_index)
+	var selected_index = -1
+	var previous_index = -1
 		
 func update_correct_incorrect_count():
 	correct_label.text = "Aciertos: %d" % correct_characters
@@ -82,16 +85,18 @@ func update_result_message(result_message):
 	result_label.text = result_message
 	
 func _on_accept_button_pressed():
-	var selected_person = persons[selected_index]	
-	handle_accept_reject(selected_person["problem"], true)
-	dni_information.display_person_dni(selected_person["dni"])	
-	select_random_person()
+	if selected_index != -1 and selected_index < persons.size():
+		var selected_person = persons[selected_index]	
+		handle_accept_reject(selected_person["problem"], true)
+		dni_information.display_person_dni(selected_person["dni"])	
+		select_random_person()
 
 func _on_reject_button_pressed():
-	var selected_person = persons[selected_index]	
-	handle_accept_reject(selected_person["problem"], false)
-	dni_information.display_person_dni(selected_person["dni"])
-	select_random_person()
+	if selected_index != -1 and selected_index < persons.size():
+		var selected_person = persons[selected_index]	
+		handle_accept_reject(selected_person["problem"], false)
+		dni_information.display_person_dni(selected_person["dni"])
+		select_random_person()
 		
 func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
