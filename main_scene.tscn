@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=16 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
+[ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -310,6 +311,22 @@ offset_left = 0.039978
 offset_top = -0.160004
 offset_right = -0.280029
 offset_bottom = 0.159988
+
+[node name="CountdownNode" type="Node" parent="."]
+script = ExtResource("4_08bw2")
+
+[node name="CountdownTimer" type="Timer" parent="CountdownNode"]
+
+[node name="CountdownLabel" type="Label" parent="CountdownNode"]
+anchors_preset = -1
+anchor_left = 0.179
+anchor_top = 0.017
+anchor_right = 0.227
+anchor_bottom = 0.077
+offset_left = -0.208008
+offset_top = -0.0160007
+offset_right = 0.495972
+offset_bottom = 0.103996
 
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]

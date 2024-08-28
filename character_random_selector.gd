@@ -31,6 +31,8 @@ var previous_index = -1
 var correct_characters = 0
 var incorrect_characters = 0
 
+var active_dni_disappear = false
+
 func _ready():
 	select_random_person()
 	update_correct_incorrect_count()
@@ -65,7 +67,7 @@ func update_person_image():
 		print("No valid person or list is empty.")
 		
 func _on_animation_player_animation_started(anim_name):
-	if anim_name == "slide_and_fade" and persons.size() > 0:
+	if anim_name == "slide_and_fade" and persons.size() > 0 and active_dni_disappear:
 		dni_animation_player.play("dni_disappear")
 		
 func _on_animation_player_animation_finished(anim_name):
@@ -75,13 +77,13 @@ func _on_animation_player_animation_finished(anim_name):
 		$CharacterSprite.modulate.a = 1.0
 		_show_and_slide_in()
 	if anim_name == "slide_and_appear":
-		var current_dialogue_index = 0
-		$DialogueControl.show_dialogue(current_dialogue_index)
+		$DialogueControl.show_dialogue()
 		dni_animation_player.play("dni_appear")
 		
 func _show_and_slide_in():
 	$CharacterSprite.visible = true
 	character_animation_player.play("slide_and_appear")
+	active_dni_disappear = true
 	persons.remove_at(selected_index)
 	var selected_index = -1
 	var previous_index = -1
