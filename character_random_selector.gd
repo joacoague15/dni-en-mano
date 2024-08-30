@@ -78,7 +78,6 @@ func _on_animation_player_animation_finished(anim_name):
 		_show_and_slide_in()
 	if anim_name == "slide_and_appear":
 		$DialogueControl.show_dialogue()
-		dni_animation_player.play("dni_appear")
 		
 func _show_and_slide_in():
 	$CharacterSprite.visible = true
