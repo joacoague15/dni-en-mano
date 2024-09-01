@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=18 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
+[ext_resource type="Texture2D" uid="uid://j231evye2gy8" path="res://dni.png" id="3_51jtu"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
+[ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -44,7 +46,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-650, -50), Vector2(-260, -50)]
+"values": [Vector2(-650, -50), Vector2(-100, -50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -121,7 +123,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-19, 400), Vector2(-19, -39)]
+"values": [Vector2(40, 400), Vector2(40, 90)]
 }
 
 [sub_resource type="Animation" id="Animation_gt23q"]
@@ -160,7 +162,15 @@ bg_color = Color(1, 1, 1, 1)
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
 
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -821.0
+offset_top = -452.0
+offset_right = 831.0
+offset_bottom = 427.0
+color = Color(0, 0, 0, 1)
+
 [node name="CharacterSprite" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-280, -50)
 scale = Vector2(0.5, 0.5)
 
@@ -170,77 +180,66 @@ libraries = {
 }
 
 [node name="AcceptButton" type="Button" parent="."]
-offset_left = -394.0
-offset_top = 193.0
-offset_right = -262.0
-offset_bottom = 294.0
+offset_left = 163.0
+offset_top = 219.0
+offset_right = 313.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 28
 text = "Pasa"
 
 [node name="RejectButton" type="Button" parent="."]
-offset_left = -552.0
-offset_top = 198.0
-offset_right = -421.0
-offset_bottom = 287.0
-text = "No pasas"
+offset_top = 220.0
+offset_right = 150.0
+offset_bottom = 300.0
+theme_override_font_sizes/font_size = 24
+text = "No pasa"
 
 [node name="ShowRulesButton" type="Button" parent="."]
-offset_left = -235.0
-offset_top = 195.0
-offset_right = -84.0
-offset_bottom = 297.0
-text = "Mostrar reglas"
+offset_left = -330.0
+offset_top = 261.0
+offset_right = -254.0
+offset_bottom = 312.0
+text = "Reglas"
 
-[node name="DNIInformation" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -19.0
-offset_top = 400.0
-offset_right = 535.0
-offset_bottom = 726.0
+[node name="DNIInformation" type="Sprite2D" parent="."]
+position = Vector2(-19, 400)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_51jtu")
 script = ExtResource("2_m835h")
 
-[node name="ColorRect" type="ColorRect" parent="DNIInformation"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = -0.083
-anchor_top = 0.003
-anchor_right = 0.917
-anchor_bottom = 1.0
-offset_left = -0.0179977
-offset_top = 0.022
-offset_right = -0.0180359
-offset_bottom = 1.0
-color = Color(0, 0, 0, 1)
-
 [node name="NameLabel" type="Label" parent="DNIInformation"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 500.0
-offset_bottom = 48.0
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 227.5
+offset_top = -130.0
+offset_right = 577.5
+offset_bottom = -89.0
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 50.0
-offset_right = 500.0
-offset_bottom = 88.0
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 210.0
+offset_top = -35.0
+offset_right = 570.0
+offset_bottom = 2.0
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 90.0
-offset_right = 500.0
-offset_bottom = 128.0
-
-[node name="PhotoSprite" type="Sprite2D" parent="DNIInformation"]
-position = Vector2(100, 100)
-scale = Vector2(0.2, 0.2)
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 205.0
+offset_top = 33.0
+offset_right = 540.0
+offset_bottom = 68.0
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
 libraries = {
 "": SubResource("AnimationLibrary_mjyla")
 }
+
+[node name="PortraitSprite" type="Sprite2D" parent="DNIInformation"]
+position = Vector2(200, -30)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("4_j40fr")
 
 [node name="CorrectCharacterLabel" type="Label" parent="."]
 offset_left = 355.0
@@ -262,10 +261,10 @@ offset_right = 251.0
 offset_bottom = -274.0
 
 [node name="CurrentDateLabel" type="Label" parent="."]
-offset_left = -552.0
-offset_top = -318.0
-offset_right = -396.0
-offset_bottom = -295.0
+offset_left = -500.0
+offset_top = 280.0
+offset_right = -344.0
+offset_bottom = 303.0
 text = "Fecha: 23 / 08 / 2024"
 
 [node name="RulesLabel" type="Label" parent="."]
@@ -319,14 +318,14 @@ script = ExtResource("4_08bw2")
 
 [node name="CountdownLabel" type="Label" parent="CountdownNode"]
 anchors_preset = -1
-anchor_left = 0.179
-anchor_top = 0.017
-anchor_right = 0.227
-anchor_bottom = 0.077
-offset_left = -0.208008
-offset_top = -0.0160007
-offset_right = 0.495972
-offset_bottom = 0.103996
+anchor_left = 0.026
+anchor_top = 0.926
+anchor_right = 0.075
+anchor_bottom = 0.986
+offset_left = 0.0480003
+offset_top = -0.0480347
+offset_right = -0.400032
+offset_bottom = 0.0720215
 
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]

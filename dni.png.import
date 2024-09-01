@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxyth0diwq5g2"
-path="res://.godot/imported/rosa.webp-f1f36ccf013b85812238e6a03b0958b1.ctex"
+uid="uid://j231evye2gy8"
+path="res://.godot/imported/dni.png-d56f26ae745eeff42fe194ab55be8ea7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characterImages/rosa.webp"
-dest_files=["res://.godot/imported/rosa.webp-f1f36ccf013b85812238e6a03b0958b1.ctex"]
+source_file="res://dni.png"
+dest_files=["res://.godot/imported/dni.png-d56f26ae745eeff42fe194ab55be8ea7.ctex"]
 
 [params]
 

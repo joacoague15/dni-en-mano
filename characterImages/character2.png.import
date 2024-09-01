@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ywd71d7f8ax5"
-path="res://.godot/imported/franco.webp-0b6b1fbca4fe9444d48a817aefecbcda.ctex"
+uid="uid://tbgum1xord4w"
+path="res://.godot/imported/character2.png-ca5f3fca22941282162c1ab4d1a07180.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characterImages/franco.webp"
-dest_files=["res://.godot/imported/franco.webp-0b6b1fbca4fe9444d48a817aefecbcda.ctex"]
+source_file="res://characterImages/character2.png"
+dest_files=["res://.godot/imported/character2.png-ca5f3fca22941282162c1ab4d1a07180.ctex"]
 
 [params]
 

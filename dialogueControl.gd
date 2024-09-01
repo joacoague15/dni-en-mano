@@ -29,7 +29,6 @@ func show_dialogue():
 		show_dialogue()
 	else:
 		await get_tree().create_timer(0.5).timeout		
-		dni_animation_player.play("dni_appear")
 		hide_dialogues()
 		index = 0
 

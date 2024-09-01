@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ckv34j3i72735"
-path="res://.godot/imported/juan.webp-12624cfb558932d66fa0b00d527aa16d.ctex"
+uid="uid://cg36bkxe7pvht"
+path="res://.godot/imported/character1.png-1892b287304b2808cf2dd2e6e7a27253.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characterImages/juan.webp"
-dest_files=["res://.godot/imported/juan.webp-12624cfb558932d66fa0b00d527aa16d.ctex"]
+source_file="res://characterImages/character1.png"
+dest_files=["res://.godot/imported/character1.png-1892b287304b2808cf2dd2e6e7a27253.ctex"]
 
 [params]
 
