@@ -19,12 +19,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-280, -50)]
+"values": [Vector2(-260, -50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -34,8 +34,9 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_1bwfy"]
-resource_name = "slide_and_appear"
+[sub_resource type="Animation" id="Animation_qigxo"]
+resource_name = "character_appear"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -43,26 +44,28 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-650, -50), Vector2(-100, -50)]
+"values": [Vector2(-550, -50), Vector2(-100, -50)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
+tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.6, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_pku3k"]
-resource_name = "slide_and_fade"
+[sub_resource type="Animation" id="Animation_b8hw4"]
+resource_name = "character_idle"
+length = 6.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -70,29 +73,17 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-260, -50), Vector2(100, -50)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Vector2(-100, -50), Vector2(-100, -48), Vector2(-100, -50), Vector2(-100, -52), Vector2(-100, -50)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vq8n"]
 _data = {
 "RESET": SubResource("Animation_51mvr"),
-"slide_and_appear": SubResource("Animation_1bwfy"),
-"slide_and_fade": SubResource("Animation_pku3k")
+"character_appear": SubResource("Animation_qigxo"),
+"character_idle": SubResource("Animation_b8hw4")
 }
 
 [sub_resource type="Animation" id="Animation_uj37j"]
@@ -170,8 +161,7 @@ offset_bottom = 427.0
 color = Color(0, 0, 0, 1)
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-280, -50)
+position = Vector2(-260, -50)
 scale = Vector2(0.5, 0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
@@ -327,8 +317,14 @@ offset_top = -0.0480347
 offset_right = -0.400032
 offset_bottom = 0.0720215
 
+[node name="BackgroundForCharacterAnimation" type="ColorRect" parent="."]
+offset_left = -643.0
+offset_top = 203.0
+offset_right = -68.0
+offset_bottom = 259.0
+color = Color(0, 0, 0, 1)
+
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
