@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=20 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
@@ -79,11 +79,68 @@ tracks/0/keys = {
 "values": [Vector2(-100, -50), Vector2(-100, -48), Vector2(-100, -50), Vector2(-100, -52), Vector2(-100, -50)]
 }
 
+[sub_resource type="Animation" id="Animation_j7jno"]
+resource_name = "character_enter"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-100, -50), Vector2(200, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_fba82"]
+resource_name = "character_no_enter"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-100, -50), Vector2(-550, -50)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3vq8n"]
 _data = {
 "RESET": SubResource("Animation_51mvr"),
 "character_appear": SubResource("Animation_qigxo"),
-"character_idle": SubResource("Animation_b8hw4")
+"character_enter": SubResource("Animation_j7jno"),
+"character_idle": SubResource("Animation_b8hw4"),
+"character_no_enter": SubResource("Animation_fba82")
 }
 
 [sub_resource type="Animation" id="Animation_uj37j"]
@@ -231,6 +288,13 @@ position = Vector2(200, -30)
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("4_j40fr")
 
+[node name="NextButton" type="Button" parent="."]
+offset_left = 334.0
+offset_top = 226.0
+offset_right = 442.0
+offset_bottom = 295.0
+text = "Siguiente"
+
 [node name="CorrectCharacterLabel" type="Label" parent="."]
 offset_left = 355.0
 offset_top = -312.0
@@ -279,27 +343,16 @@ show_percentage = false
 [node name="DialogueControl" type="Node" parent="."]
 script = ExtResource("3_sps78")
 
-[node name="PlayerDialogueLabel" type="Label" parent="DialogueControl"]
-anchors_preset = -1
-anchor_left = 0.075
-anchor_top = 0.105
-anchor_right = 0.119
-anchor_bottom = 0.147
-offset_left = -0.400002
-offset_top = -0.0400009
-offset_right = -0.0879974
-offset_bottom = -0.256004
-
 [node name="CharacterDialogueLabel" type="Label" parent="DialogueControl"]
 anchors_preset = -1
-anchor_left = 0.355
-anchor_top = 0.17
-anchor_right = 0.39
-anchor_bottom = 0.205
-offset_left = 0.039978
-offset_top = -0.160004
-offset_right = -0.280029
-offset_bottom = 0.159988
+anchor_left = 0.128
+anchor_top = 0.239
+anchor_right = 0.223
+anchor_bottom = 0.282
+offset_left = 6.54399
+offset_top = 1.12799
+offset_right = 0.104004
+offset_bottom = 0.26387
 
 [node name="CountdownNode" type="Node" parent="."]
 script = ExtResource("4_08bw2")
@@ -325,6 +378,8 @@ offset_bottom = 259.0
 color = Color(0, 0, 0, 1)
 
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
+[connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]

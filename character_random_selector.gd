@@ -32,6 +32,8 @@ var previous_index = -1
 var correct_characters = 0
 var incorrect_characters = 0
 
+var selected_person
+
 func _ready():
 	vertical_bar.value = 0
 	apply_rules()
@@ -42,19 +44,21 @@ func new_selected_person():
 		
 	previous_index = selected_index
 	return persons[selected_index]
-		
-func _on_accept_button_pressed():
-	var selected_person = new_selected_person()
+	
+func _on_next_button_pressed():
+	selected_person = new_selected_person()
 	character_sprite.texture = selected_person["image"]
 	character_animation_player.play("character_appear")
+		
+func _on_accept_button_pressed():
+	$DialogueControl.hide_dialogue()
 	handle_accept_reject(selected_person["problem"], true)
 	# dni_information.display_person_dni(selected_person["dni"])	
 
 func _on_reject_button_pressed():
-	if selected_index != -1 and selected_index < persons.size():
-		var selected_person = persons[selected_index]	
-		handle_accept_reject(selected_person["problem"], false)
-		dni_information.display_person_dni(selected_person["dni"])
+	$DialogueControl.hide_dialogue()
+	handle_accept_reject(selected_person["problem"], false)
+	# dni_information.display_person_dni(selected_person["dni"])
 		
 func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
@@ -71,6 +75,7 @@ func handle_accept_reject(problem, wasAccepted):
 			correct_characters += 1
 			correct_choice = true
 	handle_vertical_bar_change(correct_choice)
+	handle_character_enter_or_not_anim(wasAccepted)
 		
 func apply_rules():
 	var rules = [
@@ -100,3 +105,13 @@ func handle_vertical_bar_change(correct_choice):
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
+
+func _on_animation_player_animation_started(animation_name):
+	if animation_name == "character_idle":
+		$DialogueControl.show_dialogue()
+
+func handle_character_enter_or_not_anim(wasAccepted):
+	if wasAccepted:
+		character_animation_player.play("character_enter")
+	else:
+		character_animation_player.play("character_no_enter")

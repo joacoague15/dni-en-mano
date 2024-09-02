@@ -1,37 +1,26 @@
 extends Node
 
-@onready var player_dialogue_label = $PlayerDialogueLabel
-@onready var character_dialogue_label = $CharacterDialogueLabel
-@onready var dni_animation_player = get_node("../DNIInformation/DNIAnimationPlayer")
+@onready var player_dialogue_label = $CharacterDialogueLabel
+@onready var dialogue_animation_player = $DialogueAnimationPlayer
 
 var dialogues = [
-	{"character": "Player", "text": "DNI en mano", "time": 1.4},
-	{"character": "Character", "text": "Aca esta", "time": 1},
+	"Buenas"
 ]
 
 var index = 0
+var typing_speed = 0.05
 
 func show_dialogue():
 	if index < dialogues.size():
-		var dialogue = dialogues[index]
-		if index == 0:
-			await get_tree().create_timer(0.8).timeout
+		var dialogue = dialogues[0]
+		_start_typing(dialogue)
 		
-		if dialogue["character"] == "Player":
-			player_dialogue_label.text = dialogue["text"]
-			player_dialogue_label.visible = true
-		else:
-			character_dialogue_label.text = dialogue["text"]
-			character_dialogue_label.visible = true
+func _start_typing(dialogue):
+	var char_index = 0
+	while char_index < dialogue.length():
+		player_dialogue_label.text += dialogue[char_index]
+		char_index += 1
+		await get_tree().create_timer(typing_speed).timeout
 		
-		await get_tree().create_timer(dialogue["time"]).timeout
-		index += 1
-		show_dialogue()
-	else:
-		await get_tree().create_timer(0.5).timeout		
-		hide_dialogues()
-		index = 0
-
-func hide_dialogues():
-	player_dialogue_label.visible = false
-	character_dialogue_label.visible = false
+func hide_dialogue():
+	player_dialogue_label.text = ""
