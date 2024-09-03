@@ -1,7 +1,6 @@
 extends Node
 
 @onready var player_dialogue_label = $CharacterDialogueLabel
-@onready var dialogue_animation_player = $DialogueAnimationPlayer
 
 var dialogues = [
 	"Buenas"
@@ -23,4 +22,4 @@ func _start_typing(dialogue):
 		await get_tree().create_timer(typing_speed).timeout
 		
 func hide_dialogue():
-	player_dialogue_label.text = ""
+	player_dialogue_label.text = ""	

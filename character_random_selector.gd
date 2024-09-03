@@ -1,15 +1,17 @@
 extends Node2D
 
 @onready var dni_information = $DNIInformation
-@onready var correct_label = $CorrectCharacterLabel
-@onready var incorrect_label = $IncorrectCharacterLabel
 @onready var result_label = $ResultLabel
 @onready var rules_label = $RulesLabel
+@onready var rules_label_animation_player = $RulesLabel/RulesAnimationPlayer
 @onready var show_rules_button = $ShowRulesButton
 @onready var vertical_bar = $VerticalBar
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
+@onready var next_button = $NextButton
+@onready var accept_button = $AcceptButton
+@onready var reject_button = $RejectButton
 
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/character1.png")}},
@@ -37,6 +39,8 @@ var selected_person
 func _ready():
 	vertical_bar.value = 0
 	apply_rules()
+	accept_button.disabled = true
+	reject_button.disabled = true
 	
 func new_selected_person():
 	while selected_index == previous_index:
@@ -46,6 +50,7 @@ func new_selected_person():
 	return persons[selected_index]
 	
 func _on_next_button_pressed():
+	next_button.disabled = true
 	selected_person = new_selected_person()
 	character_sprite.texture = selected_person["image"]
 	character_animation_player.play("character_appear")
@@ -53,15 +58,16 @@ func _on_next_button_pressed():
 func _on_accept_button_pressed():
 	$DialogueControl.hide_dialogue()
 	handle_accept_reject(selected_person["problem"], true)
-	# dni_information.display_person_dni(selected_person["dni"])	
 
 func _on_reject_button_pressed():
 	$DialogueControl.hide_dialogue()
 	handle_accept_reject(selected_person["problem"], false)
-	# dni_information.display_person_dni(selected_person["dni"])
 		
 func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
+	accept_button.disabled = true
+	reject_button.disabled = true
+	dni_animation_player.play("dni_disappear")
 	if problem in ["due_date", "born_date"]:
 		if wasAccepted:
 			incorrect_characters += 1
@@ -92,9 +98,11 @@ func apply_rules():
 func _on_show_rules_button_pressed():
 	rules_label.visible = not rules_label.visible
 	if rules_label.visible:
+		rules_label_animation_player.play("rules_appear")
 		show_rules_button.text = "Ocultar"
 	else:
 		show_rules_button.text = "Reglas"
+		rules_label_animation_player.play("rules_disappear")
 		
 func handle_vertical_bar_change(correct_choice):
 	if correct_choice:
@@ -105,13 +113,25 @@ func handle_vertical_bar_change(correct_choice):
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
+	if animation_name == "character_enter" or animation_name == "character_no_enter":
+		next_button.disabled = false
+		accept_button.disabled = true
+		reject_button.disabled = true
 
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
 		$DialogueControl.show_dialogue()
+		dni_information.display_person_dni(selected_person["dni"])
+		dni_animation_player.play("dni_appear")
 
 func handle_character_enter_or_not_anim(wasAccepted):
 	if wasAccepted:
 		character_animation_player.play("character_enter")
 	else:
 		character_animation_player.play("character_no_enter")
+
+
+func _on_dni_animation_player_animation_finished(animation_name):
+	if animation_name == "dni_appear":
+		accept_button.disabled = false
+		reject_button.disabled = false
