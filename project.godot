@@ -12,13 +12,17 @@ config_version=5
 
 config/name="DNIenMano"
 run/main_scene="res://main_scene.tscn"
-config/features=PackedStringArray("4.2", "GL Compatibility")
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
 window/size/mode=3
 window/stretch/mode="viewport"
+
+[gui]
+
+theme/custom_font="res://dni_font.ttf"
 
 [rendering]
 
