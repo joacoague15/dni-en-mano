@@ -39,6 +39,8 @@ var incorrect_characters = 0
 
 var selected_person
 
+var rules_transitioning = false
+
 func _ready():
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	vertical_bar.value = 0
@@ -100,13 +102,15 @@ func apply_rules():
 	rules_label.text = rules_text
 		
 func _on_show_rules_button_pressed():
-	rules_label.visible = not rules_label.visible
-	if rules_label.visible:
-		rules_label_animation_player.play("rules_appear")
-		show_rules_button.text = "Ocultar"
-	else:
-		show_rules_button.text = "Reglas"
-		rules_label_animation_player.play("rules_disappear")
+	if rules_transitioning == false:
+		if show_rules_button.text == "Reglas":
+			rules_label_animation_player.play("rules_appear")
+			show_rules_button.text = "Ocultar"
+			rules_transitioning = true
+		else:
+			show_rules_button.text = "Reglas"
+			rules_label_animation_player.play("rules_disappear")
+			rules_transitioning = true
 		
 func handle_vertical_bar_change(correct_choice):
 	if correct_choice:
@@ -148,3 +152,7 @@ func _on_accept_button_mouse_exited():
 
 func _on_reject_button_mouse_exited():
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
+
+func _on_rules_animation_player_animation_finished(animation_name):
+	if animation_name == "rules_appear" or animation_name == "rules_disappear":
+		rules_transitioning = false
