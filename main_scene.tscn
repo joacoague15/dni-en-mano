@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
 [ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
-[ext_resource type="FontFile" uid="uid://ch3o0w58ht37u" path="res://dni_font.ttf" id="4_wwmhm"]
 
 [sub_resource type="Animation" id="Animation_uj37j"]
 length = 0.001
@@ -299,6 +298,33 @@ _data = {
 "rules_disappear": SubResource("Animation_qfl5k")
 }
 
+[sub_resource type="FontFile" id="FontFile_crhti"]
+msdf_pixel_range = 8
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/28/0/ascent = 0.0
+cache/0/28/0/descent = 0.0
+cache/0/28/0/underline_position = 0.0
+cache/0/28/0/underline_thickness = 0.0
+cache/0/28/0/scale = 1.0
+cache/0/28/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/28/0/kerning_overrides/24/0 = Vector2(0, 0)
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/28/0 = Vector2(0, 0)
+cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e6sb"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -330,7 +356,6 @@ offset_left = 227.5
 offset_top = -130.0
 offset_right = 577.5
 offset_bottom = -89.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
@@ -340,7 +365,6 @@ offset_left = 210.0
 offset_top = -35.0
 offset_right = 570.0
 offset_bottom = 2.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
@@ -350,7 +374,6 @@ offset_left = 205.0
 offset_top = 33.0
 offset_right = 540.0
 offset_bottom = 68.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
@@ -377,7 +400,6 @@ offset_left = 420.0
 offset_top = -327.0
 offset_right = 570.0
 offset_bottom = -247.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 text = "Reglas"
 
@@ -386,7 +408,6 @@ offset_left = 320.0
 offset_top = 220.0
 offset_right = 470.0
 offset_bottom = 300.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/normal = SubResource("StyleBoxFlat_dg1wr")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4f0mv")
@@ -399,14 +420,12 @@ offset_left = 211.0
 offset_top = -297.0
 offset_right = 251.0
 offset_bottom = -274.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 
 [node name="CurrentDateLabel" type="Label" parent="."]
 offset_left = -500.0
 offset_top = 280.0
 offset_right = -344.0
 offset_bottom = 303.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 text = "Fecha: 23 / 08 / 2024"
 
 [node name="RulesLabel" type="Label" parent="."]
@@ -414,7 +433,6 @@ offset_left = 170.0
 offset_top = 450.0
 offset_right = 458.0
 offset_bottom = 895.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="RulesLabel"]
@@ -427,7 +445,7 @@ offset_left = 516.0
 offset_top = -34.0
 offset_right = 556.0
 offset_bottom = 291.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
+theme_override_fonts/font = SubResource("FontFile_crhti")
 theme_override_styles/background = SubResource("StyleBoxFlat_0e6sb")
 theme_override_styles/fill = SubResource("StyleBoxFlat_60xdp")
 min_value = -100.0
@@ -447,7 +465,6 @@ offset_left = 6.54399
 offset_top = 1.12799
 offset_right = 0.104004
 offset_bottom = 0.26387
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 24
 
 [node name="CountdownNode" type="Node" parent="."]
@@ -465,7 +482,6 @@ offset_left = 0.0480003
 offset_top = -0.0480347
 offset_right = -0.400032
 offset_bottom = 0.0720215
-theme_override_fonts/font = ExtResource("4_wwmhm")
 
 [node name="BackgroundForCharacterAnimation" type="ColorRect" parent="."]
 offset_left = -643.0
@@ -480,7 +496,6 @@ offset_left = -330.0
 offset_top = -216.0
 offset_right = -110.0
 offset_bottom = 264.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
 
 [node name="RejectButton" type="Button" parent="."]
@@ -489,7 +504,6 @@ offset_left = -554.0
 offset_top = -216.0
 offset_right = -334.0
 offset_bottom = 264.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 24
 
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]

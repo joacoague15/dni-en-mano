@@ -22,8 +22,6 @@ window/stretch/mode="viewport"
 
 [gui]
 
-theme/custom_font="res://dni_font.ttf"
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
