@@ -132,12 +132,10 @@ func handle_character_enter_or_not_anim(wasAccepted):
 	else:
 		character_animation_player.play("character_no_enter")
 
-
 func _on_dni_animation_player_animation_finished(animation_name):
 	if animation_name == "dni_appear":
 		accept_button.visible = true
 		reject_button.visible = true
-
 
 func _on_accept_button_mouse_entered():
 	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
