@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=33 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b3co5tghdec12" path="res://entire_background.png" id="2_edmgr"]
@@ -7,6 +7,108 @@
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
 [ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
+[ext_resource type="Texture2D" uid="uid://rk1lip28paob" path="res://phone.png" id="6_gwmbi"]
+[ext_resource type="Texture2D" uid="uid://87gcny18ro83" path="res://watch_timer.png" id="8_837p2"]
+[ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
+[ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
+
+[sub_resource type="Animation" id="Animation_uj37j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-19, 400)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g1ki7"]
+resource_name = "dni_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, 1300), Vector2(40, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gt23q"]
+resource_name = "dni_disappear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, 90), Vector2(40, 600)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjyla"]
+_data = {
+"RESET": SubResource("Animation_uj37j"),
+"dni_appear": SubResource("Animation_g1ki7"),
+"dni_disappear": SubResource("Animation_gt23q")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg1wr"]
+bg_color = Color(0.0941176, 0.890196, 0.0745098, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4f0mv"]
+bg_color = Color(0.494118, 0.886275, 0.258824, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrig6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -144,104 +246,6 @@ _data = {
 "character_no_enter": SubResource("Animation_fba82")
 }
 
-[sub_resource type="Animation" id="Animation_uj37j"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-19, 400)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_g1ki7"]
-resource_name = "dni_appear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(40, 1300), Vector2(40, 30)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_gt23q"]
-resource_name = "dni_disappear"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(40, 90), Vector2(40, 600)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjyla"]
-_data = {
-"RESET": SubResource("Animation_uj37j"),
-"dni_appear": SubResource("Animation_g1ki7"),
-"dni_disappear": SubResource("Animation_gt23q")
-}
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg1wr"]
-bg_color = Color(0.0941176, 0.890196, 0.0745098, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4f0mv"]
-bg_color = Color(0.494118, 0.886275, 0.258824, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrig6"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -336,19 +340,12 @@ bg_color = Color(1, 1, 1, 1)
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
 
-[node name="CharacterSprite" type="Sprite2D" parent="."]
-position = Vector2(-260, -50)
-scale = Vector2(0.45, 0.45)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
-libraries = {
-"": SubResource("AnimationLibrary_3vq8n")
-}
-
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(6.00005, -4.49999)
 scale = Vector2(0.602083, 0.602778)
 texture = ExtResource("2_edmgr")
+region_enabled = true
+region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -395,12 +392,16 @@ scale = Vector2(0.22, 0.22)
 texture = ExtResource("4_j40fr")
 
 [node name="ShowRulesButton" type="Button" parent="."]
-offset_left = 420.0
-offset_top = -327.0
-offset_right = 570.0
-offset_bottom = -247.0
-theme_override_font_sizes/font_size = 28
-text = "Reglas"
+offset_left = -308.0
+offset_top = 247.0
+offset_right = -239.0
+offset_bottom = 319.0
+flat = true
+
+[node name="phone" type="Sprite2D" parent="ShowRulesButton"]
+position = Vector2(33, 36)
+scale = Vector2(0.567568, 0.567568)
+texture = ExtResource("6_gwmbi")
 
 [node name="NextButton" type="Button" parent="."]
 offset_left = 320.0
@@ -412,6 +413,15 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_dg1wr")
 theme_override_styles/hover = SubResource("StyleBoxFlat_4f0mv")
 theme_override_styles/disabled = SubResource("StyleBoxFlat_qrig6")
 text = "Siguiente"
+
+[node name="CharacterSprite" type="Sprite2D" parent="."]
+position = Vector2(-260, -50)
+scale = Vector2(0.45, 0.45)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_3vq8n")
+}
 
 [node name="ResultLabel" type="Label" parent="."]
 visible = false
@@ -471,38 +481,47 @@ script = ExtResource("4_08bw2")
 
 [node name="CountdownTimer" type="Timer" parent="CountdownNode"]
 
+[node name="Sprite2D" type="Sprite2D" parent="CountdownNode"]
+position = Vector2(43, 609)
+scale = Vector2(0.546296, 0.546296)
+texture = ExtResource("8_837p2")
+
 [node name="CountdownLabel" type="Label" parent="CountdownNode"]
 anchors_preset = -1
-anchor_left = 0.026
-anchor_top = 0.926
-anchor_right = 0.075
-anchor_bottom = 0.986
-offset_left = 0.0480003
-offset_top = -0.0480347
-offset_right = -0.400032
-offset_bottom = 0.0720215
+anchor_left = 0.017
+anchor_top = 0.907
+anchor_right = 0.086
+anchor_bottom = 0.961
+offset_left = 0.415998
+offset_top = 0.263977
+offset_right = -33.072
+offset_bottom = 0.271973
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AcceptButton" type="Button" parent="."]
-show_behind_parent = true
-offset_left = -330.0
-offset_top = -216.0
-offset_right = -110.0
-offset_bottom = 264.0
+offset_left = 72.0
+offset_top = 195.0
+offset_right = 144.0
+offset_bottom = 297.0
 theme_override_font_sizes/font_size = 28
+icon = ExtResource("8_cmg3h")
+flat = true
 
 [node name="RejectButton" type="Button" parent="."]
-show_behind_parent = true
-offset_left = -554.0
-offset_top = -216.0
-offset_right = -334.0
-offset_bottom = 264.0
+offset_left = 167.0
+offset_top = 207.0
+offset_right = 239.0
+offset_bottom = 289.0
 theme_override_font_sizes/font_size = 24
+icon = ExtResource("9_5kib1")
+flat = true
 
-[connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="animation_finished" from="RulesLabel/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]
 [connection signal="mouse_exited" from="AcceptButton" to="." method="_on_accept_button_mouse_exited"]

@@ -3,7 +3,7 @@ extends Node
 @onready var countdown_label = $CountdownLabel
 @onready var countdown_timer = $CountdownTimer
 
-var countdown_time = 3
+var countdown_time = 60
 
 func _ready():
 	countdown_timer.wait_time = 1.0
