@@ -9,7 +9,6 @@ extends Node2D
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
-@onready var next_button = $NextButton
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
 
@@ -47,6 +46,7 @@ func _ready():
 	apply_rules()
 	accept_button.visible = false
 	reject_button.visible = false
+	next_person()
 	
 func new_selected_person():
 	while selected_index == previous_index:
@@ -55,11 +55,12 @@ func new_selected_person():
 	previous_index = selected_index
 	return persons[selected_index]
 	
-func _on_next_button_pressed():
-	next_button.disabled = true
+func next_person():
+	await get_tree().create_timer(2.5).timeout
 	selected_person = new_selected_person()
+	character_animation_player.play("character_appear")	
+	character_sprite.position = Vector2(-500, 0)	
 	character_sprite.texture = selected_person["image"]
-	character_animation_player.play("character_appear")
 		
 func _on_accept_button_pressed():
 	$DialogueControl.hide_dialogue()
@@ -119,8 +120,8 @@ func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
-		next_button.disabled = false
-
+		next_person()
+		
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
 		$DialogueControl.show_dialogue()
