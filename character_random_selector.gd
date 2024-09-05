@@ -26,6 +26,9 @@ var persons = [
 	{"name": "Valentina", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Valentina Gomez", "born_date": "01/05/1996", "due_date": "10/07/2025", "document_photo": preload("res://characterImages/character2.png")}}
 ]
 
+var custom_cursor = load("res://characterImages/hand.png")
+var thumb_up_cursor= load("res://characterImages/thumb_up.png")
+var thumb_down_cursor= load("res://characterImages/thumb_down.png")
 var current_videogame_date = "23-08-2024"
 
 var selected_index = -1
@@ -37,10 +40,11 @@ var incorrect_characters = 0
 var selected_person
 
 func _ready():
+	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	vertical_bar.value = 0
 	apply_rules()
-	accept_button.disabled = true
-	reject_button.disabled = true
+	accept_button.visible = false
+	reject_button.visible = false
 	
 func new_selected_person():
 	while selected_index == previous_index:
@@ -65,8 +69,8 @@ func _on_reject_button_pressed():
 		
 func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
-	accept_button.disabled = true
-	reject_button.disabled = true
+	accept_button.visible = false
+	reject_button.visible = false
 	dni_animation_player.play("dni_disappear")
 	if problem in ["due_date", "born_date"]:
 		if wasAccepted:
@@ -115,8 +119,6 @@ func _on_animation_player_animation_finished(animation_name):
 		character_animation_player.play("character_idle")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		next_button.disabled = false
-		accept_button.disabled = true
-		reject_button.disabled = true
 
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
@@ -133,5 +135,18 @@ func handle_character_enter_or_not_anim(wasAccepted):
 
 func _on_dni_animation_player_animation_finished(animation_name):
 	if animation_name == "dni_appear":
-		accept_button.disabled = false
-		reject_button.disabled = false
+		accept_button.visible = true
+		reject_button.visible = true
+
+
+func _on_accept_button_mouse_entered():
+	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
+
+func _on_reject_button_mouse_entered():
+	Input.set_custom_mouse_cursor(thumb_down_cursor, 0, Vector2(64, 64))
+
+func _on_accept_button_mouse_exited():
+	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
+
+func _on_reject_button_mouse_exited():
+	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))

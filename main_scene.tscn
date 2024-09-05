@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=28 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
@@ -233,20 +233,14 @@ _data = {
 "character_no_enter": SubResource("Animation_fba82")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0s8he"]
-bg_color = Color(0.6, 0.941176, 0.6, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfm07"]
-bg_color = Color(0.6, 0, 0.6, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrig6"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg1wr"]
+bg_color = Color(0.0941176, 0.890196, 0.0745098, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4f0mv"]
 bg_color = Color(0.494118, 0.886275, 0.258824, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg1wr"]
-bg_color = Color(0.0941176, 0.890196, 0.0745098, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qrig6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
 bg_color = Color(0, 0, 0, 1)
@@ -378,24 +372,6 @@ libraries = {
 "": SubResource("AnimationLibrary_3vq8n")
 }
 
-[node name="AcceptButton" type="Button" parent="."]
-offset_left = -330.0
-offset_top = -216.0
-offset_right = -110.0
-offset_bottom = 264.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_0s8he")
-
-[node name="RejectButton" type="Button" parent="."]
-offset_left = -554.0
-offset_top = -216.0
-offset_right = -334.0
-offset_bottom = 264.0
-theme_override_fonts/font = ExtResource("4_wwmhm")
-theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxFlat_gfm07")
-
 [node name="ShowRulesButton" type="Button" parent="."]
 offset_left = 420.0
 offset_top = -327.0
@@ -412,9 +388,9 @@ offset_right = 470.0
 offset_bottom = 300.0
 theme_override_fonts/font = ExtResource("4_wwmhm")
 theme_override_font_sizes/font_size = 28
-theme_override_styles/disabled = SubResource("StyleBoxFlat_qrig6")
-theme_override_styles/hover = SubResource("StyleBoxFlat_4f0mv")
 theme_override_styles/normal = SubResource("StyleBoxFlat_dg1wr")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4f0mv")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_qrig6")
 text = "Siguiente"
 
 [node name="ResultLabel" type="Label" parent="."]
@@ -498,10 +474,32 @@ offset_right = -68.0
 offset_bottom = 259.0
 color = Color(0, 0, 0, 1)
 
+[node name="AcceptButton" type="Button" parent="."]
+show_behind_parent = true
+offset_left = -330.0
+offset_top = -216.0
+offset_right = -110.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("4_wwmhm")
+theme_override_font_sizes/font_size = 28
+
+[node name="RejectButton" type="Button" parent="."]
+show_behind_parent = true
+offset_left = -554.0
+offset_top = -216.0
+offset_right = -334.0
+offset_bottom = 264.0
+theme_override_fonts/font = ExtResource("4_wwmhm")
+theme_override_font_sizes/font_size = 24
+
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
-[connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
-[connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]
+[connection signal="mouse_exited" from="AcceptButton" to="." method="_on_accept_button_mouse_exited"]
+[connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]
+[connection signal="mouse_entered" from="RejectButton" to="." method="_on_reject_button_mouse_entered"]
+[connection signal="mouse_exited" from="RejectButton" to="." method="_on_reject_button_mouse_exited"]
+[connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
