@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
-[ext_resource type="Texture2D" uid="uid://b3co5tghdec12" path="res://entire_background.png" id="2_edmgr"]
+[ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
 [ext_resource type="Texture2D" uid="uid://j231evye2gy8" path="res://dni.png" id="3_51jtu"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
@@ -332,12 +332,12 @@ bg_color = Color(1, 1, 1, 1)
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
 
-[node name="Background" type="Sprite2D" parent="."]
-position = Vector2(6.00005, -4.49999)
-scale = Vector2(0.602083, 0.602778)
-texture = ExtResource("2_edmgr")
-region_enabled = true
-region_rect = Rect2(3.95926, 0, 1916.04, 1080)
+[node name="CharacterDisplay" type="ColorRect" parent="."]
+offset_left = -565.0
+offset_top = -322.0
+offset_right = -177.0
+offset_bottom = 314.0
+color = Color(0, 0, 0, 1)
 
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -403,6 +403,13 @@ scale = Vector2(0.45, 0.45)
 libraries = {
 "": SubResource("AnimationLibrary_3vq8n")
 }
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(6.00006, -4.5)
+scale = Vector2(0.602083, 0.602778)
+texture = ExtResource("2_edmgr")
+region_enabled = true
+region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
 [node name="ResultLabel" type="Label" parent="."]
 visible = false
