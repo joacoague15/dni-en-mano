@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=38 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -12,95 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
-
-[sub_resource type="Animation" id="Animation_uj37j"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-19, 400)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_g1ki7"]
-resource_name = "dni_appear"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(40, 1300), Vector2(40, 30)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_gt23q"]
-resource_name = "dni_disappear"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(40, 90), Vector2(40, 600)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjyla"]
-_data = {
-"RESET": SubResource("Animation_uj37j"),
-"dni_appear": SubResource("Animation_g1ki7"),
-"dni_disappear": SubResource("Animation_gt23q")
-}
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -328,6 +239,194 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60xdp"]
 bg_color = Color(1, 1, 1, 1)
 
+[sub_resource type="Animation" id="Animation_uj37j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-19, 400)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g1ki7"]
+resource_name = "dni_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, 1300), Vector2(40, 30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_gt23q"]
+resource_name = "dni_disappear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(40, 90), Vector2(40, 600)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjyla"]
+_data = {
+"RESET": SubResource("Animation_uj37j"),
+"dni_appear": SubResource("Animation_g1ki7"),
+"dni_disappear": SubResource("Animation_gt23q")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg64p"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Animation" id="Animation_hskue"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [null]
+}
+
+[sub_resource type="Animation" id="Animation_1c86v"]
+resource_name = "red_alarm"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 0.7, 1, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.919281, 3.08037e-06, 4.81307e-07, 1), Color(0.917647, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bkhf6"]
+resource_name = "yellow_alarm"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 1, 1.3, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1), Vector2(1.1, 1.1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0001, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [null, Color(0.941176, 0.913725, 0, 1), Color(0.941176, 0.913725, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5wfro"]
+_data = {
+"RESET": SubResource("Animation_hskue"),
+"red_alarm": SubResource("Animation_1c86v"),
+"yellow_alarm": SubResource("Animation_bkhf6")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gh0d6"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbkte"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
@@ -338,62 +437,6 @@ offset_top = -322.0
 offset_right = -177.0
 offset_bottom = 314.0
 color = Color(0, 0, 0, 1)
-
-[node name="DNIInformation" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0)
-position = Vector2(-19, 400)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("3_51jtu")
-script = ExtResource("2_m835h")
-
-[node name="NameLabel" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = 227.5
-offset_top = -130.0
-offset_right = 577.5
-offset_bottom = -89.0
-theme_override_font_sizes/font_size = 28
-
-[node name="BornDateLabel" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = 210.0
-offset_top = -35.0
-offset_right = 570.0
-offset_bottom = 2.0
-theme_override_font_sizes/font_size = 28
-
-[node name="DueDateLabel" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = 205.0
-offset_top = 33.0
-offset_right = 540.0
-offset_bottom = 68.0
-theme_override_font_sizes/font_size = 28
-
-[node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
-libraries = {
-"": SubResource("AnimationLibrary_mjyla")
-}
-
-[node name="PortraitSprite" type="Sprite2D" parent="DNIInformation"]
-position = Vector2(200, -30)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("4_j40fr")
-
-[node name="ShowRulesButton" type="Button" parent="."]
-offset_left = -308.0
-offset_top = 247.0
-offset_right = -239.0
-offset_bottom = 319.0
-flat = true
-
-[node name="phone" type="Sprite2D" parent="ShowRulesButton"]
-position = Vector2(33, 36)
-scale = Vector2(0.567568, 0.567568)
-texture = ExtResource("6_gwmbi")
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 position = Vector2(-260, -50)
@@ -449,6 +492,63 @@ min_value = -100.0
 fill_mode = 3
 show_percentage = false
 
+[node name="DNIInformation" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(-19, 400)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("3_51jtu")
+script = ExtResource("2_m835h")
+
+[node name="NameLabel" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 227.5
+offset_top = -130.0
+offset_right = 577.5
+offset_bottom = -89.0
+theme_override_font_sizes/font_size = 28
+
+[node name="BornDateLabel" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 210.0
+offset_top = -35.0
+offset_right = 570.0
+offset_bottom = 2.0
+theme_override_font_sizes/font_size = 28
+
+[node name="DueDateLabel" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 205.0
+offset_top = 33.0
+offset_right = 540.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 28
+
+[node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
+libraries = {
+"": SubResource("AnimationLibrary_mjyla")
+}
+
+[node name="PortraitSprite" type="Sprite2D" parent="DNIInformation"]
+position = Vector2(200, -30)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("4_j40fr")
+
+[node name="ShowRulesButton" type="Button" parent="."]
+offset_left = -308.0
+offset_top = 247.0
+offset_right = -239.0
+offset_bottom = 319.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_bg64p")
+flat = true
+
+[node name="phone" type="Sprite2D" parent="ShowRulesButton"]
+position = Vector2(33, 36)
+scale = Vector2(0.567568, 0.567568)
+texture = ExtResource("6_gwmbi")
+
 [node name="DialogueControl" type="Node" parent="."]
 script = ExtResource("3_sps78")
 
@@ -478,30 +578,38 @@ texture = ExtResource("8_837p2")
 anchors_preset = -1
 anchor_left = 0.017
 anchor_top = 0.907
-anchor_right = 0.086
-anchor_bottom = 0.961
+anchor_right = 0.061
+anchor_bottom = 0.965
 offset_left = 0.415998
 offset_top = 0.263977
-offset_right = -33.072
-offset_bottom = 0.271973
+offset_right = -0.272003
+offset_bottom = -0.320007
+text = "01:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CountdownAnimationPlayer" type="AnimationPlayer" parent="CountdownNode"]
+libraries = {
+"": SubResource("AnimationLibrary_5wfro")
+}
+
 [node name="AcceptButton" type="Button" parent="."]
-offset_left = 72.0
+offset_left = 170.0
 offset_top = 195.0
-offset_right = 144.0
+offset_right = 242.0
 offset_bottom = 297.0
 theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
 icon = ExtResource("8_cmg3h")
 flat = true
 
 [node name="RejectButton" type="Button" parent="."]
-offset_left = 167.0
-offset_top = 207.0
-offset_right = 239.0
-offset_bottom = 289.0
+offset_left = 90.0
+offset_top = 195.0
+offset_right = 162.0
+offset_bottom = 297.0
 theme_override_font_sizes/font_size = 24
+theme_override_styles/focus = SubResource("StyleBoxFlat_fbkte")
 icon = ExtResource("9_5kib1")
 flat = true
 
@@ -510,11 +618,12 @@ position = Vector2(-387, -218)
 scale = Vector2(0.601156, 0.602076)
 texture = ExtResource("12_snwmf")
 
-[connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
-[connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="animation_finished" from="RulesLabel/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
+[connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
+[connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
+[connection signal="timeout" from="CountdownNode/CountdownTimer" to="CountdownNode" method="_on_countdown_timer_timeout"]
 [connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]
 [connection signal="mouse_exited" from="AcceptButton" to="." method="_on_accept_button_mouse_exited"]
 [connection signal="pressed" from="AcceptButton" to="." method="_on_accept_button_pressed"]

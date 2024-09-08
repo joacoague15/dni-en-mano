@@ -1,29 +1,44 @@
 extends Node
 
 @onready var countdown_label = $CountdownLabel
+@onready var countdown_label_animator = $CountdownAnimationPlayer
 @onready var countdown_timer = $CountdownTimer
 
-var countdown_time = 60
+var start_time = 60
+var end_time = 180
+var current_time = start_time
+var yellow_alarm_already_activated = false
+var red_alarm_already_activated = false
 
 func _ready():
-	countdown_timer.wait_time = 1.0
-	countdown_timer.one_shot = false
+	set_text_from_seconds(current_time)
 	countdown_timer.start()
-	update_countdown_label()
 	
-	countdown_timer.timeout.connect(_on_CountdownTimer_timeout)
-
-func _on_CountdownTimer_timeout():
-	countdown_time -= 1
-	update_countdown_label()
-	
-	if countdown_time <= 0:
+func _on_countdown_timer_timeout():
+	if current_time < end_time:
+		current_time += 1
+		set_text_from_seconds(current_time)
+		if current_time == 120 and not yellow_alarm_already_activated:
+			countdown_label_animator.play("yellow_alarm")
+			yellow_alarm_already_activated = true
+		if current_time == 150 and not red_alarm_already_activated:
+			countdown_label_animator.play("red_alarm")
+			red_alarm_already_activated = true
+	else:
 		countdown_timer.stop()
-		countdown_time = 0
-		on_countdown_finished()
+		
+func set_text_from_seconds(seconds):
+	var minutes = seconds / 60
+	var remaining_seconds = seconds % 60
+	countdown_label.text = "%02d:%02d" % [minutes, remaining_seconds]
 
-func update_countdown_label():
-	countdown_label.text = str(countdown_time)
+func change_remaining_seconds(delta):
+	current_time += delta
+	current_time = clamp(current_time, 0, end_time)  # Prevent values outside 0 and end_time
+	set_text_from_seconds(current_time)
+	
+func add_seconds(seconds):
+	change_remaining_seconds(seconds)
 
-func on_countdown_finished():
-	print("Countdown finished!")
+func subtract_seconds(seconds):
+	change_remaining_seconds(-seconds)
