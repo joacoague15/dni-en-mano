@@ -92,6 +92,7 @@ func handle_accept_reject(problem, wasAccepted):
 		
 func apply_rules():
 	var rules = [
+		"Entrada cierra 03:00",
 		"Solo mayores de edad +18",
 		"El documento ser valido"
 	]
