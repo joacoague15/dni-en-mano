@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://b0voilu7dbrpw"]
+
+[ext_resource type="FontFile" uid="uid://cp1fleqp2g5cd" path="res://dni_font.ttf" id="1_o1kxj"]
+
+[resource]
+base_font = ExtResource("1_o1kxj")

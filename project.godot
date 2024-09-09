@@ -22,7 +22,7 @@ window/stretch/mode="viewport"
 
 [gui]
 
-theme/custom_font="res://dni_font.ttf"
+theme/custom_font="res://dni_font_variation.tres"
 
 [rendering]
 

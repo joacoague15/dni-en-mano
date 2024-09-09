@@ -3,15 +3,17 @@ extends Node
 @onready var player_dialogue_label = $CharacterDialogueLabel
 
 var dialogues = [
-	"Buenas"
+	"Buenas",
+	"¿Todo bien?",
+	"Buenas, ¿cómo va?"
 ]
 
-var index = 0
 var typing_speed = 0.05
 
 func show_dialogue():
-	if index < dialogues.size():
-		var dialogue = dialogues[0]
+	var randomIndex = randi() % dialogues.size()
+	if randomIndex < dialogues.size():
+		var dialogue = dialogues[randomIndex]
 		_start_typing(dialogue)
 		
 func _start_typing(dialogue):

@@ -14,8 +14,8 @@ func _ready():
 func display_person_dni(dni):
 	if dni:
 		name_label.text = "Nombre: " + dni["name"]
-		born_date_label.text = "Fecha de nacimiento: " + dni["born_date"]
-		due_date_label.text = "Fecha de vencimiento: " + dni["due_date"]
+		born_date_label.text = "Nacimiento: " + dni["born_date"]
+		due_date_label.text = "Vencimiento: " + dni["due_date"]
 		portrait_sprite.texture = dni["document_photo"]
 		portrait_sprite.visible = true
 	else:

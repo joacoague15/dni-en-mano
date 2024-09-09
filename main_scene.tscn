@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
 [ext_resource type="Texture2D" uid="uid://j231evye2gy8" path="res://dni.png" id="3_51jtu"]
+[ext_resource type="FontVariation" uid="uid://b0voilu7dbrpw" path="res://dni_font_variation.tres" id="3_gm82o"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
 [ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
+[ext_resource type="Texture2D" uid="uid://diduqh3rwfvyv" path="res://progressBarImages/barra_0.png" id="13_tcllv"]
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -206,39 +208,6 @@ _data = {
 "rules_disappear": SubResource("Animation_qfl5k")
 }
 
-[sub_resource type="FontFile" id="FontFile_crhti"]
-msdf_pixel_range = 8
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/28/0 = Vector2(0, 0)
-cache/0/16/0/kerning_overrides/24/0 = Vector2(0, 0)
-cache/0/28/0/ascent = 0.0
-cache/0/28/0/descent = 0.0
-cache/0/28/0/underline_position = 0.0
-cache/0/28/0/underline_thickness = 0.0
-cache/0/28/0/scale = 1.0
-cache/0/28/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/28/0/kerning_overrides/28/0 = Vector2(0, 0)
-cache/0/28/0/kerning_overrides/24/0 = Vector2(0, 0)
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-cache/0/24/0/kerning_overrides/16/0 = Vector2(0, 0)
-cache/0/24/0/kerning_overrides/28/0 = Vector2(0, 0)
-cache/0/24/0/kerning_overrides/24/0 = Vector2(0, 0)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e6sb"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60xdp"]
-bg_color = Color(1, 1, 1, 1)
-
 [sub_resource type="Animation" id="Animation_uj37j"]
 length = 0.001
 tracks/0/type = "value"
@@ -427,6 +396,10 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbkte"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
+[sub_resource type="GDScript" id="GDScript_brifd"]
+script/source = "extends Sprite2D
+"
+
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
@@ -460,12 +433,14 @@ offset_left = 211.0
 offset_top = -297.0
 offset_right = 251.0
 offset_bottom = -274.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 
 [node name="CurrentDateLabel" type="Label" parent="."]
 offset_left = -500.0
 offset_top = 280.0
 offset_right = -344.0
 offset_bottom = 303.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 text = "Fecha: 23 / 08 / 2024"
 
 [node name="RulesLabel" type="Label" parent="."]
@@ -473,24 +448,13 @@ offset_left = 170.0
 offset_top = 450.0
 offset_right = 458.0
 offset_bottom = 895.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="RulesLabel"]
 libraries = {
 "": SubResource("AnimationLibrary_xam52")
 }
-
-[node name="VerticalBar" type="ProgressBar" parent="."]
-offset_left = 516.0
-offset_top = -34.0
-offset_right = 556.0
-offset_bottom = 291.0
-theme_override_fonts/font = SubResource("FontFile_crhti")
-theme_override_styles/background = SubResource("StyleBoxFlat_0e6sb")
-theme_override_styles/fill = SubResource("StyleBoxFlat_60xdp")
-min_value = -100.0
-fill_mode = 3
-show_percentage = false
 
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -502,11 +466,12 @@ script = ExtResource("2_m835h")
 [node name="NameLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 227.5
-offset_top = -130.0
-offset_right = 577.5
-offset_bottom = -89.0
-theme_override_font_sizes/font_size = 28
+offset_left = -30.0
+offset_top = -148.333
+offset_right = 320.0
+offset_bottom = -107.333
+theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_font_sizes/font_size = 24
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
@@ -515,7 +480,8 @@ offset_left = 210.0
 offset_top = -35.0
 offset_right = 570.0
 offset_bottom = 2.0
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_font_sizes/font_size = 24
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
@@ -524,7 +490,8 @@ offset_left = 205.0
 offset_top = 33.0
 offset_right = 540.0
 offset_bottom = 68.0
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_font_sizes/font_size = 24
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
 libraries = {
@@ -541,6 +508,7 @@ offset_left = -308.0
 offset_top = 247.0
 offset_right = -239.0
 offset_bottom = 319.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 theme_override_styles/focus = SubResource("StyleBoxFlat_bg64p")
 flat = true
 
@@ -562,6 +530,7 @@ offset_left = -107.456
 offset_top = 95.128
 offset_right = -113.896
 offset_bottom = 101.264
+theme_override_fonts/font = ExtResource("3_gm82o")
 theme_override_font_sizes/font_size = 16
 
 [node name="CountdownNode" type="Node" parent="."]
@@ -584,6 +553,8 @@ offset_left = 0.415998
 offset_top = 0.263977
 offset_right = -0.272003
 offset_bottom = -0.320007
+theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_font_sizes/font_size = 12
 text = "01:00"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -598,6 +569,7 @@ offset_left = 170.0
 offset_top = 195.0
 offset_right = 242.0
 offset_bottom = 297.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
 icon = ExtResource("8_cmg3h")
@@ -608,6 +580,7 @@ offset_left = 90.0
 offset_top = 195.0
 offset_right = 162.0
 offset_bottom = 297.0
+theme_override_fonts/font = ExtResource("3_gm82o")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxFlat_fbkte")
 icon = ExtResource("9_5kib1")
@@ -617,6 +590,12 @@ flat = true
 position = Vector2(-387, -218)
 scale = Vector2(0.601156, 0.602076)
 texture = ExtResource("12_snwmf")
+
+[node name="ProgressBar" type="Sprite2D" parent="."]
+position = Vector2(76.585, -277.365)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("13_tcllv")
+script = SubResource("GDScript_brifd")
 
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
