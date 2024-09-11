@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/dni_font.ttf-947b9fb9d5271bc6ca9e79c38ff87834
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

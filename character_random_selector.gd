@@ -11,6 +11,7 @@ extends Node2D
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
 @onready var progress_bar = $ProgressBar
+@onready var background_music = $BackgroundMusicPlayer
 
 var MAX_PROGRESS_BAR_VALUE = 17
 var MIN_PROGRESS_BAR_VALUE = 0
@@ -68,6 +69,7 @@ var check_interval = 0.1  # Check every 0.1 seconds
 var time_since_last_check = 0.0
 
 func _ready():
+	background_music.play()
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	progress_value = 0
 	apply_rules()
@@ -157,6 +159,8 @@ func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
+		background_music.set_bus("New Bus")
+		background_music.set_volume_db(0)
 		next_person()
 		
 func _on_animation_player_animation_started(animation_name):
@@ -168,6 +172,8 @@ func _on_animation_player_animation_started(animation_name):
 func handle_character_enter_or_not_anim(wasAccepted):
 	if wasAccepted:
 		character_animation_player.play("character_enter")
+		background_music.set_bus("Master")
+		background_music.set_volume_db(background_music.get_volume_db() + 10)
 	else:
 		character_animation_player.play("character_no_enter")
 

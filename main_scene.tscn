@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=39 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
 [ext_resource type="Texture2D" uid="uid://diduqh3rwfvyv" path="res://progressBarImages/barra_0.png" id="13_tcllv"]
+[ext_resource type="AudioStream" uid="uid://fdahb23jahf3" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -40,6 +41,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BackgroundMusicPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BackgroundMusicPlayer:bus")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"New Bus"]
 }
 
 [sub_resource type="Animation" id="Animation_qigxo"]
@@ -72,6 +97,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_j7jno"]
 resource_name = "character_enter"
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -79,7 +105,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-150, -20), Vector2(200, -20)]
@@ -91,10 +117,34 @@ tracks/1/path = NodePath(".:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1),
+"times": PackedFloat32Array(0, 1.5, 3),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BackgroundMusicPlayer:volume_db")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 10.0, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BackgroundMusicPlayer:bus")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [&"Master", &"New Bus"]
 }
 
 [sub_resource type="Animation" id="Animation_b8hw4"]
@@ -596,6 +646,10 @@ position = Vector2(76.585, -277.365)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("13_tcllv")
 script = SubResource("GDScript_brifd")
+
+[node name="BackgroundMusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_entrm")
+bus = &"New Bus"
 
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
