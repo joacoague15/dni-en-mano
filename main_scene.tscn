@@ -1,10 +1,10 @@
-[gd_scene load_steps=39 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=40 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
 [ext_resource type="Texture2D" uid="uid://j231evye2gy8" path="res://dni.png" id="3_51jtu"]
-[ext_resource type="FontVariation" uid="uid://b0voilu7dbrpw" path="res://dni_font_variation.tres" id="3_gm82o"]
+[ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
 [ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
@@ -199,6 +199,12 @@ _data = {
 "character_enter": SubResource("Animation_j7jno"),
 "character_idle": SubResource("Animation_b8hw4"),
 "character_no_enter": SubResource("Animation_fba82")
+}
+
+[sub_resource type="FontVariation" id="FontVariation_xvukn"]
+base_font = ExtResource("3_a2yxb")
+opentype_features = {
+1667329140: 0
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
@@ -483,14 +489,14 @@ offset_left = 211.0
 offset_top = -297.0
 offset_right = 251.0
 offset_bottom = -274.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 
 [node name="CurrentDateLabel" type="Label" parent="."]
 offset_left = -500.0
 offset_top = 280.0
 offset_right = -344.0
 offset_bottom = 303.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 text = "Fecha: 23 / 08 / 2024"
 
 [node name="RulesLabel" type="Label" parent="."]
@@ -498,7 +504,7 @@ offset_left = 170.0
 offset_top = 450.0
 offset_right = 458.0
 offset_bottom = 895.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="RulesLabel"]
@@ -520,7 +526,7 @@ offset_left = -30.0
 offset_top = -148.333
 offset_right = 320.0
 offset_bottom = -107.333
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 24
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
@@ -530,7 +536,7 @@ offset_left = 210.0
 offset_top = -35.0
 offset_right = 570.0
 offset_bottom = 2.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
@@ -540,7 +546,7 @@ offset_left = 205.0
 offset_top = 33.0
 offset_right = 540.0
 offset_bottom = 68.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 24
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
@@ -558,7 +564,7 @@ offset_left = -308.0
 offset_top = 247.0
 offset_right = -239.0
 offset_bottom = 319.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/focus = SubResource("StyleBoxFlat_bg64p")
 flat = true
 
@@ -580,7 +586,7 @@ offset_left = -107.456
 offset_top = 95.128
 offset_right = -113.896
 offset_bottom = 101.264
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 16
 
 [node name="CountdownNode" type="Node" parent="."]
@@ -603,7 +609,7 @@ offset_left = 0.415998
 offset_top = 0.263977
 offset_right = -0.272003
 offset_bottom = -0.320007
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 12
 text = "01:00"
 horizontal_alignment = 1
@@ -619,7 +625,7 @@ offset_left = 170.0
 offset_top = 195.0
 offset_right = 242.0
 offset_bottom = 297.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
 icon = ExtResource("8_cmg3h")
@@ -630,7 +636,7 @@ offset_left = 90.0
 offset_top = 195.0
 offset_right = 162.0
 offset_bottom = 297.0
-theme_override_fonts/font = ExtResource("3_gm82o")
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxFlat_fbkte")
 icon = ExtResource("9_5kib1")

@@ -20,10 +20,6 @@ config/icon="res://icon.svg"
 window/size/mode=3
 window/stretch/mode="viewport"
 
-[gui]
-
-theme/custom_font="res://dni_font_variation.tres"
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -94,7 +94,7 @@ func new_selected_person():
 	return persons[selected_index]
 	
 func next_person():
-	await get_tree().create_timer(2.5).timeout
+	await get_tree().create_timer(1.5).timeout
 	selected_person = new_selected_person()
 	character_animation_player.play("character_appear")	
 	character_sprite.position = Vector2(-500, 0)	

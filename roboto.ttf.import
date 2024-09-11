@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cp1fleqp2g5cd"
-path="res://.godot/imported/dni_font.ttf-947b9fb9d5271bc6ca9e79c38ff87834.fontdata"
+uid="uid://ccvlwspbby7hc"
+path="res://.godot/imported/roboto.ttf-4a2d7fae7243b8a9b3fd892872215254.fontdata"
 
 [deps]
 
-source_file="res://dni_font.ttf"
-dest_files=["res://.godot/imported/dni_font.ttf-947b9fb9d5271bc6ca9e79c38ff87834.fontdata"]
+source_file="res://roboto.ttf"
+dest_files=["res://.godot/imported/roboto.ttf-4a2d7fae7243b8a9b3fd892872215254.fontdata"]
 
 [params]
 
