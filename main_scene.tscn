@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=42 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -13,8 +13,193 @@
 [ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
-[ext_resource type="Texture2D" uid="uid://diduqh3rwfvyv" path="res://progressBarImages/barra_0.png" id="13_tcllv"]
 [ext_resource type="AudioStream" uid="uid://fdahb23jahf3" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
+
+[sub_resource type="Animation" id="Animation_25fdj"]
+resource_name = "show_results"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ResultBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LabelEffectScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TotalCharactersCount:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CorrectCharactersCount:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("IncorrectCharactersCount:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5h8d7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ResultBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LabelEffectScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LabelEffectScreen:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-587, -335)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:z_index")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("TotalCharactersCount:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CorrectCharactersCount:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("IncorrectCharactersCount:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_e1jg5"]
+resource_name = "show_labels"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LabelEffectScreen:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-587, -335), Vector2(-587, 400)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dbdax"]
+_data = {
+"RESET": SubResource("Animation_5h8d7"),
+"show_labels": SubResource("Animation_e1jg5"),
+"show_results": SubResource("Animation_25fdj")
+}
 
 [sub_resource type="Animation" id="Animation_51mvr"]
 length = 0.001
@@ -207,63 +392,6 @@ opentype_features = {
 1667329140: 0
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="Animation" id="Animation_7ou0i"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(170, 450)]
-}
-
-[sub_resource type="Animation" id="Animation_j1gxf"]
-resource_name = "rules_appear"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(170, 450), Vector2(170, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_qfl5k"]
-resource_name = "rules_disappear"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(170, 0), Vector2(170, 450)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xam52"]
-_data = {
-"RESET": SubResource("Animation_7ou0i"),
-"rules_appear": SubResource("Animation_j1gxf"),
-"rules_disappear": SubResource("Animation_qfl5k")
-}
-
 [sub_resource type="Animation" id="Animation_uj37j"]
 length = 0.001
 tracks/0/type = "value"
@@ -351,6 +479,63 @@ _data = {
 "RESET": SubResource("Animation_uj37j"),
 "dni_appear": SubResource("Animation_g1ki7"),
 "dni_disappear": SubResource("Animation_gt23q")
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_7ou0i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(170, 450)]
+}
+
+[sub_resource type="Animation" id="Animation_j1gxf"]
+resource_name = "rules_appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(170, 450), Vector2(170, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qfl5k"]
+resource_name = "rules_disappear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(170, 0), Vector2(170, 450)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xam52"]
+_data = {
+"RESET": SubResource("Animation_7ou0i"),
+"rules_appear": SubResource("Animation_j1gxf"),
+"rules_disappear": SubResource("Animation_qfl5k")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg64p"]
@@ -452,13 +637,55 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbkte"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="GDScript" id="GDScript_brifd"]
-script/source = "extends Sprite2D
-"
-
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
+
+[node name="ResultScreen" type="Node2D" parent="."]
+
+[node name="ResultBackground" type="ColorRect" parent="ResultScreen"]
+offset_left = -605.0
+offset_top = -349.0
+offset_right = 603.0
+offset_bottom = 327.0
+color = Color(0, 0, 0, 0)
+
+[node name="ResultAnimationPlayer" type="AnimationPlayer" parent="ResultScreen"]
+libraries = {
+"": SubResource("AnimationLibrary_dbdax")
+}
+
+[node name="TotalCharactersCount" type="Label" parent="ResultScreen"]
+visible = false
+offset_left = -242.0
+offset_top = -253.0
+offset_right = 33.0
+offset_bottom = -186.0
+text = "Revisaste a X personas"
+
+[node name="CorrectCharactersCount" type="Label" parent="ResultScreen"]
+visible = false
+offset_left = -241.0
+offset_top = -198.0
+offset_right = 21.0
+offset_bottom = -120.0
+text = "Y pasaron correctamente"
+
+[node name="IncorrectCharactersCount" type="Label" parent="ResultScreen"]
+visible = false
+offset_left = -239.0
+offset_top = -138.0
+offset_right = 27.0
+offset_bottom = -57.0
+text = "Z pasaron incorrectamente"
+
+[node name="LabelEffectScreen" type="ColorRect" parent="ResultScreen"]
+visible = false
+offset_left = -587.0
+offset_top = -335.0
+offset_right = 574.0
+offset_bottom = 340.0
+color = Color(0, 0, 0, 1)
 
 [node name="CharacterDisplay" type="ColorRect" parent="."]
 offset_left = -565.0
@@ -498,19 +725,6 @@ offset_right = -344.0
 offset_bottom = 303.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 text = "Fecha: 23 / 08 / 2024"
-
-[node name="RulesLabel" type="Label" parent="."]
-offset_left = 170.0
-offset_top = 450.0
-offset_right = 458.0
-offset_bottom = 895.0
-theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
-
-[node name="RulesAnimationPlayer" type="AnimationPlayer" parent="RulesLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_xam52")
-}
 
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
@@ -558,6 +772,19 @@ libraries = {
 position = Vector2(200, -30)
 scale = Vector2(0.22, 0.22)
 texture = ExtResource("4_j40fr")
+
+[node name="RulesLabel" type="Label" parent="."]
+offset_left = 170.0
+offset_top = 450.0
+offset_right = 458.0
+offset_bottom = 895.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
+
+[node name="RulesAnimationPlayer" type="AnimationPlayer" parent="RulesLabel"]
+libraries = {
+"": SubResource("AnimationLibrary_xam52")
+}
 
 [node name="ShowRulesButton" type="Button" parent="."]
 offset_left = -308.0
@@ -647,20 +874,15 @@ position = Vector2(-387, -218)
 scale = Vector2(0.601156, 0.602076)
 texture = ExtResource("12_snwmf")
 
-[node name="ProgressBar" type="Sprite2D" parent="."]
-position = Vector2(76.585, -277.365)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("13_tcllv")
-script = SubResource("GDScript_brifd")
-
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_entrm")
 bus = &"New Bus"
 
+[connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
-[connection signal="animation_finished" from="RulesLabel/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
+[connection signal="animation_finished" from="RulesLabel/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="timeout" from="CountdownNode/CountdownTimer" to="CountdownNode" method="_on_countdown_timer_timeout"]
 [connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]

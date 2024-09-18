@@ -8,13 +8,11 @@ extends Node2D
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
+@onready var result_animation_player = $ResultScreen/ResultAnimationPlayer
+
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
-@onready var progress_bar = $ProgressBar
 @onready var background_music = $BackgroundMusicPlayer
-
-var MAX_PROGRESS_BAR_VALUE = 17
-var MIN_PROGRESS_BAR_VALUE = 0
 
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/character1.png")}},
@@ -29,27 +27,6 @@ var persons = [
 	{"name": "Valentina", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Valentina Gomez", "born_date": "01/05/1996", "due_date": "10/07/2025", "document_photo": preload("res://characterImages/character2.png")}}
 ]
 
-var progress_bar_sprites = [
-	preload("res://progressBarImages/barra_0.png"),
-	preload("res://progressBarImages/barra_1.png"),
-	preload("res://progressBarImages/barra_2.png"),
-	preload("res://progressBarImages/barra_3.png"),
-	preload("res://progressBarImages/barra_4.png"),
-	preload("res://progressBarImages/barra_5.png"),
-	preload("res://progressBarImages/barra_6.png"),
-	preload("res://progressBarImages/barra_7.png"),
-	preload("res://progressBarImages/barra_8.png"),
-	preload("res://progressBarImages/barra_9.png"),
-	preload("res://progressBarImages/barra_10.png"),
-	preload("res://progressBarImages/barra_11.png"),
-	preload("res://progressBarImages/barra_12.png"),
-	preload("res://progressBarImages/barra_13.png"),
-	preload("res://progressBarImages/barra_14.png"),
-	preload("res://progressBarImages/barra_15.png"),
-	preload("res://progressBarImages/barra_16.png"),
-	preload("res://progressBarImages/barra_17.png")
-]
-
 var custom_cursor = load("res://characterImages/hand.png")
 var thumb_up_cursor= load("res://characterImages/thumb_up.png")
 var thumb_down_cursor= load("res://characterImages/thumb_down.png")
@@ -58,20 +35,17 @@ var current_videogame_date = "23-08-2024"
 var selected_index = -1
 var previous_index = -1
 var correct_characters = 0
-var incorrect_characters = 0
+var incorrect_characters = []
 var selected_person
 
 var rules_visible = false
 
-var progress_value = 0
-var previous_value = 0
 var check_interval = 0.1  # Check every 0.1 seconds
 var time_since_last_check = 0.0
 
 func _ready():
 	background_music.play()
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
-	progress_value = 0
 	apply_rules()
 	accept_button.visible = false
 	reject_button.visible = false
@@ -82,10 +56,6 @@ func _process(delta):
 	if time_since_last_check >= check_interval:
 		time_since_last_check = 0.0
 		
-		if progress_value != previous_value:
-			progress_bar.texture = progress_bar_sprites[progress_value]
-			previous_value = progress_value
-	
 func new_selected_person():
 	while selected_index == previous_index:
 		selected_index = randi() % persons.size()
@@ -115,24 +85,23 @@ func handle_accept_reject(problem, wasAccepted):
 	dni_animation_player.play("dni_disappear")
 	if problem in ["due_date", "born_date"]:
 		if wasAccepted:
-			incorrect_characters += 1
+			incorrect_characters.append(problem)
 		else:
 			correct_characters += 1
 			correct_choice = true
 	else: 
 		if not problem and not wasAccepted:
-			incorrect_characters += 1
+			incorrect_characters.append(problem)
 		elif not problem and wasAccepted:
 			correct_characters += 1
 			correct_choice = true
-	handle_vertical_bar_change(correct_choice)
 	handle_character_enter_or_not_anim(wasAccepted)
 		
 func apply_rules():
 	var rules = [
 		"Entrada cierra 03:00",
-		"Solo mayores de edad +18",
-		"El documento ser valido"
+		"Solo mayores de edad (+18)",
+		"El documento debe ser valido"
 	]
 
 	var rules_text = ""
@@ -148,12 +117,6 @@ func _on_show_rules_button_pressed():
 	else:
 		rules_label_animation_player.play("rules_disappear")
 		rules_visible = false
-		
-func handle_vertical_bar_change(correct_choice):
-	if correct_choice and progress_value < MAX_PROGRESS_BAR_VALUE:
-		progress_value += 1
-	elif not correct_choice and progress_value > 0:
-		progress_value -= 1
 
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
@@ -181,6 +144,10 @@ func _on_dni_animation_player_animation_finished(animation_name):
 	if animation_name == "dni_appear":
 		accept_button.visible = true
 		reject_button.visible = true
+		
+func _on_result_animation_player_animation_finished(animation_name):
+	if animation_name == "show_results":
+		result_animation_player.play("show_labels")
 
 func _on_accept_button_mouse_entered():
 	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
