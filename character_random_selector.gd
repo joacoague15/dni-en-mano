@@ -2,8 +2,8 @@ extends Node2D
 
 @onready var dni_information = $DNIInformation
 @onready var result_label = $ResultLabel
-@onready var rules_label = $RulesLabel
-@onready var rules_label_animation_player = $RulesLabel/RulesAnimationPlayer
+@onready var rules_label = $Phone/RulesLabel
+@onready var rules_label_animation_player = $Phone/RulesLabel/RulesAnimationPlayer
 @onready var show_rules_button = $ShowRulesButton
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
@@ -13,6 +13,9 @@ extends Node2D
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
 @onready var background_music = $BackgroundMusicPlayer
+
+@export var hover_color: Color = Color(1, 0.5, 0.5)  # light red
+@export var normal_color: Color = Color(1, 1, 1)      # white
 
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/character1.png")}},
@@ -111,12 +114,10 @@ func apply_rules():
 	rules_label.text = rules_text
 		
 func _on_show_rules_button_pressed():
-	if not rules_visible:
-		rules_label_animation_player.play("rules_appear")
-		rules_visible = true
-	else:
-		rules_label_animation_player.play("rules_disappear")
-		rules_visible = false
+	if not rules_label_animation_player.is_playing():
+		var animation = "rules_appear" if not rules_visible else "rules_disappear"
+		rules_label_animation_player.play(animation)
+		rules_visible = !rules_visible
 
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
@@ -153,10 +154,13 @@ func _on_accept_button_mouse_entered():
 	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
 
 func _on_reject_button_mouse_entered():
+	modulate = hover_color
 	Input.set_custom_mouse_cursor(thumb_down_cursor, 0, Vector2(64, 64))
 
 func _on_accept_button_mouse_exited():
+	modulate = normal_color
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 
 func _on_reject_button_mouse_exited():
+	modulate = normal_color
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
