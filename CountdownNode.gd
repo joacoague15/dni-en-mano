@@ -4,6 +4,10 @@ extends Node
 @onready var countdown_label_animator = $CountdownAnimationPlayer
 @onready var countdown_timer = $CountdownTimer
 @onready var result_animation_player = get_node("../ResultScreen/ResultAnimationPlayer")
+@onready var total_character_count = get_node("../ResultScreen/TotalCharactersCount")
+@onready var correct_character_count = get_node("../ResultScreen/CorrectCharactersCount")
+@onready var incorrect_character_count = get_node("../ResultScreen/IncorrectCharactersCount")
+@onready var character_node = get_node("../../Character")
 
 var start_time = 60
 var end_time = 180
@@ -18,6 +22,7 @@ func _ready():
 
 func _process(delta):
 	if countdown_timer.is_stopped() and not result_screen_shown:
+		character_node.fill_result_details()
 		result_animation_player.play("show_results")
 		result_screen_shown = true
 	change_remaining_seconds(delta * 7)

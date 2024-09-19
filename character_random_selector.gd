@@ -3,12 +3,16 @@ extends Node2D
 @onready var dni_information = $DNIInformation
 @onready var result_label = $ResultLabel
 @onready var rules_label = $Phone/RulesLabel
-@onready var rules_label_animation_player = $Phone/RulesLabel/RulesAnimationPlayer
+@onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
 @onready var show_rules_button = $ShowRulesButton
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
 @onready var result_animation_player = $ResultScreen/ResultAnimationPlayer
+@onready var total_characters_count = $ResultScreen/TotalCharactersCount
+@onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
+@onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
+
 
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
@@ -37,8 +41,8 @@ var current_videogame_date = "23-08-2024"
 
 var selected_index = -1
 var previous_index = -1
-var correct_characters = 0
-var incorrect_characters = []
+var correct_characters
+var incorrect_characters
 var selected_person
 
 var rules_visible = false
@@ -47,6 +51,8 @@ var check_interval = 0.1  # Check every 0.1 seconds
 var time_since_last_check = 0.0
 
 func _ready():
+	correct_characters = 0
+	incorrect_characters = []
 	background_music.play()
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	apply_rules()
@@ -112,6 +118,11 @@ func apply_rules():
 		rules_text += rule + "\n"
 	
 	rules_label.text = rules_text
+	
+func fill_result_details():
+	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
+	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
+	incorrect_characters_count.text = "Errores: " + str(incorrect_characters.size())
 		
 func _on_show_rules_button_pressed():
 	if not rules_label_animation_player.is_playing():

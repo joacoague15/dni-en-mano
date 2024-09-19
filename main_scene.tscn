@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
 [ext_resource type="Texture2D" uid="uid://nip20sokv4sy" path="res://characterImages/phone.png" id="15_4qmgs"]
-[ext_resource type="AudioStream" uid="uid://fdahb23jahf3" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
+[ext_resource type="AudioStream" uid="uid://dh5mpboqaq8a4" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
 
 [sub_resource type="Animation" id="Animation_25fdj"]
 resource_name = "show_results"
@@ -581,9 +581,6 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbkte"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
-bg_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_7ou0i"]
 length = 0.001
 tracks/0/type = "value"
@@ -638,6 +635,9 @@ _data = {
 "rules_disappear": SubResource("Animation_qfl5k")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
+bg_color = Color(0, 0, 0, 1)
+
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
@@ -674,6 +674,7 @@ text = "Y pasaron correctamente"
 
 [node name="IncorrectCharactersCount" type="Label" parent="ResultScreen"]
 visible = false
+self_modulate = Color(0.910932, 0.200015, 0, 1)
 offset_left = -239.0
 offset_top = -138.0
 offset_right = 27.0
@@ -870,6 +871,12 @@ bus = &"New Bus"
 position = Vector2(419, 675)
 texture = ExtResource("15_4qmgs")
 
+[node name="RulesAnimationPlayer" type="AnimationPlayer" parent="Phone"]
+root_node = NodePath("../RulesLabel")
+libraries = {
+"": SubResource("AnimationLibrary_xam52")
+}
+
 [node name="RulesLabel" type="Label" parent="Phone"]
 offset_left = -143.0
 offset_top = -195.0
@@ -878,10 +885,22 @@ offset_bottom = 168.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
-[node name="RulesAnimationPlayer" type="AnimationPlayer" parent="Phone/RulesLabel"]
-libraries = {
-"": SubResource("AnimationLibrary_xam52")
-}
+[node name="RulesPhoneButton" type="Button" parent="Phone"]
+offset_left = -146.0
+offset_top = 172.0
+offset_right = -41.0
+offset_bottom = 203.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+text = "Reglas
+"
+
+[node name="StrikesButton" type="Button" parent="Phone"]
+offset_left = -41.0
+offset_top = 172.0
+offset_right = 64.0
+offset_bottom = 203.0
+text = "Strikes
+"
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
@@ -895,4 +914,4 @@ libraries = {
 [connection signal="mouse_entered" from="RejectButton" to="." method="_on_reject_button_mouse_entered"]
 [connection signal="mouse_exited" from="RejectButton" to="." method="_on_reject_button_mouse_exited"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
-[connection signal="animation_finished" from="Phone/RulesLabel/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
+[connection signal="animation_finished" from="Phone/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
