@@ -54,8 +54,8 @@ var check_interval = 0.1
 var time_since_last_check = 0.0
 
 var energy = 10
-var PERMITED_STRIKES = 3
-var CORRECT_CHARACTERS_NEEDED = 1
+var PERMITED_STRIKES = 2
+var CORRECT_CHARACTERS_NEEDED = 5
 var strikes = 0
 
 func _ready():
