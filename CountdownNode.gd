@@ -22,10 +22,9 @@ func _ready():
 
 func _process(delta):
 	if countdown_timer.is_stopped() and not result_screen_shown:
-		character_node.fill_result_details()
-		result_animation_player.play("show_results")
+		character_node.end_level()
 		result_screen_shown = true
-	change_remaining_seconds(delta * 7)
+	change_remaining_seconds(delta * 2)
 
 func _on_countdown_timer_timeout():
 	if current_time >= end_time:

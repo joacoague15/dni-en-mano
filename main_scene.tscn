@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=46 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -15,82 +15,6 @@
 [ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
 [ext_resource type="Texture2D" uid="uid://nip20sokv4sy" path="res://characterImages/phone.png" id="15_4qmgs"]
 [ext_resource type="AudioStream" uid="uid://dh5mpboqaq8a4" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
-
-[sub_resource type="Animation" id="Animation_25fdj"]
-resource_name = "show_results"
-length = 2.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ResultBackground:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LabelEffectScreen:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:z_index")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [1]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("TotalCharactersCount:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(2.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CorrectCharactersCount:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(2.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("IncorrectCharactersCount:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(2.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_5h8d7"]
 length = 0.001
@@ -193,6 +117,82 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(-587, -335), Vector2(-587, 400)]
+}
+
+[sub_resource type="Animation" id="Animation_25fdj"]
+resource_name = "show_results"
+length = 2.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ResultBackground:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LabelEffectScreen:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:z_index")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TotalCharactersCount:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CorrectCharactersCount:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("IncorrectCharactersCount:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dbdax"]
@@ -593,7 +593,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(419, 675)]
+"values": [Vector2(470, 510)]
 }
 
 [sub_resource type="Animation" id="Animation_j1gxf"]
@@ -609,7 +609,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(419, 675), Vector2(419, 0)]
+"values": [Vector2(470, 510), Vector2(470, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qfl5k"]
@@ -625,7 +625,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(419, 0), Vector2(419, 675)]
+"values": [Vector2(470, 0), Vector2(470, 510)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xam52"]
@@ -636,6 +636,15 @@ _data = {
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b31ab"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yf3k"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vpl2"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Character" type="Node2D"]
@@ -712,14 +721,6 @@ texture = ExtResource("2_edmgr")
 region_enabled = true
 region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
-[node name="ResultLabel" type="Label" parent="."]
-visible = false
-offset_left = 211.0
-offset_top = -297.0
-offset_right = 251.0
-offset_bottom = -274.0
-theme_override_fonts/font = SubResource("FontVariation_xvukn")
-
 [node name="CurrentDateLabel" type="Label" parent="."]
 offset_left = -500.0
 offset_top = 280.0
@@ -735,35 +736,68 @@ scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_51jtu")
 script = ExtResource("2_m835h")
 
+[node name="NameTitle" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 200.0
+offset_top = -120.0
+offset_right = 430.0
+offset_bottom = -85.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_font_sizes/font_size = 24
+text = "Nombre"
+
 [node name="NameLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = -30.0
-offset_top = -148.333
-offset_right = 320.0
-offset_bottom = -107.333
+offset_left = 200.0
+offset_top = -90.0
+offset_right = 415.0
+offset_bottom = -62.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
+theme_override_font_sizes/font_size = 20
+
+[node name="BornDateTitle" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 200.0
+offset_top = -50.0
+offset_right = 332.0
+offset_bottom = -17.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
+text = "Nacimiento"
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 210.0
-offset_top = -35.0
-offset_right = 570.0
-offset_bottom = 2.0
+offset_left = 200.0
+offset_top = -20.0
+offset_right = 348.0
+offset_bottom = 17.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_font_sizes/font_size = 20
+
+[node name="DueDateTitle" type="Label" parent="DNIInformation"]
+modulate = Color(0, 0, 0, 1)
+self_modulate = Color(0, 0, 0, 1)
+offset_left = 200.0
+offset_top = 20.0
+offset_right = 344.0
+offset_bottom = 53.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
+text = "Vencimiento"
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 205.0
-offset_top = 33.0
-offset_right = 540.0
-offset_bottom = 68.0
+offset_left = 200.0
+offset_top = 50.0
+offset_right = 535.0
+offset_bottom = 85.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 20
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
 libraries = {
@@ -868,7 +902,7 @@ stream = ExtResource("15_entrm")
 bus = &"New Bus"
 
 [node name="Phone" type="Sprite2D" parent="."]
-position = Vector2(419, 675)
+position = Vector2(470, 510)
 texture = ExtResource("15_4qmgs")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="Phone"]
@@ -878,29 +912,36 @@ libraries = {
 }
 
 [node name="RulesLabel" type="Label" parent="Phone"]
-offset_left = -143.0
-offset_top = -195.0
-offset_right = 65.0
-offset_bottom = 168.0
+offset_left = -147.0
+offset_top = -194.0
+offset_right = 69.0
+offset_bottom = 171.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
-[node name="RulesPhoneButton" type="Button" parent="Phone"]
-offset_left = -146.0
-offset_top = 172.0
-offset_right = -41.0
+[node name="EnergyLabel" type="Label" parent="Phone"]
+offset_left = -147.0
+offset_top = -216.0
+offset_right = -33.0
+offset_bottom = -190.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b31ab")
+
+[node name="StrikesLabel" type="Label" parent="Phone"]
+offset_left = -36.0
+offset_top = -216.0
+offset_right = 69.0
+offset_bottom = -189.0
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0yf3k")
+
+[node name="CorrectCharactersLabel" type="Label" parent="Phone"]
+offset_left = -145.0
+offset_top = 170.0
+offset_right = 67.0
 offset_bottom = 203.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
-text = "Reglas
-"
-
-[node name="StrikesButton" type="Button" parent="Phone"]
-offset_left = -41.0
-offset_top = 172.0
-offset_right = 64.0
-offset_bottom = 203.0
-text = "Strikes
-"
+theme_override_styles/normal = SubResource("StyleBoxFlat_4vpl2")
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -12,7 +12,9 @@ extends Node2D
 @onready var total_characters_count = $ResultScreen/TotalCharactersCount
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
-
+@onready var energy_label = $Phone/EnergyLabel
+@onready var strikes_label = $Phone/StrikesLabel
+@onready var correct_character_label = $Phone/CorrectCharactersLabel
 
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
@@ -47,13 +49,21 @@ var selected_person
 
 var rules_visible = false
 
-var check_interval = 0.1  # Check every 0.1 seconds
+var check_interval = 0.1
 var time_since_last_check = 0.0
+
+var energy = 10
+var PERMITED_STRIKES = 3
+var CORRECT_CHARACTERS_NEEDED = 5
+var strikes = 0
 
 func _ready():
 	correct_characters = 0
 	incorrect_characters = []
 	background_music.play()
+	energy_label.text = str(energy)
+	strikes_label.text = str(strikes)
+	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
 	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	apply_rules()
 	accept_button.visible = false
@@ -91,26 +101,54 @@ func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
 	accept_button.visible = false
 	reject_button.visible = false
+	handle_energy()
 	dni_animation_player.play("dni_disappear")
 	if problem in ["due_date", "born_date"]:
 		if wasAccepted:
 			incorrect_characters.append(problem)
+			handle_strikes()
 		else:
-			correct_characters += 1
 			correct_choice = true
+			handle_amount_correct_characters()
 	else: 
 		if not problem and not wasAccepted:
 			incorrect_characters.append(problem)
+			handle_strikes()
 		elif not problem and wasAccepted:
-			correct_characters += 1
 			correct_choice = true
+			handle_amount_correct_characters()
 	handle_character_enter_or_not_anim(wasAccepted)
+	
+func handle_energy():
+	if energy <= 1:
+		end_level()
+	energy -= 1
+	energy_label.text = str(energy)
+	
+func handle_strikes():
+	if strikes < PERMITED_STRIKES:
+		strikes += 1
+		strikes_label.text = str(strikes)
+	else:
+		end_level()
+		
+func handle_amount_correct_characters():
+	correct_characters += 1
+	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
+	if correct_characters >= CORRECT_CHARACTERS_NEEDED:
+		fill_result_details()
+		result_animation_player.play("show_results")
+		
+func end_level():
+	fill_result_details()
+	result_animation_player.play("show_results")
 		
 func apply_rules():
 	var rules = [
-		"Entrada cierra 03:00",
+		"Entrada cierra 03:00hs",
 		"Solo mayores de edad (+18)",
-		"El documento debe ser valido"
+		"El DNI debe estar en regla",
+		"Strikes: " + str(strikes) + "/ " + str(PERMITED_STRIKES)
 	]
 
 	var rules_text = ""
@@ -165,7 +203,6 @@ func _on_accept_button_mouse_entered():
 	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
 
 func _on_reject_button_mouse_entered():
-	modulate = hover_color
 	Input.set_custom_mouse_cursor(thumb_down_cursor, 0, Vector2(64, 64))
 
 func _on_accept_button_mouse_exited():
