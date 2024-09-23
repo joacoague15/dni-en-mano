@@ -8,6 +8,7 @@ extends Node2D
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
+@onready var win_or_loose_label = $ResultScreen/WinOrLooseLabel
 @onready var result_animation_player = $ResultScreen/ResultAnimationPlayer
 @onready var total_characters_count = $ResultScreen/TotalCharactersCount
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
@@ -54,7 +55,7 @@ var time_since_last_check = 0.0
 
 var energy = 10
 var PERMITED_STRIKES = 3
-var CORRECT_CHARACTERS_NEEDED = 5
+var CORRECT_CHARACTERS_NEEDED = 1
 var strikes = 0
 
 func _ready():
@@ -158,6 +159,12 @@ func apply_rules():
 	rules_label.text = rules_text
 	
 func fill_result_details():
+	if strikes >= PERMITED_STRIKES or correct_characters < CORRECT_CHARACTERS_NEEDED:
+		win_or_loose_label.text = "PERDISTE"
+		win_or_loose_label.modulate = Color(1, 0, 0)
+	else:
+		win_or_loose_label.text = "GANASTE"
+		win_or_loose_label.modulate = Color(0, 1, 0)
 	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
 	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
 	incorrect_characters_count.text = "Errores: " + str(incorrect_characters.size())
