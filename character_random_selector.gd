@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var dni_information = $DNIInformation
-@onready var result_label = $ResultLabel
 @onready var rules_label = $Phone/RulesLabel
 @onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
 @onready var show_rules_button = $ShowRulesButton
@@ -16,6 +15,10 @@ extends Node2D
 @onready var energy_label = $Phone/EnergyLabel
 @onready var strikes_label = $Phone/StrikesLabel
 @onready var correct_character_label = $Phone/CorrectCharactersLabel
+
+@onready var scanning_progress_bar = $ScanningProgressBar
+@onready var scanning_button = $ScanningButton
+@onready var activate_scan_button = $ActivateScanButton
 
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
@@ -37,7 +40,6 @@ var persons = [
 	{"name": "Valentina", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Valentina Gomez", "born_date": "01/05/1996", "due_date": "10/07/2025", "document_photo": preload("res://characterImages/character2.png")}}
 ]
 
-var custom_cursor = load("res://characterImages/hand.png")
 var thumb_up_cursor= load("res://characterImages/thumb_up.png")
 var thumb_down_cursor= load("res://characterImages/thumb_down.png")
 var current_videogame_date = "23-08-2024"
@@ -58,23 +60,44 @@ var PERMITED_STRIKES = 2
 var CORRECT_CHARACTERS_NEEDED = 5
 var strikes = 0
 
+var is_holding = false
+var progress = 0.0
+var progress_time = 2.0
+
 func _ready():
+	scanning_progress_bar.value = 0
 	correct_characters = 0
+	activate_scan_button.disabled = true
 	incorrect_characters = []
 	background_music.play()
 	energy_label.text = str(energy)
 	strikes_label.text = str(strikes)
 	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
-	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 	apply_rules()
 	accept_button.visible = false
 	reject_button.visible = false
 	next_person()
 	
 func _process(delta):
+	print(activate_scan_button.visible)
 	time_since_last_check += delta
 	if time_since_last_check >= check_interval:
 		time_since_last_check = 0.0
+	
+	if is_holding:
+		progress += delta / progress_time
+		if progress >= 1.0:
+			progress = 1.0
+			scanning_button.visible = false
+			scanning_progress_bar.visible = false
+			activate_scan_button.disabled = true
+			activate_scan_button.text = "Scanear"
+			is_holding = false
+	else:
+		if progress > 0:
+			progress = 0
+
+	scanning_progress_bar.value = progress * scanning_progress_bar.max_value
 		
 func new_selected_person():
 	while selected_index == previous_index:
@@ -178,7 +201,10 @@ func _on_show_rules_button_pressed():
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
+		activate_scan_button.disabled = false
+		activate_scan_button.text = "Scanear"
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
+		activate_scan_button.disabled = true
 		background_music.set_bus("New Bus")
 		background_music.set_volume_db(0)
 		next_person()
@@ -206,16 +232,22 @@ func _on_result_animation_player_animation_finished(animation_name):
 	if animation_name == "show_results":
 		result_animation_player.play("show_labels")
 
-func _on_accept_button_mouse_entered():
-	Input.set_custom_mouse_cursor(thumb_up_cursor, 0, Vector2(64, 64))
-
-func _on_reject_button_mouse_entered():
-	Input.set_custom_mouse_cursor(thumb_down_cursor, 0, Vector2(64, 64))
-
 func _on_accept_button_mouse_exited():
 	modulate = normal_color
-	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
 
 func _on_reject_button_mouse_exited():
 	modulate = normal_color
-	Input.set_custom_mouse_cursor(custom_cursor, 0, Vector2(64, 64))
+
+func _on_scanning_button_button_down():
+	is_holding = true
+
+func _on_scanning_button_button_up():
+	is_holding = false
+
+func _on_activate_scan_button_pressed():
+	if scanning_button.visible:
+		activate_scan_button.text = "Scanear"
+	else:
+		activate_scan_button.text = "Cancelar"
+	scanning_button.visible = !scanning_button.visible
+	scanning_progress_bar.visible = !scanning_progress_bar.visible

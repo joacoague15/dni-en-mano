@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=47 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -671,6 +671,9 @@ bg_color = Color(0, 0, 0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vpl2"]
 bg_color = Color(0, 0, 0, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mphql"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
@@ -753,10 +756,10 @@ region_enabled = true
 region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
 [node name="CurrentDateLabel" type="Label" parent="."]
-offset_left = -500.0
-offset_top = 280.0
-offset_right = -344.0
-offset_bottom = 303.0
+offset_left = -179.0
+offset_top = -313.0
+offset_right = -26.0
+offset_bottom = -290.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 text = "Fecha: 23 / 08 / 2024"
 
@@ -974,6 +977,33 @@ offset_bottom = 203.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4vpl2")
 
+[node name="ScanningButton" type="Button" parent="."]
+visible = false
+offset_left = -550.0
+offset_top = -94.0
+offset_right = -226.0
+offset_bottom = 215.0
+theme_override_styles/focus = SubResource("StyleBoxFlat_mphql")
+flat = true
+
+[node name="ScanningProgressBar" type="ProgressBar" parent="."]
+visible = false
+anchors_preset = -1
+anchor_right = 0.061
+anchor_bottom = 0.066
+offset_left = -259.0
+offset_top = -91.0
+offset_right = -230.0
+offset_bottom = 212.0
+fill_mode = 3
+
+[node name="ActivateScanButton" type="Button" parent="."]
+offset_left = -360.0
+offset_top = 257.0
+offset_right = -303.0
+offset_bottom = 301.0
+text = "Scanear"
+
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
@@ -987,3 +1017,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_4vpl2")
 [connection signal="mouse_exited" from="RejectButton" to="." method="_on_reject_button_mouse_exited"]
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="animation_finished" from="Phone/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
+[connection signal="button_down" from="ScanningButton" to="." method="_on_scanning_button_button_down"]
+[connection signal="button_up" from="ScanningButton" to="." method="_on_scanning_button_button_up"]
+[connection signal="pressed" from="ScanningButton" to="." method="_on_scanning_button_pressed"]
+[connection signal="pressed" from="ActivateScanButton" to="." method="_on_activate_scan_button_pressed"]
