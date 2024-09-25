@@ -64,6 +64,8 @@ var is_holding = false
 var progress = 0.0
 var progress_time = 2.0
 
+var	is_scan_activated = false
+
 func _ready():
 	scanning_progress_bar.value = 0
 	correct_characters = 0
@@ -79,20 +81,21 @@ func _ready():
 	next_person()
 	
 func _process(delta):
-	print(activate_scan_button.visible)
 	time_since_last_check += delta
 	if time_since_last_check >= check_interval:
 		time_since_last_check = 0.0
-	
-	if is_holding:
+		
+	if is_scan_activated:
 		progress += delta / progress_time
 		if progress >= 1.0:
 			progress = 1.0
-			scanning_button.visible = false
 			scanning_progress_bar.visible = false
 			activate_scan_button.disabled = true
-			activate_scan_button.text = "Scanear"
-			is_holding = false
+			is_scan_activated = false
+			energy += 3
+			if energy > 10:
+				energy = 10
+			energy_label.text = str(energy)
 	else:
 		if progress > 0:
 			progress = 0
@@ -202,7 +205,7 @@ func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
 		activate_scan_button.disabled = false
-		activate_scan_button.text = "Scanear"
+		scanning_progress_bar.visible = true
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
 		background_music.set_bus("New Bus")
@@ -214,6 +217,9 @@ func _on_animation_player_animation_started(animation_name):
 		$DialogueControl.show_dialogue()
 		dni_information.display_person_dni(selected_person["dni"])
 		dni_animation_player.play("dni_appear")
+	if animation_name == "character_enter" or animation_name == "character_no_enter":
+		activate_scan_button.disabled = true
+		scanning_progress_bar.visible = false
 
 func handle_character_enter_or_not_anim(wasAccepted):
 	if wasAccepted:
@@ -238,16 +244,5 @@ func _on_accept_button_mouse_exited():
 func _on_reject_button_mouse_exited():
 	modulate = normal_color
 
-func _on_scanning_button_button_down():
-	is_holding = true
-
-func _on_scanning_button_button_up():
-	is_holding = false
-
 func _on_activate_scan_button_pressed():
-	if scanning_button.visible:
-		activate_scan_button.text = "Scanear"
-	else:
-		activate_scan_button.text = "Cancelar"
-	scanning_button.visible = !scanning_button.visible
-	scanning_progress_bar.visible = !scanning_progress_bar.visible
+	is_scan_activated = !is_scan_activated	
