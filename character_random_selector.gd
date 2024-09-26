@@ -24,9 +24,6 @@ extends Node2D
 @onready var reject_button = $RejectButton
 @onready var background_music = $BackgroundMusicPlayer
 
-@export var hover_color: Color = Color(1, 0.5, 0.5)  # light red
-@export var normal_color: Color = Color(1, 1, 1)      # white
-
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/character1.png")}},
 	{"name": "Franco", "image": preload("res://characterImages/character1.png"), "problem": null, "dni": {"name": "Franco Perez", "born_date": "10/03/1997", "due_date": "20/02/2025", "document_photo": preload("res://characterImages/character1.png")}},
@@ -62,7 +59,7 @@ var strikes = 0
 
 var is_holding = false
 var progress = 0.0
-var progress_time = 2.0
+var progress_time = 1.5
 
 var	is_scan_activated = false
 
@@ -72,8 +69,8 @@ func _ready():
 	activate_scan_button.disabled = true
 	incorrect_characters = []
 	background_music.play()
-	energy_label.text = str(energy)
-	strikes_label.text = str(strikes)
+	energy_label.text = "Energia: " + str(energy)
+	strikes_label.text = "Strikes: " + str(strikes)
 	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
 	apply_rules()
 	accept_button.visible = false
@@ -95,7 +92,7 @@ func _process(delta):
 			energy += 3
 			if energy > 10:
 				energy = 10
-			energy_label.text = str(energy)
+			energy_label.text = "Energia: " + str(energy)
 	else:
 		if progress > 0:
 			progress = 0
@@ -110,7 +107,6 @@ func new_selected_person():
 	return persons[selected_index]
 	
 func next_person():
-	await get_tree().create_timer(1.5).timeout
 	selected_person = new_selected_person()
 	character_animation_player.play("character_appear")	
 	character_sprite.position = Vector2(-500, 0)	
@@ -150,12 +146,12 @@ func handle_energy():
 	if energy <= 1:
 		end_level()
 	energy -= 1
-	energy_label.text = str(energy)
+	energy_label.text = "Energia: " + str(energy)
 	
 func handle_strikes():
 	if strikes < PERMITED_STRIKES:
 		strikes += 1
-		strikes_label.text = str(strikes)
+		strikes_label.text = "Strikes: " + str(strikes)
 	else:
 		end_level()
 		
@@ -237,12 +233,6 @@ func _on_dni_animation_player_animation_finished(animation_name):
 func _on_result_animation_player_animation_finished(animation_name):
 	if animation_name == "show_results":
 		result_animation_player.play("show_labels")
-
-func _on_accept_button_mouse_exited():
-	modulate = normal_color
-
-func _on_reject_button_mouse_exited():
-	modulate = normal_color
 
 func _on_activate_scan_button_pressed():
 	is_scan_activated = !is_scan_activated	
