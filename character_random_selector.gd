@@ -20,6 +20,8 @@ extends Node2D
 
 @onready var win_or_loose_screen = $ResultScreen/WinOrLooseImage
 
+@onready var wrong_choice_notification_label = $WrongChoiceNotificationLabel
+
 @onready var scanning_progress_bar = $ScanningProgressBar
 @onready var scanning_button = $ScanningButton
 @onready var activate_scan_button = $ActivateScanButton
@@ -129,6 +131,7 @@ func handle_accept_reject(problem, wasAccepted):
 		if wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
+			handle_incorrect_choice_notification(problem)
 		else:
 			correct_choice = true
 			handle_amount_correct_characters()
@@ -136,6 +139,7 @@ func handle_accept_reject(problem, wasAccepted):
 		if not problem and not wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
+			handle_incorrect_choice_notification(problem)
 		elif not problem and wasAccepted:
 			correct_choice = true
 			handle_amount_correct_characters()
@@ -154,6 +158,28 @@ func handle_strikes():
 	else:
 		end_level()
 		
+func handle_incorrect_choice_notification(problem):
+	var message = ""
+	match problem:
+		"due_date":
+			message = "DNI caducado"
+		"born_date":
+			message = "No era mayor de edad"
+		"wrong_portrait":
+			message = "Lo retrato no era correcto"
+		_:
+			message = "No habia nada de malo con el cliente"
+
+	wrong_choice_notification_label.text = "" 
+	await type_text(message)  
+	
+func type_text(text_to_type):
+	var typing_speed = 0.05
+	for char in text_to_type:
+		wrong_choice_notification_label.text += char
+		await get_tree().create_timer(typing_speed).timeout
+	
+		
 func handle_amount_correct_characters():
 	correct_characters += 1
 	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
@@ -167,13 +193,12 @@ func end_level():
 		
 func apply_rules():
 	var rules = [
-		"Entrada cierra 03:00hs",
 		"Solo mayores de edad (+18)",
 		"El DNI debe estar en regla",
-		"Strikes: " + str(strikes) + "/ " + str(PERMITED_STRIKES)
+		"Entrada cierra 03:00hs"
 	]
 
-	var rules_text = ""
+	var rules_text = "REGLAS" + "\n"
 	for rule in rules:
 		rules_text += rule + "\n"
 	
