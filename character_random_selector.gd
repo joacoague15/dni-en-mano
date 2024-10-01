@@ -16,6 +16,10 @@ extends Node2D
 @onready var strikes_label = $Phone/StrikesLabel
 @onready var correct_character_label = $Phone/CorrectCharactersLabel
 
+@onready var phone_sprite = $ShowRulesButton/phone
+
+@onready var win_or_loose_screen = $ResultScreen/WinOrLooseImage
+
 @onready var scanning_progress_bar = $ScanningProgressBar
 @onready var scanning_button = $ScanningButton
 @onready var activate_scan_button = $ActivateScanButton
@@ -25,24 +29,22 @@ extends Node2D
 @onready var background_music = $BackgroundMusicPlayer
 
 var persons = [
-	{"name": "Camila", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Camila Gutierrez", "born_date": "15/01/1990", "due_date": "10/05/2024", "document_photo": preload("res://characterImages/character1.png")}},
-	{"name": "Franco", "image": preload("res://characterImages/character1.png"), "problem": null, "dni": {"name": "Franco Perez", "born_date": "10/03/1997", "due_date": "20/02/2025", "document_photo": preload("res://characterImages/character1.png")}},
-	{"name": "Victoria", "image": preload("res://characterImages/character1.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "25/07/1995", "due_date": "01/12/2028", "document_photo": preload("res://characterImages/character1.png")}},
-	{"name": "Juan", "image": preload("res://characterImages/character1.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2030", "document_photo": preload("res://characterImages/character1.png")}},
-	{"name": "Lucas", "image": preload("res://characterImages/character1.png"), "problem": "due_date", "dni": {"name": "Lucas Vitz", "born_date": "13/11/1997", "due_date": "14/03/2024", "document_photo": preload("res://characterImages/character1.png")}},
-	{"name": "Rosa", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Rosa Yung", "born_date": "20/07/1995", "due_date": "10/10/2026", "document_photo": preload("res://characterImages/character2.png")}},
-	{"name": "Claudio", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Claudio Fernandez", "born_date": "10/06/1998", "due_date": "10/12/2024", "document_photo": preload("res://characterImages/character2.png")}},
-	{"name": "Gerardo", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Gerardo Gonzalez", "born_date": "01/05/1999", "due_date": "10/01/2025", "document_photo": preload("res://characterImages/character2.png")}},
-	{"name": "Romina", "image": preload("res://characterImages/character2.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "01/05/1996", "due_date": "10/07/2024", "document_photo": preload("res://characterImages/character2.png")}},
-	{"name": "Valentina", "image": preload("res://characterImages/character2.png"), "problem": null, "dni": {"name": "Valentina Gomez", "born_date": "01/05/1996", "due_date": "10/07/2025", "document_photo": preload("res://characterImages/character2.png")}}
+	{"name": "Camila", "image": preload("res://characterImages/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://characterImages/portraits/portrait1.png")}},
+	{"name": "Victoria", "image": preload("res://characterImages/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://characterImages/portraits/portrait2.png")}},
+	{"name": "Romina", "image": preload("res://characterImages/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://characterImages/portraits/portrait3.png")}},
+	{"name": "Juan", "image": preload("res://characterImages/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2026", "document_photo": preload("res://characterImages/portraits/portrait4.png")}},
+	{"name": "Valentin", "image": preload("res://characterImages/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://characterImages/portraits/portrait5.png")}},
+	{"name": "Luciana", "image": preload("res://characterImages/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://characterImages/portraits/portrait6.png")}},
+	{"name": "Juliana", "image": preload("res://characterImages/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://characterImages/portraits/portrait7.png")}},
+	{"name": "Micaela", "image": preload("res://characterImages/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://characterImages/portraits/portrait8.png")}},
 ]
 
-var thumb_up_cursor= load("res://characterImages/thumb_up.png")
-var thumb_down_cursor= load("res://characterImages/thumb_down.png")
-var current_videogame_date = "23-08-2024"
+var win_screen = preload("res://characterImages/win_screen.jpg")
+var loose_screen = preload("res://characterImages/LooseImage.jpg")
+
+var current_videogame_date = "04-10-2024"
 
 var selected_index = -1
-var previous_index = -1
 var correct_characters
 var incorrect_characters
 var selected_person
@@ -52,9 +54,9 @@ var rules_visible = false
 var check_interval = 0.1
 var time_since_last_check = 0.0
 
-var energy = 10
+var energy = 100
 var PERMITED_STRIKES = 2
-var CORRECT_CHARACTERS_NEEDED = 5
+var correct_character_needed = 1
 var strikes = 0
 
 var is_holding = false
@@ -71,7 +73,7 @@ func _ready():
 	background_music.play()
 	energy_label.text = "Energia: " + str(energy)
 	strikes_label.text = "Strikes: " + str(strikes)
-	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
+	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
 	apply_rules()
 	accept_button.visible = false
 	reject_button.visible = false
@@ -100,10 +102,7 @@ func _process(delta):
 	scanning_progress_bar.value = progress * scanning_progress_bar.max_value
 		
 func new_selected_person():
-	while selected_index == previous_index:
-		selected_index = randi() % persons.size()
-		
-	previous_index = selected_index
+	selected_index += 1
 	return persons[selected_index]
 	
 func next_person():
@@ -126,7 +125,7 @@ func handle_accept_reject(problem, wasAccepted):
 	reject_button.visible = false
 	handle_energy()
 	dni_animation_player.play("dni_disappear")
-	if problem in ["due_date", "born_date"]:
+	if problem in ["due_date", "born_date", "wrong_portrait"]:
 		if wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
@@ -157,8 +156,8 @@ func handle_strikes():
 		
 func handle_amount_correct_characters():
 	correct_characters += 1
-	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(CORRECT_CHARACTERS_NEEDED)
-	if correct_characters >= CORRECT_CHARACTERS_NEEDED:
+	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
+	if correct_characters >= correct_character_needed:
 		fill_result_details()
 		result_animation_player.play("show_results")
 		
@@ -181,10 +180,12 @@ func apply_rules():
 	rules_label.text = rules_text
 	
 func fill_result_details():
-	if strikes >= PERMITED_STRIKES or correct_characters < CORRECT_CHARACTERS_NEEDED:
+	if strikes >= PERMITED_STRIKES or correct_characters < correct_character_needed:
 		win_or_loose_label.text = "PERDISTE"
 		win_or_loose_label.modulate = Color(1, 0, 0)
+		win_or_loose_screen.texture = loose_screen
 	else:
+		win_or_loose_screen.texture = win_screen
 		win_or_loose_label.text = "GANASTE"
 		win_or_loose_label.modulate = Color(0, 1, 0)
 	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
@@ -236,3 +237,34 @@ func _on_result_animation_player_animation_finished(animation_name):
 
 func _on_activate_scan_button_pressed():
 	is_scan_activated = !is_scan_activated	
+
+func _on_show_rules_button_mouse_entered():
+	phone_sprite.modulate = Color.GRAY
+	phone_sprite.scale = Vector2(0.6, 0.6)
+
+func _on_show_rules_button_mouse_exited():
+	phone_sprite.modulate = Color.WHITE
+	phone_sprite.scale = Vector2(0.55, 0.55)
+
+func _on_show_rules_button_button_down():
+	phone_sprite.modulate = Color.DARK_GRAY
+	phone_sprite.scale = Vector2(0.52, 0.52)
+
+func _on_show_rules_button_button_up():
+	phone_sprite.modulate = Color.WHITE	
+	phone_sprite.scale = Vector2(0.55, 0.55)
+
+func _on_accept_button_mouse_entered():
+	accept_button.modulate = Color.LIGHT_GREEN
+
+func _on_accept_button_mouse_exited():
+	accept_button.modulate = Color.WHITE
+
+func _on_reject_button_mouse_entered():
+	reject_button.modulate = Color.LIGHT_CORAL
+
+func _on_reject_button_mouse_exited():
+	reject_button.modulate = Color.WHITE
+
+func _on_next_level_button_pressed():
+	pass

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=47 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
-[ext_resource type="Texture2D" uid="uid://cg36bkxe7pvht" path="res://characterImages/character1.png" id="4_j40fr"]
 [ext_resource type="Texture2D" uid="uid://rk1lip28paob" path="res://phone.png" id="6_gwmbi"]
 [ext_resource type="Texture2D" uid="uid://87gcny18ro83" path="res://watch_timer.png" id="8_837p2"]
 [ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
@@ -109,6 +108,18 @@ tracks/7/path = NodePath("WinOrLooseLabel:visible")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("WinOrLooseImage:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -218,6 +229,18 @@ tracks/6/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("WinOrLooseImage:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dbdax"]
 _data = {
@@ -290,7 +313,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-550, -20), Vector2(-150, -20)]
+"values": [Vector2(-600, 80), Vector2(-380, 80)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -318,7 +341,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-150, -20), Vector2(200, -20)]
+"values": [Vector2(-380, 80), Vector2(200, 80)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -371,7 +394,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-150, -20), Vector2(-150, -18), Vector2(-150, -20), Vector2(-150, -22), Vector2(-150, -20)]
+"values": [Vector2(-380, 80), Vector2(-380, 82), Vector2(-380, 80), Vector2(-380, 78), Vector2(-380, 80)]
 }
 
 [sub_resource type="Animation" id="Animation_fba82"]
@@ -387,7 +410,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(-150, -20), Vector2(-550, -20)]
+"values": [Vector2(-380, 80), Vector2(-550, 80)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -514,7 +537,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/path = NodePath("../Phone/CountdownLabel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -526,7 +549,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/path = NodePath("../Phone/CountdownLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -542,7 +565,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/path = NodePath("../Phone/CountdownLabel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -554,7 +577,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/path = NodePath("../Phone/CountdownLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -570,7 +593,7 @@ length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CountdownLabel:scale")
+tracks/0/path = NodePath("../Phone/CountdownLabel:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -582,7 +605,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CountdownLabel:theme_override_colors/font_color")
+tracks/1/path = NodePath("../Phone/CountdownLabel:theme_override_colors/font_color")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -617,7 +640,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(470, 510)]
+"values": [Vector2(470, 485)]
 }
 
 [sub_resource type="Animation" id="Animation_j1gxf"]
@@ -633,7 +656,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(470, 510), Vector2(470, 0)]
+"values": [Vector2(470, 490), Vector2(470, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qfl5k"]
@@ -649,7 +672,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(470, 0), Vector2(470, 510)]
+"values": [Vector2(470, 0), Vector2(470, 485)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xam52"]
@@ -669,6 +692,12 @@ bg_color = Color(0, 0, 0, 1)
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vpl2"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_myjid"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y40xb"]
 bg_color = Color(0, 0, 0, 1)
 
 [node name="Character" type="Node2D"]
@@ -691,34 +720,36 @@ libraries = {
 
 [node name="WinOrLooseLabel" type="Label" parent="ResultScreen"]
 visible = false
-offset_top = -250.0
-offset_right = 328.0
-offset_bottom = -212.0
+offset_left = -70.0
+offset_top = 20.0
+offset_right = 258.0
+offset_bottom = 58.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 28
 
 [node name="TotalCharactersCount" type="Label" parent="ResultScreen"]
 visible = false
-offset_left = -242.0
-offset_top = -100.0
-offset_right = 33.0
-offset_bottom = -33.0
+offset_left = -220.0
+offset_top = 100.0
+offset_right = 55.0
+offset_bottom = 167.0
 text = "Revisaste a X personas"
 
 [node name="CorrectCharactersCount" type="Label" parent="ResultScreen"]
 visible = false
-offset_left = -241.0
-offset_top = -50.0
-offset_right = 21.0
-offset_bottom = 28.0
+offset_left = -220.0
+offset_top = 150.0
+offset_right = 42.0
+offset_bottom = 228.0
 text = "Y pasaron correctamente"
 
 [node name="IncorrectCharactersCount" type="Label" parent="ResultScreen"]
 visible = false
 self_modulate = Color(0.910932, 0.200015, 0, 1)
-offset_left = -239.0
-offset_right = 27.0
-offset_bottom = 81.0
+offset_left = -220.0
+offset_top = 200.0
+offset_right = 46.0
+offset_bottom = 281.0
 text = "Z pasaron incorrectamente"
 
 [node name="LabelEffectScreen" type="ColorRect" parent="ResultScreen"]
@@ -729,6 +760,17 @@ offset_right = 574.0
 offset_bottom = 340.0
 color = Color(0, 0, 0, 1)
 
+[node name="WinOrLooseImage" type="Sprite2D" parent="ResultScreen"]
+visible = false
+position = Vector2(0, -150)
+scale = Vector2(0.25, 0.25)
+
+[node name="NextLevelButton" type="Button" parent="ResultScreen"]
+offset_top = 200.0
+offset_right = 121.0
+offset_bottom = 231.0
+text = "Siguiente nivel"
+
 [node name="CharacterDisplay" type="ColorRect" parent="."]
 offset_left = -565.0
 offset_top = -322.0
@@ -738,7 +780,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="CharacterSprite" type="Sprite2D" parent="."]
 position = Vector2(-260, -50)
-scale = Vector2(0.45, 0.45)
+scale = Vector2(0.8, 0.8)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CharacterSprite"]
 libraries = {
@@ -752,14 +794,6 @@ texture = ExtResource("2_edmgr")
 region_enabled = true
 region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
-[node name="CurrentDateLabel" type="Label" parent="."]
-offset_left = -179.0
-offset_top = -313.0
-offset_right = -26.0
-offset_bottom = -290.0
-theme_override_fonts/font = SubResource("FontVariation_xvukn")
-text = "Fecha: 23 / 08 / 2024"
-
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
 position = Vector2(-19, 400)
@@ -771,9 +805,9 @@ script = ExtResource("2_m835h")
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 offset_left = 200.0
-offset_top = -120.0
+offset_top = -110.0
 offset_right = 430.0
-offset_bottom = -85.0
+offset_bottom = -75.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Nombre"
@@ -782,11 +816,11 @@ text = "Nombre"
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 offset_left = 200.0
-offset_top = -90.0
+offset_top = -80.0
 offset_right = 415.0
-offset_bottom = -62.0
+offset_bottom = -47.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 
 [node name="BornDateTitle" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
@@ -807,15 +841,15 @@ offset_top = -20.0
 offset_right = 348.0
 offset_bottom = 17.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 
 [node name="DueDateTitle" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 offset_left = 200.0
-offset_top = 20.0
+offset_top = 10.0
 offset_right = 344.0
-offset_bottom = 53.0
+offset_bottom = 43.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Vencimiento"
@@ -824,11 +858,11 @@ text = "Vencimiento"
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
 offset_left = 200.0
-offset_top = 50.0
+offset_top = 40.0
 offset_right = 535.0
-offset_bottom = 85.0
+offset_bottom = 75.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 24
 
 [node name="DNIAnimationPlayer" type="AnimationPlayer" parent="DNIInformation"]
 libraries = {
@@ -836,9 +870,8 @@ libraries = {
 }
 
 [node name="PortraitSprite" type="Sprite2D" parent="DNIInformation"]
-position = Vector2(200, -30)
-scale = Vector2(0.22, 0.22)
-texture = ExtResource("4_j40fr")
+position = Vector2(90, 50)
+scale = Vector2(0.5, 0.5)
 
 [node name="ShowRulesButton" type="Button" parent="."]
 offset_left = -308.0
@@ -851,7 +884,7 @@ flat = true
 
 [node name="phone" type="Sprite2D" parent="ShowRulesButton"]
 position = Vector2(33, 36)
-scale = Vector2(0.567568, 0.567568)
+scale = Vector2(0.55, 0.55)
 texture = ExtResource("6_gwmbi")
 
 [node name="DialogueControl" type="Node" parent="."]
@@ -876,25 +909,10 @@ script = ExtResource("4_08bw2")
 [node name="CountdownTimer" type="Timer" parent="CountdownNode"]
 
 [node name="Sprite2D" type="Sprite2D" parent="CountdownNode"]
+visible = false
 position = Vector2(43, 609)
 scale = Vector2(0.546296, 0.546296)
 texture = ExtResource("8_837p2")
-
-[node name="CountdownLabel" type="Label" parent="CountdownNode"]
-anchors_preset = -1
-anchor_left = 0.017
-anchor_top = 0.907
-anchor_right = 0.061
-anchor_bottom = 0.965
-offset_left = 0.415998
-offset_top = 0.263977
-offset_right = -0.272003
-offset_bottom = -0.320007
-theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_font_sizes/font_size = 12
-text = "01:00"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="CountdownAnimationPlayer" type="AnimationPlayer" parent="CountdownNode"]
 libraries = {
@@ -933,7 +951,7 @@ stream = ExtResource("15_entrm")
 bus = &"New Bus"
 
 [node name="Phone" type="Sprite2D" parent="."]
-position = Vector2(470, 510)
+position = Vector2(470, 485)
 texture = ExtResource("15_4qmgs")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="Phone"]
@@ -944,13 +962,14 @@ libraries = {
 
 [node name="RulesLabel" type="Label" parent="Phone"]
 offset_left = -147.0
-offset_top = -194.0
+offset_top = -169.0
 offset_right = 69.0
 offset_bottom = 171.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
 [node name="EnergyLabel" type="Label" parent="Phone"]
+visible = false
 offset_left = -147.0
 offset_top = -216.0
 offset_right = -33.0
@@ -965,16 +984,47 @@ offset_right = 69.0
 offset_bottom = -189.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_0yf3k")
+horizontal_alignment = 2
 
 [node name="CorrectCharactersLabel" type="Label" parent="Phone"]
-offset_left = -145.0
-offset_top = 170.0
-offset_right = 67.0
-offset_bottom = 203.0
+offset_left = -147.0
+offset_top = -216.0
+offset_right = -36.0
+offset_bottom = -192.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4vpl2")
 
+[node name="CurrentDateLabel" type="Label" parent="Phone"]
+offset_left = -37.0
+offset_top = -192.0
+offset_right = 69.0
+offset_bottom = -169.0
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_myjid")
+text = "23 / 08 / 2024"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CountdownLabel" type="Label" parent="Phone"]
+anchors_preset = -1
+anchor_left = 0.017
+anchor_top = 0.907
+anchor_right = 0.061
+anchor_bottom = 0.965
+offset_left = -164.408
+offset_top = -1121.77
+offset_right = -99.464
+offset_bottom = -1157.16
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_y40xb")
+text = "  01:00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ScanningProgressBar" type="ProgressBar" parent="."]
+visible = false
 anchors_preset = -1
 anchor_right = 0.061
 anchor_bottom = 0.066
@@ -986,6 +1036,7 @@ fill_mode = 3
 show_percentage = false
 
 [node name="ActivateScanButton" type="Button" parent="."]
+visible = false
 offset_left = -410.0
 offset_top = 258.0
 offset_right = -340.0
@@ -993,9 +1044,14 @@ offset_bottom = 302.0
 text = "Scanear"
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
+[connection signal="pressed" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
+[connection signal="button_down" from="ShowRulesButton" to="." method="_on_show_rules_button_button_down"]
+[connection signal="button_up" from="ShowRulesButton" to="." method="_on_show_rules_button_button_up"]
+[connection signal="mouse_entered" from="ShowRulesButton" to="." method="_on_show_rules_button_mouse_entered"]
+[connection signal="mouse_exited" from="ShowRulesButton" to="." method="_on_show_rules_button_mouse_exited"]
 [connection signal="pressed" from="ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="timeout" from="CountdownNode/CountdownTimer" to="CountdownNode" method="_on_countdown_timer_timeout"]
 [connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]

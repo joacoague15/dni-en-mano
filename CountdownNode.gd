@@ -1,6 +1,6 @@
 extends Node
 
-@onready var countdown_label = $CountdownLabel
+@onready var countdown_label = get_node("../Phone/CountdownLabel")
 @onready var countdown_label_animator = $CountdownAnimationPlayer
 @onready var countdown_timer = $CountdownTimer
 @onready var result_animation_player = get_node("../ResultScreen/ResultAnimationPlayer")

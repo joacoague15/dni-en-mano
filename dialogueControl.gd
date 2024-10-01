@@ -5,7 +5,14 @@ extends Node
 var dialogues = [
 	"Buenas",
 	"¿Todo bien?",
-	"Buenas, ¿cómo va?"
+	"Buenas, ¿cómo va?",
+	"Mirá, está todo en regla. ¿Me dejás pasar?",
+	"¿Todo bien por acá? ¿puedo entrar?",
+	"Está todo bien, ¿me das el OK?",
+	"Mirá, vengo con buena onda. Solo quiero romperme",
+	"Dale, ya me conocen acá. Todo bien, ¿me dejás?",
+	"¡Con este outfit, sería un crimen no dejarme entrar!",
+	"La pista me necesita. ¡No puedo defraudarla!"
 ]
 
 var typing_speed = 0.05
