@@ -58,7 +58,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 1
+var correct_character_needed = 5
 var strikes = 0
 
 var is_holding = false
