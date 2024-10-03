@@ -46,6 +46,11 @@ var persons = [
 	{"name": "Luciana", "image": preload("res://characterImages/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://characterImages/portraits/portrait6.png")}},
 	{"name": "Juliana", "image": preload("res://characterImages/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://characterImages/portraits/portrait7.png")}},
 	{"name": "Micaela", "image": preload("res://characterImages/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://characterImages/portraits/portrait8.png")}},
+	
+	{"name": "Santiago", "image": preload("res://characterImages/characters/character9.png"), "problem": "due_date", "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/08/2024", "document_photo": preload("res://characterImages/portraits/portrait9.png")}},
+	{"name": "Facundo", "image": preload("res://characterImages/characters/character10.png"), "problem": null, "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://characterImages/portraits/portrait10.png")}},
+	{"name": "Martín", "image": preload("res://characterImages/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://characterImages/portraits/portrait11.png")}},
+	{"name": "Tomás", "image": preload("res://characterImages/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://characterImages/portraits/portrait12.png")}},
 ]
 
 var win_screen = preload("res://characterImages/win_screen.jpg")
@@ -65,7 +70,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 5
+var correct_character_needed = 8
 var strikes = 0
 
 var is_holding = false
@@ -86,7 +91,7 @@ func _ready():
 		heart.texture = full_heart_icon
 	background_music.play()
 	energy_label.text = "Energia: " + str(energy)
-	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
+	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
 	apply_rules()
 	accept_button.visible = false
 	reject_button.visible = false
@@ -164,7 +169,7 @@ func handle_energy():
 	
 func handle_strikes():
 	if strikes < PERMITED_STRIKES:
-		rules_label_animation_player.play("twinkleHeart" + str(strikes + 1))
+		rules_label_animation_player.play("twinkleHeart" + str(heart_sprites.size() - strikes))
 		heart_sprites[strikes].texture = empty_heart_icon
 		strikes += 1
 	else:
@@ -195,7 +200,7 @@ func type_text(text_to_type):
 		
 func handle_amount_correct_characters():
 	correct_characters += 1
-	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
+	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
 	if correct_characters >= correct_character_needed:
 		fill_result_details()
 		result_animation_player.play("show_results")

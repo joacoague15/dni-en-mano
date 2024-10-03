@@ -24,7 +24,7 @@ func _process(delta):
 	if countdown_timer.is_stopped() and not result_screen_shown:
 		character_node.end_level()
 		result_screen_shown = true
-	change_remaining_seconds(delta * 2)
+	change_remaining_seconds(delta * 1.2)
 
 func _on_countdown_timer_timeout():
 	if current_time >= end_time:
