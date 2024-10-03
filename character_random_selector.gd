@@ -30,6 +30,13 @@ extends Node2D
 @onready var reject_button = $RejectButton
 @onready var background_music = $BackgroundMusicPlayer
 
+@onready var full_heart_icon = preload("res://characterImages/full_heart.png")
+@onready var empty_heart_icon = preload("res://characterImages/empty_heart.png")
+
+@onready var heart1 = $Phone/Heart1
+@onready var heart2 = $Phone/Heart2
+@onready var heart3 = $Phone/Heart3
+
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://characterImages/portraits/portrait1.png")}},
 	{"name": "Victoria", "image": preload("res://characterImages/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://characterImages/portraits/portrait2.png")}},
@@ -67,14 +74,18 @@ var progress_time = 1.5
 
 var	is_scan_activated = false
 
+var heart_sprites = []
+
 func _ready():
 	scanning_progress_bar.value = 0
 	correct_characters = 0
 	activate_scan_button.disabled = true
 	incorrect_characters = []
+	heart_sprites = [heart3, heart2, heart1]
+	for heart in heart_sprites:
+		heart.texture = full_heart_icon
 	background_music.play()
 	energy_label.text = "Energia: " + str(energy)
-	strikes_label.text = "Strikes: " + str(strikes)
 	correct_character_label.text = "Objetivo : " + str(correct_characters) + " / " + str(correct_character_needed)
 	apply_rules()
 	accept_button.visible = false
@@ -153,9 +164,11 @@ func handle_energy():
 	
 func handle_strikes():
 	if strikes < PERMITED_STRIKES:
+		rules_label_animation_player.play("twinkleHeart" + str(strikes + 1))
+		heart_sprites[strikes].texture = empty_heart_icon
 		strikes += 1
-		strikes_label.text = "Strikes: " + str(strikes)
 	else:
+		heart_sprites[strikes].texture = empty_heart_icon
 		end_level()
 		
 func handle_incorrect_choice_notification(problem):
@@ -188,6 +201,8 @@ func handle_amount_correct_characters():
 		result_animation_player.play("show_results")
 		
 func end_level():
+	accept_button.disabled = true
+	reject_button.disabled = true
 	fill_result_details()
 	result_animation_player.play("show_results")
 		
@@ -205,6 +220,7 @@ func apply_rules():
 	rules_label.text = rules_text
 	
 func fill_result_details():
+	dni_information.visible = false
 	if strikes >= PERMITED_STRIKES or correct_characters < correct_character_needed:
 		win_or_loose_label.text = "PERDISTE"
 		win_or_loose_label.modulate = Color(1, 0, 0)

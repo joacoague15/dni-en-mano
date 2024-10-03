@@ -1,9 +1,9 @@
-[gd_scene load_steps=47 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=50 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://character_random_selector.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://entire_background.png" id="2_edmgr"]
 [ext_resource type="Script" path="res://dni_information.gd" id="2_m835h"]
-[ext_resource type="Texture2D" uid="uid://j231evye2gy8" path="res://dni.png" id="3_51jtu"]
+[ext_resource type="Texture2D" uid="uid://cg83iwfhdx78q" path="res://dni.png" id="3_51jtu"]
 [ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="Script" path="res://dialogueControl.gd" id="3_sps78"]
 [ext_resource type="Script" path="res://CountdownNode.gd" id="4_08bw2"]
@@ -11,9 +11,11 @@
 [ext_resource type="Texture2D" uid="uid://87gcny18ro83" path="res://watch_timer.png" id="8_837p2"]
 [ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://characterImages/thumb_up.png" id="8_cmg3h"]
 [ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://characterImages/thumb_down.png" id="9_5kib1"]
-[ext_resource type="Texture2D" uid="uid://4bvvb1p07k7w" path="res://club.png" id="12_snwmf"]
 [ext_resource type="Texture2D" uid="uid://nip20sokv4sy" path="res://characterImages/phone.png" id="15_4qmgs"]
 [ext_resource type="AudioStream" uid="uid://dh5mpboqaq8a4" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
+[ext_resource type="Texture2D" uid="uid://cmphdk3pi0mgy" path="res://characterImages/full_heart.png" id="15_q41q0"]
+[ext_resource type="VideoStream" path="res://idle.ogv" id="16_lp6ko"]
+[ext_resource type="Texture2D" uid="uid://bsms5ga3jkg47" path="res://characterImages/empty_heart.png" id="16_p0gkp"]
 
 [sub_resource type="Animation" id="Animation_5h8d7"]
 length = 0.001
@@ -479,7 +481,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(40, 1300), Vector2(40, 30)]
+"values": [Vector2(200, 1300), Vector2(150, 30)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -507,7 +509,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(40, 90), Vector2(40, 600)]
+"values": [Vector2(150, 90), Vector2(150, 600)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -642,6 +644,30 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(470, 485)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Heart3:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_q41q0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Heart2:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("15_q41q0")]
+}
 
 [sub_resource type="Animation" id="Animation_j1gxf"]
 resource_name = "rules_appear"
@@ -675,20 +701,51 @@ tracks/0/keys = {
 "values": [Vector2(470, 0), Vector2(470, 485)]
 }
 
+[sub_resource type="Animation" id="Animation_5kmg0"]
+resource_name = "twinkleHeart3"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Heart3:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("15_q41q0"), ExtResource("16_p0gkp"), ExtResource("15_q41q0"), ExtResource("16_p0gkp"), ExtResource("15_q41q0"), ExtResource("16_p0gkp")]
+}
+
+[sub_resource type="Animation" id="Animation_bfebs"]
+resource_name = "twinkleHeart2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Heart2:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("15_q41q0"), ExtResource("16_p0gkp"), ExtResource("15_q41q0"), ExtResource("16_p0gkp"), ExtResource("15_q41q0"), ExtResource("16_p0gkp")]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xam52"]
 _data = {
 "RESET": SubResource("Animation_7ou0i"),
 "rules_appear": SubResource("Animation_j1gxf"),
-"rules_disappear": SubResource("Animation_qfl5k")
+"rules_disappear": SubResource("Animation_qfl5k"),
+"twinkleHeart2": SubResource("Animation_bfebs"),
+"twinkleHeart3": SubResource("Animation_5kmg0")
 }
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b31ab"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yf3k"]
 bg_color = Color(0, 0, 0, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4vpl2"]
@@ -796,18 +853,27 @@ region_rect = Rect2(3.95926, 0, 1916.04, 1080)
 
 [node name="DNIInformation" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
+z_index = 2
 position = Vector2(-19, 400)
 scale = Vector2(0.6, 0.6)
 texture = ExtResource("3_51jtu")
 script = ExtResource("2_m835h")
 
+[node name="PortraitBackground" type="ColorRect" parent="DNIInformation"]
+z_as_relative = false
+offset_left = -335.0
+offset_top = -143.0
+offset_right = -102.0
+offset_bottom = 143.0
+color = Color(0, 0, 0, 1)
+
 [node name="NameTitle" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = -110.0
-offset_right = 430.0
-offset_bottom = -75.0
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 130.0
+offset_bottom = -85.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Nombre"
@@ -815,20 +881,20 @@ text = "Nombre"
 [node name="NameLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = -80.0
-offset_right = 415.0
-offset_bottom = -47.0
+offset_left = -90.0
+offset_top = -90.0
+offset_right = 125.0
+offset_bottom = -57.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 24
 
 [node name="BornDateTitle" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = -50.0
-offset_right = 332.0
-offset_bottom = -17.0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 32.0
+offset_bottom = -27.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Nacimiento"
@@ -836,20 +902,19 @@ text = "Nacimiento"
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = -20.0
-offset_right = 348.0
-offset_bottom = 17.0
+offset_left = -90.0
+offset_top = -30.0
+offset_right = 58.0
+offset_bottom = 7.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 
 [node name="DueDateTitle" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 344.0
-offset_bottom = 43.0
+offset_left = -100.0
+offset_right = 44.0
+offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Vencimiento"
@@ -857,10 +922,10 @@ text = "Vencimiento"
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
 self_modulate = Color(0, 0, 0, 1)
-offset_left = 200.0
-offset_top = 40.0
-offset_right = 535.0
-offset_bottom = 75.0
+offset_left = -90.0
+offset_top = 30.0
+offset_right = 245.0
+offset_bottom = 65.0
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 24
 
@@ -870,7 +935,9 @@ libraries = {
 }
 
 [node name="PortraitSprite" type="Sprite2D" parent="DNIInformation"]
-position = Vector2(90, 50)
+z_index = 1
+z_as_relative = false
+position = Vector2(-210, 50)
 scale = Vector2(0.5, 0.5)
 
 [node name="ShowRulesButton" type="Button" parent="."]
@@ -951,11 +1018,6 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_fbkte")
 icon = ExtResource("9_5kib1")
 flat = true
 
-[node name="ClubBackground" type="Sprite2D" parent="."]
-position = Vector2(-387, -218)
-scale = Vector2(0.601156, 0.602076)
-texture = ExtResource("12_snwmf")
-
 [node name="BackgroundMusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("15_entrm")
 bus = &"New Bus"
@@ -987,19 +1049,10 @@ offset_bottom = -190.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_b31ab")
 
-[node name="StrikesLabel" type="Label" parent="Phone"]
-offset_left = -36.0
-offset_top = -216.0
-offset_right = 69.0
-offset_bottom = -189.0
-theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_0yf3k")
-horizontal_alignment = 2
-
 [node name="CorrectCharactersLabel" type="Label" parent="Phone"]
 offset_left = -147.0
 offset_top = -216.0
-offset_right = -36.0
+offset_right = 69.0
 offset_bottom = -192.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_4vpl2")
@@ -1033,6 +1086,21 @@ text = "  01:00"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Heart1" type="Sprite2D" parent="Phone"]
+position = Vector2(-25, -204)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_q41q0")
+
+[node name="Heart2" type="Sprite2D" parent="Phone"]
+position = Vector2(10, -204)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_q41q0")
+
+[node name="Heart3" type="Sprite2D" parent="Phone"]
+position = Vector2(45, -204)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("15_q41q0")
+
 [node name="ScanningProgressBar" type="ProgressBar" parent="."]
 visible = false
 anchors_preset = -1
@@ -1052,6 +1120,16 @@ offset_top = 258.0
 offset_right = -340.0
 offset_bottom = 302.0
 text = "Scanear"
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+offset_left = -543.0
+offset_top = -305.0
+offset_right = 81.0
+offset_bottom = 43.0
+scale = Vector2(0.6, 0.6)
+stream = ExtResource("16_lp6ko")
+autoplay = true
+loop = true
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="pressed" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_pressed"]
