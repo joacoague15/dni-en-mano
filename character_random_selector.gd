@@ -7,16 +7,22 @@ extends Node2D
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
+@onready var result_screen = $ResultScreen
 @onready var win_or_loose_label = $ResultScreen/WinOrLooseLabel
 @onready var result_animation_player = $ResultScreen/ResultAnimationPlayer
 @onready var total_characters_count = $ResultScreen/TotalCharactersCount
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
 @onready var energy_label = $Phone/EnergyLabel
-@onready var strikes_label = $Phone/StrikesLabel
 @onready var correct_character_label = $Phone/CorrectCharactersLabel
 
+@onready var countdown_label = $Phone/CountdownLabel
+@onready var countdown_label_animator = $CountdownNode/CountdownAnimationPlayer
+@onready var countdown_timer = $CountdownNode/CountdownTimer
+
 @onready var phone_sprite = $ShowRulesButton/phone
+
+@onready var player_dialogue_label = $DialogueControl/CharacterDialogueLabel
 
 @onready var win_or_loose_screen = $ResultScreen/WinOrLooseImage
 
@@ -37,6 +43,11 @@ extends Node2D
 @onready var heart2 = $Phone/Heart2
 @onready var heart3 = $Phone/Heart3
 
+@onready var name_label = $DNIInformation/NameLabel
+@onready var born_date_label = $DNIInformation/BornDateLabel
+@onready var due_date_label = $DNIInformation/DueDateLabel
+@onready var portrait_sprite = $DNIInformation/PortraitSprite
+
 var persons = [
 	{"name": "Camila", "image": preload("res://characterImages/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://characterImages/portraits/portrait1.png")}},
 	{"name": "Victoria", "image": preload("res://characterImages/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://characterImages/portraits/portrait2.png")}},
@@ -53,8 +64,22 @@ var persons = [
 	{"name": "Tomás", "image": preload("res://characterImages/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://characterImages/portraits/portrait12.png")}},
 ]
 
+var dialogues = [
+	"Buenas",
+	"¿Todo bien?",
+	"Buenas, ¿cómo va?",
+	"Está todo en regla. ¿Me dejás pasar?",
+	"¿Todo bien por acá? ¿puedo entrar?",
+	"Está todo bien, ¿me das el OK?",
+	"Dale, ya me conocen acá ¿Me dejás?",
+	"¡Sería un crimen no dejarme entrar!",
+	"¡La pista me necesita!"
+]
+
 var win_screen = preload("res://characterImages/win_screen.jpg")
 var loose_screen = preload("res://characterImages/LooseImage.jpg")
+
+var typing_speed = 0.05
 
 var current_videogame_date = "04-10-2024"
 
@@ -70,7 +95,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 8
+var correct_character_needed = 1
 var strikes = 0
 
 var is_holding = false
@@ -80,6 +105,13 @@ var progress_time = 1.5
 var	is_scan_activated = false
 
 var heart_sprites = []
+
+var start_time = 60
+var end_time = 180
+var current_time = start_time
+var yellow_alarm_already_activated = false
+var red_alarm_already_activated = false
+var result_screen_shown = false
 
 func _ready():
 	scanning_progress_bar.value = 0
@@ -96,6 +128,8 @@ func _ready():
 	accept_button.visible = false
 	reject_button.visible = false
 	next_person()
+	set_text_from_seconds(current_time)
+	countdown_timer.start()
 	
 func _process(delta):
 	time_since_last_check += delta
@@ -118,6 +152,53 @@ func _process(delta):
 			progress = 0
 
 	scanning_progress_bar.value = progress * scanning_progress_bar.max_value
+	if countdown_timer.is_stopped() and not result_screen_shown:
+		end_level()
+		result_screen_shown = true
+	change_remaining_seconds(delta * 1.2)
+	
+func _on_countdown_timer_timeout():
+	if current_time >= end_time:
+		countdown_timer.stop()
+	else:
+		if current_time >= 120 and not yellow_alarm_already_activated:
+			countdown_label_animator.play("yellow_alarm")
+			yellow_alarm_already_activated = true
+		if current_time >= 150 and not red_alarm_already_activated:
+			countdown_label_animator.play("red_alarm")
+			red_alarm_already_activated = true
+
+func set_text_from_seconds(seconds):
+	var minutes = int(seconds) / 60
+	var remaining_seconds = int(seconds) % 60
+	countdown_label.text = "%02d:%02d" % [minutes, remaining_seconds]
+
+func change_remaining_seconds(delta):
+	current_time += delta
+	current_time = clamp(current_time, 0, end_time)  # Clamp between 0 and end_time
+	set_text_from_seconds(current_time)
+	
+func display_person_dni(dni):
+	if dni:
+		name_label.text = dni["name"]
+		born_date_label.text = dni["born_date"]
+		due_date_label.text = dni["due_date"]
+		portrait_sprite.texture = dni["document_photo"]
+		portrait_sprite.visible = true
+	else:
+		clear_display()
+
+func clear_display():
+	name_label.text = ""
+	born_date_label.text = ""
+	due_date_label.text = ""
+	portrait_sprite.visible = false
+
+func add_seconds(seconds):
+	change_remaining_seconds(seconds)
+
+func subtract_seconds(seconds):
+	change_remaining_seconds(-seconds)
 		
 func new_selected_person():
 	selected_index += 1
@@ -130,11 +211,11 @@ func next_person():
 	character_sprite.texture = selected_person["image"]
 		
 func _on_accept_button_pressed():
-	$DialogueControl.hide_dialogue()
+	hide_dialogue()
 	handle_accept_reject(selected_person["problem"], true)
 
 func _on_reject_button_pressed():
-	$DialogueControl.hide_dialogue()
+	hide_dialogue()
 	handle_accept_reject(selected_person["problem"], false)
 		
 func handle_accept_reject(problem, wasAccepted):
@@ -197,7 +278,6 @@ func type_text(text_to_type):
 		wrong_choice_notification_label.text += char
 		await get_tree().create_timer(typing_speed).timeout
 	
-		
 func handle_amount_correct_characters():
 	correct_characters += 1
 	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
@@ -208,6 +288,7 @@ func handle_amount_correct_characters():
 func end_level():
 	accept_button.disabled = true
 	reject_button.disabled = true
+	dni_animation_player.play("dni_disappear")
 	fill_result_details()
 	result_animation_player.play("show_results")
 		
@@ -224,9 +305,28 @@ func apply_rules():
 	
 	rules_label.text = rules_text
 	
+func show_dialogue():
+	var randomIndex = randi() % dialogues.size()
+	if randomIndex < dialogues.size():
+		var dialogue = dialogues[randomIndex]
+		_start_typing(dialogue)
+		
+func _start_typing(dialogue):
+	var char_index = 0
+	
+	player_dialogue_label.text = ""		
+	player_dialogue_label.visible = true
+	
+	while char_index < dialogue.length():
+		player_dialogue_label.text += dialogue[char_index]
+		char_index += 1
+		await get_tree().create_timer(typing_speed).timeout
+		
+func hide_dialogue():
+	player_dialogue_label.visible = false
+
 func fill_result_details():
-	dni_information.visible = false
-	if strikes >= PERMITED_STRIKES or correct_characters < correct_character_needed:
+	if strikes > PERMITED_STRIKES or correct_characters < correct_character_needed:
 		win_or_loose_label.text = "PERDISTE"
 		win_or_loose_label.modulate = Color(1, 0, 0)
 		win_or_loose_screen.texture = loose_screen
@@ -243,6 +343,42 @@ func _on_show_rules_button_pressed():
 		var animation = "rules_appear" if not rules_visible else "rules_disappear"
 		rules_label_animation_player.play(animation)
 		rules_visible = !rules_visible
+		
+func next_level():
+	selected_index = -1
+	correct_characters = 0
+	incorrect_characters = []
+	energy = 100
+	strikes = 0
+	progress = 0.0
+	is_scan_activated = false
+	heart_sprites = [heart3, heart2, heart1]
+	
+	for heart in heart_sprites:
+		heart.texture = full_heart_icon
+	energy_label.text = "Energia: " + str(energy)
+	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
+	win_or_loose_label.text = ""
+	wrong_choice_notification_label.text = ""
+	
+	accept_button.disabled = false
+	reject_button.disabled = false
+	
+	result_screen_shown = false
+	
+	result_screen.visible = false
+	
+	scanning_progress_bar.value = 0
+	
+	player_dialogue_label.text = ""		
+	
+	activate_scan_button.disabled = true
+	scanning_progress_bar.visible = false
+
+	background_music.set_bus("Master")
+	background_music.set_volume_db(0)
+	background_music.play()
+	next_person()
 
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
@@ -257,8 +393,8 @@ func _on_animation_player_animation_finished(animation_name):
 		
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
-		$DialogueControl.show_dialogue()
-		dni_information.display_person_dni(selected_person["dni"])
+		show_dialogue()
+		display_person_dni(selected_person["dni"])
 		dni_animation_player.play("dni_appear")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
@@ -313,4 +449,5 @@ func _on_reject_button_mouse_exited():
 	reject_button.modulate = Color.WHITE
 
 func _on_next_level_button_pressed():
-	pass
+	# Hide results animation
+	next_level()
