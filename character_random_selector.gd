@@ -29,7 +29,6 @@ extends Node2D
 @onready var wrong_choice_notification_label = $WrongChoiceNotificationLabel
 
 @onready var scanning_progress_bar = $ScanningProgressBar
-@onready var scanning_button = $ScanningButton
 @onready var activate_scan_button = $ActivateScanButton
 
 @onready var accept_button = $AcceptButton
@@ -366,8 +365,6 @@ func next_level():
 	
 	result_screen_shown = false
 	
-	result_screen.visible = false
-	
 	scanning_progress_bar.value = 0
 	
 	player_dialogue_label.text = ""		
@@ -449,5 +446,5 @@ func _on_reject_button_mouse_exited():
 	reject_button.modulate = Color.WHITE
 
 func _on_next_level_button_pressed():
-	# Hide results animation
+	result_animation_player.play("hide_results")
 	next_level()
