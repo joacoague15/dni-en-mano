@@ -50,17 +50,32 @@ extends Node2D
 @onready var random_credential = $RandomCredential
 @onready var random_credential_animation_player = $RandomCredential/RandomCredentialAnimationPlayer
 
-var persons = [
+var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
-	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": "no_dni", "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
+	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
 	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
 	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
 	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
 	{"name": "Luciana", "image": preload("res://images/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://images/portraits/portrait6.png")}},
 	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
 	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
-	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": "due_date", "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/08/2024", "document_photo": preload("res://images/portraits/portrait9.png")}},
-	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": null, "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
+	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": null, "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/04/2025", "document_photo": preload("res://images/portraits/portrait9.png")}},
+	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": "no_dni", "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
+	{"name": "Martín", "image": preload("res://images/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://images/portraits/portrait11.png")}},
+	{"name": "Tomás", "image": preload("res://images/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://images/portraits/portrait12.png")}},
+]
+
+var persons_second_level = [
+	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
+	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
+	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
+	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
+	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
+	{"name": "Luciana", "image": preload("res://images/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://images/portraits/portrait6.png")}},
+	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
+	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
+	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": null, "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/04/2025", "document_photo": preload("res://images/portraits/portrait9.png")}},
+	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": "no_dni", "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
 	{"name": "Martín", "image": preload("res://images/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://images/portraits/portrait11.png")}},
 	{"name": "Tomás", "image": preload("res://images/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://images/portraits/portrait12.png")}},
 ]
@@ -96,7 +111,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 1
+var correct_character_needed = 9
 var strikes = 0
 
 var is_holding = false
@@ -113,6 +128,8 @@ var current_time = start_time
 var yellow_alarm_already_activated = false
 var red_alarm_already_activated = false
 var result_screen_shown = false
+
+var current_level = 1
 
 func _ready():
 	scanning_progress_bar.value = 0
@@ -201,7 +218,7 @@ func subtract_seconds(seconds):
 		
 func new_selected_person():
 	selected_index += 1
-	return persons[selected_index]
+	return persons_first_level[selected_index]
 	
 func next_person():
 	selected_person = new_selected_person()
@@ -475,3 +492,8 @@ func _on_reject_button_mouse_exited():
 func _on_next_level_button_pressed():
 	result_animation_player.play("hide_results")
 	next_level()
+	
+func handle_level_settings():
+	current_level += 1
+	if current_level == 2:
+		correct_character_needed = 11
