@@ -47,16 +47,18 @@ extends Node2D
 @onready var due_date_label = $DNIInformation/DueDateLabel
 @onready var portrait_sprite = $DNIInformation/PortraitSprite
 
+@onready var random_credential = $RandomCredential
+@onready var random_credential_animation_player = $RandomCredential/RandomCredentialAnimationPlayer
+
 var persons = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
-	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
+	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": "no_dni", "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
 	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
 	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
 	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
 	{"name": "Luciana", "image": preload("res://images/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://images/portraits/portrait6.png")}},
 	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
 	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
-	
 	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": "due_date", "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/08/2024", "document_photo": preload("res://images/portraits/portrait9.png")}},
 	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": null, "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
 	{"name": "Martín", "image": preload("res://images/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://images/portraits/portrait11.png")}},
@@ -172,7 +174,7 @@ func set_text_from_seconds(seconds):
 
 func change_remaining_seconds(delta):
 	current_time += delta
-	current_time = clamp(current_time, 0, end_time)  # Clamp between 0 and end_time
+	current_time = clamp(current_time, 0, end_time)
 	set_text_from_seconds(current_time)
 	
 func display_person_dni(dni):
@@ -220,8 +222,12 @@ func handle_accept_reject(problem, wasAccepted):
 	accept_button.visible = false
 	reject_button.visible = false
 	handle_energy()
-	dni_animation_player.play("dni_disappear")
-	if problem in ["due_date", "born_date", "wrong_portrait"]:
+	if selected_person["problem"] == "no_dni":
+		random_credential_animation_player.play("random_credential_disappear")
+	else:
+		dni_animation_player.play("dni_disappear")
+	
+	if problem in ["due_date", "born_date", "wrong_portrait", "no_dni"]:
 		if wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
@@ -263,6 +269,8 @@ func handle_incorrect_choice_notification(problem):
 			message = "No era mayor de edad"
 		"wrong_portrait":
 			message = "Lo retrato no era correcto"
+		"no_dni":
+			message = "Ni siquiera tenia DNI..."
 		_:
 			message = "No habia nada de malo con el cliente"
 
@@ -284,7 +292,10 @@ func handle_amount_correct_characters():
 func end_level():
 	accept_button.disabled = true
 	reject_button.disabled = true
-	dni_animation_player.play("dni_disappear")
+	if selected_person["problem"] == "no_dni":
+		random_credential_animation_player.play("random_credential_disappear")
+	else:
+		dni_animation_player.play("dni_disappear")
 	fill_result_details()
 	result_animation_player.play("show_results")
 	countdown_timer.stop()
@@ -376,6 +387,9 @@ func next_level():
 	
 	activate_scan_button.disabled = true
 	scanning_progress_bar.visible = false
+	
+	random_credential.visible = false
+	random_credential_animation_player.stop()
 
 	background_music.set_bus("Master")
 	background_music.set_volume_db(0)
@@ -396,12 +410,15 @@ func _on_animation_player_animation_finished(animation_name):
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
 		show_dialogue()
-		display_person_dni(selected_person["dni"])
-		dni_animation_player.play("dni_appear")
+		if selected_person["problem"] == "no_dni":
+			random_credential_animation_player.play("random_credential_appear")
+		else:
+			display_person_dni(selected_person["dni"])
+			dni_animation_player.play("dni_appear")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
 		scanning_progress_bar.visible = false
-
+		
 func handle_character_enter_or_not_anim(wasAccepted):
 	if wasAccepted:
 		character_animation_player.play("character_enter")
@@ -412,6 +429,11 @@ func handle_character_enter_or_not_anim(wasAccepted):
 
 func _on_dni_animation_player_animation_finished(animation_name):
 	if animation_name == "dni_appear":
+		accept_button.visible = true
+		reject_button.visible = true
+		
+func _on_random_credential_animation_player_animation_finished(animation_name):
+	if animation_name == "random_credential_appear":
 		accept_button.visible = true
 		reject_button.visible = true
 		

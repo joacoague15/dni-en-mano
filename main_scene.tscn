@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=54 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://main_script.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://b8k4gkfbetp5" path="res://images/entire_background.png" id="2_edmgr"]
@@ -6,8 +6,9 @@
 [ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="Texture2D" uid="uid://rk1lip28paob" path="res://images/phone.png" id="6_gwmbi"]
 [ext_resource type="Texture2D" uid="uid://87gcny18ro83" path="res://images/watch_timer.png" id="8_837p2"]
-[ext_resource type="Texture2D" uid="uid://ba6esi8lcm1py" path="res://images/thumb_up.png" id="8_cmg3h"]
-[ext_resource type="Texture2D" uid="uid://cg07p3kwgkgf2" path="res://images/thumb_down.png" id="9_5kib1"]
+[ext_resource type="Texture2D" uid="uid://rns0nj1uvrb0" path="res://images/thumb_up.png" id="8_cmg3h"]
+[ext_resource type="Texture2D" uid="uid://dg7vwkt8l7syh" path="res://images/thumb_down.png" id="9_5kib1"]
+[ext_resource type="Texture2D" uid="uid://ckx3ctk74d6sk" path="res://images/sube.png" id="14_6yprm"]
 [ext_resource type="Texture2D" uid="uid://den1tvx411g0u" path="res://images/phone_display.png" id="15_4qmgs"]
 [ext_resource type="AudioStream" uid="uid://dh5mpboqaq8a4" path="res://sounds/la_noche_llama.ogg" id="15_entrm"]
 [ext_resource type="Texture2D" uid="uid://cmphdk3pi0mgy" path="res://images/full_heart.png" id="15_q41q0"]
@@ -906,6 +907,82 @@ bg_color = Color(0.807843, 0.815686, 0.639216, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y40xb"]
 bg_color = Color(0.807843, 0.815686, 0.639216, 1)
 
+[sub_resource type="Animation" id="Animation_sh6jx"]
+resource_name = "random_credential_appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(150, 1300), Vector2(150, 80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2ghwp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(150, 1300)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_s75if"]
+resource_name = "random_credential_disappear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(150, 80), Vector2(150, 1300)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nlrgh"]
+_data = {
+"RESET": SubResource("Animation_2ghwp"),
+"random_credential_appear": SubResource("Animation_sh6jx"),
+"random_credential_disappear": SubResource("Animation_s75if")
+}
+
 [node name="Character" type="Node2D"]
 position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
@@ -1152,6 +1229,7 @@ offset_left = 170.0
 offset_top = 195.0
 offset_right = 242.0
 offset_bottom = 297.0
+scale = Vector2(0.4, 0.4)
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
@@ -1163,6 +1241,7 @@ offset_left = 90.0
 offset_top = 195.0
 offset_right = 162.0
 offset_bottom = 297.0
+scale = Vector2(0.4, 0.4)
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxFlat_fbkte")
@@ -1287,6 +1366,16 @@ stream = ExtResource("16_lp6ko")
 autoplay = true
 loop = true
 
+[node name="RandomCredential" type="Sprite2D" parent="."]
+position = Vector2(150, 1300)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("14_6yprm")
+
+[node name="RandomCredentialAnimationPlayer" type="AnimationPlayer" parent="RandomCredential"]
+libraries = {
+"": SubResource("AnimationLibrary_nlrgh")
+}
+
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="pressed" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
@@ -1306,3 +1395,4 @@ loop = true
 [connection signal="pressed" from="RejectButton" to="." method="_on_reject_button_pressed"]
 [connection signal="animation_finished" from="Phone/RulesAnimationPlayer" to="." method="_on_rules_animation_player_animation_finished"]
 [connection signal="pressed" from="ActivateScanButton" to="." method="_on_activate_scan_button_pressed"]
+[connection signal="animation_finished" from="RandomCredential/RandomCredentialAnimationPlayer" to="." method="_on_random_credential_animation_player_animation_finished"]
