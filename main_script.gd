@@ -38,6 +38,9 @@ extends Node2D
 @onready var full_heart_icon = preload("res://images/full_heart.png")
 @onready var empty_heart_icon = preload("res://images/empty_heart.png")
 
+@onready var sube = preload("res://images/sube.png")
+@onready var ioma = preload("res://images/ioma.png")
+
 @onready var heart1 = $Phone/Heart1
 @onready var heart2 = $Phone/Heart2
 @onready var heart3 = $Phone/Heart3
@@ -59,8 +62,8 @@ var persons_first_level = [
 	{"name": "Luciana", "image": preload("res://images/characters/character6.png"), "problem": "wrong_portrait", "dni": {"name": "Luciana Herrera", "born_date": "24/11/2005", "due_date": "03/07/2027", "document_photo": preload("res://images/portraits/portrait6.png")}},
 	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
 	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": null, "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
-	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": null, "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/04/2025", "document_photo": preload("res://images/portraits/portrait9.png")}},
-	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": "no_dni", "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
+	{"name": "Santiago", "image": preload("res://images/characters/character9.png"), "problem": "no_dni", "dni": {"name": "Santiago Acosta", "born_date": "18/11/2000", "due_date": "05/04/2025", "document_photo": preload("res://images/portraits/portrait9.png")}},
+	{"name": "Facundo", "image": preload("res://images/characters/character10.png"), "problem": null, "dni": {"name": "Facundo Navarro", "born_date": "12/12/2002", "due_date": "20/04/2025", "document_photo": preload("res://images/portraits/portrait10.png")}},
 	{"name": "Martín", "image": preload("res://images/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://images/portraits/portrait11.png")}},
 	{"name": "Tomás", "image": preload("res://images/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://images/portraits/portrait12.png")}},
 ]
@@ -82,14 +85,27 @@ var persons_second_level = [
 
 var dialogues = [
 	"Buenas",
+	"Buenas buenas",
 	"¿Todo bien?",
+	"Hola, ¿qué tal?",
+	"¿Qué tal?",
 	"Buenas, ¿cómo va?",
 	"Está todo en regla. ¿Me dejás pasar?",
 	"¿Todo bien por acá? ¿puedo entrar?",
 	"Está todo bien, ¿me das el OK?",
 	"Dale, ya me conocen acá ¿Me dejás?",
 	"¡Sería un crimen no dejarme entrar!",
-	"¡La pista me necesita!"
+	"¡La pista me necesita!",
+	"¡Apurate que me están esperando!",
+	"No me hagas esperar, dejame pasar",
+	"¡Dale, tengo que entrar sí o sí!",
+	"Revisá tranqui, está todo impecable.",
+	"¡Mirá que no soy nuevo acá, eh!",
+	"Soy cliente habitual, ¡dejame pasar!",
+	"Che, no des más vueltas, ¿paso?",
+	"¡Me tienen que ver adentro, es urgente!",
+	"¿Ya revisaste? ¡Está todo bien!",
+	"¡No me hagas esperar más, por favor!"
 ]
 
 var win_screen = preload("res://images/win_screen.jpg")
@@ -427,6 +443,10 @@ func _on_animation_player_animation_finished(animation_name):
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
 		show_dialogue()
+		if current_level == 1:
+			random_credential.texture = sube
+		elif current_level == 2:
+			random_credential.texture = ioma
 		if selected_person["problem"] == "no_dni":
 			random_credential_animation_player.play("random_credential_appear")
 		else:
