@@ -1097,15 +1097,15 @@ offset_bottom = 143.0
 color = Color(0, 0, 0, 1)
 
 [node name="NameTitle" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = -100.0
+self_modulate = Color(0.385493, 0.385492, 0.385492, 1)
+offset_left = -90.0
 offset_top = -120.0
-offset_right = 130.0
+offset_right = 140.0
 offset_bottom = -85.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Nombre"
+uppercase = true
 
 [node name="NameLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
@@ -1118,15 +1118,15 @@ theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 24
 
 [node name="BornDateTitle" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = -100.0
+self_modulate = Color(0.384314, 0.384314, 0.384314, 1)
+offset_left = -90.0
 offset_top = -60.0
-offset_right = 32.0
+offset_right = 66.0
 offset_bottom = -27.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Nacimiento"
+uppercase = true
 
 [node name="BornDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
@@ -1139,14 +1139,14 @@ theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 
 [node name="DueDateTitle" type="Label" parent="DNIInformation"]
-modulate = Color(0, 0, 0, 1)
-self_modulate = Color(0, 0, 0, 1)
-offset_left = -100.0
-offset_right = 44.0
+self_modulate = Color(0.384314, 0.384314, 0.384314, 1)
+offset_left = -90.0
+offset_right = 82.0
 offset_bottom = 33.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 24
 text = "Vencimiento"
+uppercase = true
 
 [node name="DueDateLabel" type="Label" parent="DNIInformation"]
 modulate = Color(0, 0, 0, 1)
