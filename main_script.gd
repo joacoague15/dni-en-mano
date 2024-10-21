@@ -3,7 +3,7 @@ extends Node2D
 @onready var dni_information = $DNIInformation
 @onready var rules_label = $Phone/RulesLabel
 @onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
-@onready var show_rules_button = $ShowRulesButton
+@onready var show_rules_button = $Phone/ShowRulesButton
 @onready var character_sprite = $CharacterSprite
 @onready var character_animation_player = $CharacterSprite/AnimationPlayer
 @onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
@@ -14,13 +14,11 @@ extends Node2D
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
 @onready var energy_label = $Phone/EnergyLabel
-@onready var correct_character_label = $Phone/CorrectCharactersLabel
+@onready var correct_character_label = $CorrectCharactersLabel
 
-@onready var countdown_label = $Phone/CountdownLabel
+@onready var countdown_label = $CountdownNode/CountdownLabel
 @onready var countdown_label_animator = $CountdownNode/CountdownAnimationPlayer
 @onready var countdown_timer = $CountdownNode/CountdownTimer
-
-@onready var phone_sprite = $ShowRulesButton/phone
 
 @onready var player_dialogue_label = $DialogueControl/CharacterDialogueLabel
 
@@ -35,15 +33,21 @@ extends Node2D
 @onready var reject_button = $RejectButton
 @onready var background_music = $BackgroundMusicPlayer
 
+@onready var thumb_down = preload("res://images/thumb_down.png")
+@onready var thumb_down_pressed = preload("res://images/thumb_down_pressed.png")
+
+@onready var thumb_up = preload("res://images/thumb_up.png")
+@onready var thumb_up_pressed = preload("res://images/thumb_up_pressed.png")
+
 @onready var full_heart_icon = preload("res://images/full_heart.png")
 @onready var empty_heart_icon = preload("res://images/empty_heart.png")
 
 @onready var sube = preload("res://images/sube.png")
 @onready var ioma = preload("res://images/ioma.png")
 
-@onready var heart1 = $Phone/Heart1
-@onready var heart2 = $Phone/Heart2
-@onready var heart3 = $Phone/Heart3
+@onready var heart1 = $Heart1
+@onready var heart2 = $Heart2
+@onready var heart3 = $Heart3
 
 @onready var name_label = $DNIInformation/NameLabel
 @onready var born_date_label = $DNIInformation/BornDateLabel
@@ -52,6 +56,8 @@ extends Node2D
 
 @onready var random_credential = $RandomCredential
 @onready var random_credential_animation_player = $RandomCredential/RandomCredentialAnimationPlayer
+
+@onready var menu = $Menu
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -155,15 +161,11 @@ func _ready():
 	heart_sprites = [heart3, heart2, heart1]
 	for heart in heart_sprites:
 		heart.texture = full_heart_icon
-	background_music.play()
 	energy_label.text = "Energia: " + str(energy)
 	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
 	apply_rules()
-	accept_button.visible = false
-	reject_button.visible = false
-	next_person()
-	set_text_from_seconds(current_time)
-	countdown_timer.start()
+	accept_button.disabled = true
+	reject_button.disabled = true
 	
 func _process(delta):
 	time_since_last_check += delta
@@ -252,8 +254,8 @@ func _on_reject_button_pressed():
 		
 func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
-	accept_button.visible = false
-	reject_button.visible = false
+	accept_button.disabled = true
+	reject_button.disabled = true
 	handle_energy()
 	if selected_person["problem"] == "no_dni":
 		random_credential_animation_player.play("random_credential_disappear")
@@ -434,6 +436,7 @@ func _on_animation_player_animation_finished(animation_name):
 		character_animation_player.play("character_idle")
 		activate_scan_button.disabled = false
 		scanning_progress_bar.visible = true
+		wrong_choice_notification_label.text = "" 
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
 		background_music.set_bus("New Bus")
@@ -466,13 +469,13 @@ func handle_character_enter_or_not_anim(wasAccepted):
 
 func _on_dni_animation_player_animation_finished(animation_name):
 	if animation_name == "dni_appear":
-		accept_button.visible = true
-		reject_button.visible = true
+		accept_button.disabled = false
+		reject_button.disabled = false
 		
 func _on_random_credential_animation_player_animation_finished(animation_name):
 	if animation_name == "random_credential_appear":
-		accept_button.visible = true
-		reject_button.visible = true
+		accept_button.disabled = false
+		reject_button.disabled = false
 		
 func _on_result_animation_player_animation_finished(animation_name):
 	if animation_name == "show_results":
@@ -481,33 +484,36 @@ func _on_result_animation_player_animation_finished(animation_name):
 func _on_activate_scan_button_pressed():
 	is_scan_activated = !is_scan_activated	
 
-func _on_show_rules_button_mouse_entered():
-	phone_sprite.modulate = Color.GRAY
-	phone_sprite.scale = Vector2(0.6, 0.6)
-
-func _on_show_rules_button_mouse_exited():
-	phone_sprite.modulate = Color.WHITE
-	phone_sprite.scale = Vector2(0.55, 0.55)
-
-func _on_show_rules_button_button_down():
-	phone_sprite.modulate = Color.DARK_GRAY
-	phone_sprite.scale = Vector2(0.52, 0.52)
-
-func _on_show_rules_button_button_up():
-	phone_sprite.modulate = Color.WHITE	
-	phone_sprite.scale = Vector2(0.55, 0.55)
-
 func _on_accept_button_mouse_entered():
-	accept_button.modulate = Color.LIGHT_GREEN
+	accept_button.modulate = Color(1.0, 1.0, 1.0, 0.8)
+	
+func _on_accept_button_button_down():
+	accept_button.icon = thumb_up_pressed
+	accept_button.scale = Vector2(0.48, 0.5)
+	
+func _on_accept_button_button_up():
+	accept_button.icon = thumb_up
+	accept_button.scale = Vector2(0.5, 0.5)
 
 func _on_accept_button_mouse_exited():
-	accept_button.modulate = Color.WHITE
+	accept_button.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	
+func _on_accept_button_focus_entered():
+	accept_button.texture = thumb_up_pressed
+	
+func _on_reject_button_button_down():
+	reject_button.icon = thumb_down_pressed
+	reject_button.scale = Vector2(0.48, 0.5)
+	
+func _on_reject_button_button_up():
+	reject_button.icon = thumb_down
+	reject_button.scale = Vector2(0.5, 0.5)
 
 func _on_reject_button_mouse_entered():
-	reject_button.modulate = Color.LIGHT_CORAL
+	reject_button.modulate = Color(1.0, 1.0, 1.0, 0.8)
 
 func _on_reject_button_mouse_exited():
-	reject_button.modulate = Color.WHITE
+	reject_button.modulate = Color(1.0, 1.0, 1.0, 1.0)
 
 func _on_next_level_button_pressed():
 	result_animation_player.play("hide_results")
@@ -517,3 +523,11 @@ func handle_level_settings():
 	current_level += 1
 	if current_level == 2:
 		correct_character_needed = 11
+
+
+func _on_play_pressed():
+	menu.visible = false
+	background_music.play()
+	next_person()
+	set_text_from_seconds(current_time)
+	countdown_timer.start()
