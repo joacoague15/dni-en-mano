@@ -45,6 +45,9 @@ extends Node2D
 @onready var sube = preload("res://images/sube.png")
 @onready var ioma = preload("res://images/ioma.png")
 
+@onready var la_noche_llama = preload("res://sounds/la_noche_llama.ogg")
+@onready var noche_de_entrada = preload("res://sounds/noche_de_entrada.ogg")
+
 @onready var heart1 = $Heart1
 @onready var heart2 = $Heart2
 @onready var heart3 = $Heart3
@@ -65,6 +68,16 @@ extends Node2D
 
 @onready var ticket_information = $TicketInformation
 @onready var ticket_animation_player = $TicketInformation/TicketAnimationPlayer
+
+@onready var play_button = $Menu/Play
+@onready var how_to_play_button = $Menu/HowToPlay
+
+@onready var menu_audio_stream_player = $Menu/MenuAudioStreamPlayer
+
+@onready var menu_animation_player = $Menu/MenuAnimationPlayer
+
+@onready var cinematic_audio_stream_player = $MainCinematic/CinematicAudioStreamPlayer
+@onready var cinematic_animation_player = $MainCinematic/CinematicAnimationPlayer
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -154,7 +167,7 @@ var strikes = 0
 
 var is_holding = false
 var progress = 0.0
-var progress_time = 1.5
+var progress_time = 1.4
 
 var	is_scan_activated = false
 
@@ -455,7 +468,7 @@ func next_level():
 	
 	random_credential.visible = false
 	random_credential_animation_player.stop()
-
+	
 	background_music.set_bus("Master")
 	background_music.set_volume_db(0)
 	background_music.play()
@@ -476,10 +489,12 @@ func _on_animation_player_animation_finished(animation_name):
 func _on_animation_player_animation_started(animation_name):
 	if animation_name == "character_idle":
 		show_dialogue()
+		
 		if current_level == 1:
 			random_credential.texture = sube
 		elif current_level == 2:
 			random_credential.texture = ioma
+			
 		if selected_person["problem"] == "no_dni":
 			random_credential_animation_player.play("random_credential_appear")
 		else:
@@ -487,6 +502,7 @@ func _on_animation_player_animation_started(animation_name):
 			dni_animation_player.play("dni_appear")
 			if current_level != 1 and selected_person["problem"] != "no_ticket":
 				ticket_animation_player.play("ticket_appear")
+				
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
 		scanning_progress_bar.visible = false
@@ -563,13 +579,28 @@ func handle_new_level_settings():
 		correct_character_needed = 8
 
 func _on_play_pressed():
+	menu_animation_player.play("slowly_stop_menu_music")
+	cinematic_animation_player.play("slowly_start_cinematic_music")
 	main_cinematic.visible = true
 	main_cinematic.play()
 	menu.visible = false
 
 func _on_main_cinematic_finished():
+	cinematic_animation_player.play("slowly_stop_cinematic_music")
 	main_cinematic.visible = false
 	background_music.play()
 	next_person()
 	set_text_from_seconds(current_time)
 	countdown_timer.start()
+
+func _on_play_mouse_entered():
+	play_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
+
+func _on_play_mouse_exited():
+	play_button.modulate = Color(1.0, 1.0, 1.0, 1)
+
+func _on_how_to_play_mouse_entered():
+	how_to_play_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
+
+func _on_how_to_play_mouse_exited():
+	how_to_play_button.modulate = Color(1.0, 1.0, 1.0, 1)

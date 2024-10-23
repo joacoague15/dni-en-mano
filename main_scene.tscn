@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=70 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://main_script.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://dpm1mll7rw4r" path="res://images/entire_background.png" id="2_edmgr"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://dn2ha108o3wnh" path="res://images/ticket.png" id="16_h6xcr"]
 [ext_resource type="VideoStream" path="res://idle.ogv" id="16_lp6ko"]
 [ext_resource type="Texture2D" uid="uid://bsms5ga3jkg47" path="res://images/empty_heart.png" id="16_p0gkp"]
+[ext_resource type="AudioStream" uid="uid://bs7wkans0ciur" path="res://sounds/oso_pixel.ogg" id="17_1qiee"]
 
 [sub_resource type="Animation" id="Animation_5h8d7"]
 length = 0.001
@@ -989,20 +990,154 @@ _data = {
 "random_credential_disappear": SubResource("Animation_s75if")
 }
 
-[sub_resource type="Animation" id="Animation_thbnk"]
-resource_name = "ticket_appear"
-length = 0.4
+[sub_resource type="Animation" id="Animation_hy2ri"]
+resource_name = "slowly_stop_menu_music"
+length = 2.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
+tracks/0/path = NodePath(".:volume_db")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(400, 422), Vector2(400, 0), Vector2(400, 40)]
+"values": [0.0, -20.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ll8o2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d0d14"]
+_data = {
+"RESET": SubResource("Animation_ll8o2"),
+"slowly_stop_menu_music": SubResource("Animation_hy2ri")
+}
+
+[sub_resource type="Animation" id="Animation_s3q4p"]
+resource_name = "slowly_start_cinematic_music"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicAudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-20.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CinematicAudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_6o0qj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicAudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CinematicAudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_q5q3p"]
+resource_name = "slowly_stop_cinematic_music"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CinematicAudioStreamPlayer:volume_db")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -20.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CinematicAudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hc3vw"]
+_data = {
+"RESET": SubResource("Animation_6o0qj"),
+"slowly_start_cinematic_music": SubResource("Animation_s3q4p"),
+"slowly_stop_cinematic_music": SubResource("Animation_q5q3p")
 }
 
 [sub_resource type="Animation" id="Animation_8npct"]
@@ -1018,6 +1153,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(400, 422)]
+}
+
+[sub_resource type="Animation" id="Animation_thbnk"]
+resource_name = "ticket_appear"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(400, 422), Vector2(400, 0), Vector2(400, 40)]
 }
 
 [sub_resource type="Animation" id="Animation_hb8fl"]
@@ -1443,23 +1594,27 @@ texture = ExtResource("13_v2kee")
 [node name="Play" type="Button" parent="Menu"]
 z_index = 6
 offset_left = -120.0
-offset_top = -10.0
+offset_top = -6.0
 offset_right = 355.0
-offset_bottom = 98.0
+offset_bottom = 132.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
 icon = ExtResource("14_7xau4")
+flat = true
 
 [node name="Label" type="Label" parent="Menu/Play"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.088
+anchor_left = 0.084
 anchor_top = 0.204
-anchor_right = 0.905
-anchor_bottom = 0.796
-offset_left = 0.199997
-offset_top = -0.0320015
-offset_right = 0.125
-offset_bottom = 0.0319901
+anchor_right = 0.914
+anchor_bottom = 0.783
+offset_left = 0.100029
+offset_top = -2.15197
+offset_right = -0.149994
+offset_bottom = -0.053978
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 32
 text = "Jugar"
@@ -1471,41 +1626,58 @@ z_index = 6
 offset_left = -120.0
 offset_top = 80.0
 offset_right = 355.0
-offset_bottom = 188.0
+offset_bottom = 218.0
 scale = Vector2(0.5, 0.5)
+theme_override_fonts/font = SubResource("FontVariation_xvukn")
+theme_override_font_sizes/font_size = 28
+theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
 icon = ExtResource("14_7xau4")
+flat = true
 
 [node name="Label" type="Label" parent="Menu/HowToPlay"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.093
-anchor_top = 0.185
-anchor_right = 0.909
-anchor_bottom = 0.815
-offset_left = -0.174999
-offset_top = 0.0200005
-offset_right = 0.224976
-offset_bottom = -0.0200043
-theme_override_font_sizes/font_size = 28
+anchor_left = 0.084
+anchor_top = 0.188
+anchor_right = 0.914
+anchor_bottom = 0.783
+offset_left = 0.100029
+offset_top = 0.0560303
+offset_right = -0.149994
+offset_bottom = -0.053978
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_font_sizes/font_size = 32
 text = "Como jugar"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MainMenuAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Menu"]
+[node name="MenuAudioStreamPlayer" type="AudioStreamPlayer" parent="Menu"]
 stream = ExtResource("15_041t7")
-volume_db = 5.0
 autoplay = true
-bus = &"New Bus"
+
+[node name="MenuAnimationPlayer" type="AnimationPlayer" parent="Menu"]
+root_node = NodePath("../MenuAudioStreamPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_d0d14")
+}
 
 [node name="MainCinematic" type="VideoStreamPlayer" parent="."]
 visible = false
 z_index = 6
-offset_left = -661.0
-offset_top = -391.0
-offset_right = 511.0
-offset_bottom = 286.0
-scale = Vector2(0.7, 0.7)
+offset_left = -575.0
+offset_top = -338.0
+offset_right = 595.0
+offset_bottom = 340.0
 stream = ExtResource("15_xscx3")
+expand = true
+
+[node name="CinematicAudioStreamPlayer" type="AudioStreamPlayer" parent="MainCinematic"]
+stream = ExtResource("17_1qiee")
+
+[node name="CinematicAnimationPlayer" type="AnimationPlayer" parent="MainCinematic"]
+libraries = {
+"": SubResource("AnimationLibrary_hc3vw")
+}
 
 [node name="TicketInformation" type="Sprite2D" parent="."]
 z_index = 2
@@ -1542,5 +1714,9 @@ libraries = {
 [connection signal="pressed" from="Phone/ShowRulesButton" to="." method="_on_show_rules_button_pressed"]
 [connection signal="pressed" from="ActivateScanButton" to="." method="_on_activate_scan_button_pressed"]
 [connection signal="animation_finished" from="RandomCredential/RandomCredentialAnimationPlayer" to="." method="_on_random_credential_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="Menu/Play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/Play" to="." method="_on_play_mouse_exited"]
 [connection signal="pressed" from="Menu/Play" to="." method="_on_play_pressed"]
+[connection signal="mouse_entered" from="Menu/HowToPlay" to="." method="_on_how_to_play_mouse_entered"]
+[connection signal="mouse_exited" from="Menu/HowToPlay" to="." method="_on_how_to_play_mouse_exited"]
 [connection signal="finished" from="MainCinematic" to="." method="_on_main_cinematic_finished"]
