@@ -1,6 +1,5 @@
 extends Node2D
 
-@onready var dni_information = $DNIInformation
 @onready var rules_label = $Phone/RulesLabel
 @onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
 @onready var show_rules_button = $Phone/ShowRulesButton
@@ -13,6 +12,7 @@ extends Node2D
 @onready var total_characters_count = $ResultScreen/TotalCharactersCount
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
+@onready var next_level_button = $ResultScreen/NextLevelButton
 @onready var energy_label = $Phone/EnergyLabel
 @onready var correct_character_label = $CorrectCharactersLabel
 
@@ -54,6 +54,8 @@ extends Node2D
 @onready var due_date_label = $DNIInformation/DueDateLabel
 @onready var portrait_sprite = $DNIInformation/PortraitSprite
 
+@onready var current_date = $CurrentDateLabel
+
 @onready var random_credential = $RandomCredential
 @onready var random_credential_animation_player = $RandomCredential/RandomCredentialAnimationPlayer
 
@@ -66,7 +68,6 @@ extends Node2D
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
-	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
 	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
 	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "25/07/2008", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
 	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
@@ -82,10 +83,28 @@ var persons_first_level = [
 var persons_second_level = [
 	{"name": "Luciano", "image": preload("res://images/characters/character13.png"), "problem": null, "dni": {"name": "Luciano Ponce", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait13.png")}},
 	{"name": "Santiago", "image": preload("res://images/characters/character14.png"), "problem": null, "dni": {"name": "Santiago Escobar", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait14.png")}},
-	{"name": "Franco", "image": preload("res://images/characters/character15.png"), "problem": "due_date", "dni": {"name": "Franco Navarro", "born_date": "25/07/2004", "due_date": "21/05/2024", "document_photo": preload("res://images/portraits/portrait15.png")}},
+	{"name": "Jorge", "image": preload("res://images/characters/character18.png"), "problem": "due_date", "dni": {"name": "Jorge Jorji", "born_date": "01/04/1979", "due_date": "10/03/1998", "document_photo": preload("res://images/portraits/portrait18.png")}},
+	{"name": "Martín", "image": preload("res://images/characters/character11.png"), "problem": "born_date", "dni": {"name": "Martín Díaz", "born_date": "15/03/2009", "due_date": "13/09/2026", "document_photo": preload("res://images/portraits/portrait11.png")}},
+	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": "no_ticket", "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
+	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
+	{"name": "Franco", "image": preload("res://images/characters/character15.png"), "problem": "due_date", "dni": {"name": "Franco Navarro", "born_date": "25/07/2004", "due_date": "11/07/2024", "document_photo": preload("res://images/portraits/portrait15.png")}},
 	{"name": "Juan", "image": preload("res://images/characters/character16.png"), "problem": null, "dni": {"name": "Juan Aguirre", "born_date": "26/10/2004", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait16.png")}},
+	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
 	{"name": "Carlos", "image": preload("res://images/characters/character17.png"), "problem": "no_dni", "dni": {"name": "Carlos Herrera", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait17.png")}},
-	{"name": "Jorge", "image": preload("res://images/characters/character18.png"), "problem": "due_date", "dni": {"name": "Jorge Jorji", "born_date": "01/04/1999", "due_date": "10/03/1998", "document_photo": preload("res://images/portraits/portrait18.png")}},
+]
+
+var persons_third_level = [
+	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
+	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
+	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "02/12/2009", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
+	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": "no_ticket", "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
+	{"name": "Tomás", "image": preload("res://images/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://images/portraits/portrait12.png")}},
+	{"name": "Jorge", "image": preload("res://images/characters/character18.png"), "problem": "no_dni", "dni": {"name": "Jorge Jorji", "born_date": "01/04/1999", "due_date": "10/03/1998", "document_photo": preload("res://images/portraits/portrait18.png")}},
+	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
+	{"name": "Franco", "image": preload("res://images/characters/character15.png"), "problem": "due_date", "dni": {"name": "Franco Navarro", "born_date": "25/07/2004", "due_date": "26/08/2024", "document_photo": preload("res://images/portraits/portrait15.png")}},
+	{"name": "Juan", "image": preload("res://images/characters/character16.png"), "problem": null, "dni": {"name": "Juan Aguirre", "born_date": "26/10/2004", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait16.png")}},
+	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
+	{"name": "Carlos", "image": preload("res://images/characters/character17.png"), "problem": "no_ticket", "dni": {"name": "Carlos Herrera", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait17.png")}},
 ]
 
 var dialogues = [
@@ -118,8 +137,6 @@ var loose_screen = preload("res://images/LooseImage.jpg")
 
 var typing_speed = 0.05
 
-var current_videogame_date = "04-10-2024"
-
 var selected_index = -1
 var correct_characters
 var incorrect_characters
@@ -132,7 +149,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 3
+var correct_character_needed = 8
 var strikes = 0
 
 var is_holding = false
@@ -153,6 +170,7 @@ var result_screen_shown = false
 var current_level = 1
 
 func _ready():
+	current_date.text = "04-10-2024"
 	scanning_progress_bar.value = 0
 	correct_characters = 0
 	activate_scan_button.disabled = true
@@ -239,6 +257,8 @@ func new_selected_person():
 		return persons_first_level[selected_index]
 	elif current_level == 2:
 		return persons_second_level[selected_index]
+	elif current_level == 3:
+		return persons_third_level[selected_index]
 	
 func next_person():
 	selected_person = new_selected_person()
@@ -263,10 +283,10 @@ func handle_accept_reject(problem, wasAccepted):
 		random_credential_animation_player.play("random_credential_disappear")
 	else:
 		dni_animation_player.play("dni_disappear")
-		if current_level != 1:
+		if current_level != 1 and selected_person["problem"] != "no_ticket":
 			ticket_animation_player.play("ticket_disappear")
 	
-	if problem in ["due_date", "born_date", "wrong_portrait", "no_dni"]:
+	if problem in ["due_date", "born_date", "wrong_portrait", "no_dni", "no_ticket"]:
 		if wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
@@ -310,6 +330,8 @@ func handle_incorrect_choice_notification(problem):
 			message = "Lo retrato no era correcto"
 		"no_dni":
 			message = "Ni siquiera tenia DNI..."
+		"no_ticket":
+			message = "Faltaba el ticket de entrada"
 		_:
 			message = "No habia nada de malo con el cliente"
 
@@ -384,10 +406,12 @@ func fill_result_details():
 		win_or_loose_label.text = "PERDISTE"
 		win_or_loose_label.modulate = Color(1, 0, 0)
 		win_or_loose_screen.texture = loose_screen
+		next_level_button.text = "Vamos de nuevo..."
 	else:
 		win_or_loose_screen.texture = win_screen
 		win_or_loose_label.text = "GANASTE"
 		win_or_loose_label.modulate = Color(0, 1, 0)
+		next_level_button.text = "Dormir"
 	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
 	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
 	incorrect_characters_count.text = "Errores: " + str(incorrect_characters.size())
@@ -461,7 +485,7 @@ func _on_animation_player_animation_started(animation_name):
 		else:
 			display_person_dni(selected_person["dni"])
 			dni_animation_player.play("dni_appear")
-			if current_level != 1:
+			if current_level != 1 and selected_person["problem"] != "no_ticket":
 				ticket_animation_player.play("ticket_appear")
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
 		activate_scan_button.disabled = true
@@ -525,13 +549,18 @@ func _on_reject_button_mouse_exited():
 
 func _on_next_level_button_pressed():
 	result_animation_player.play("hide_results")
-	handle_level_settings()
+	if correct_characters >= correct_character_needed:
+		handle_new_level_settings()
 	next_level()
 	
-func handle_level_settings():
+func handle_new_level_settings():
 	current_level += 1
 	if current_level == 2:
-		correct_character_needed = 4
+		current_date.text = "05-10-2024"
+		correct_character_needed = 7
+	elif current_level == 3:
+		current_date.text = "06-10-2024"
+		correct_character_needed = 8
 
 func _on_play_pressed():
 	main_cinematic.visible = true
