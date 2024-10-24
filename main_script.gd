@@ -79,6 +79,8 @@ extends Node2D
 @onready var cinematic_audio_stream_player = $MainCinematic/CinematicAudioStreamPlayer
 @onready var cinematic_animation_player = $MainCinematic/CinematicAnimationPlayer
 
+@onready var end_screen = $EndScreen
+
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
 	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
@@ -162,7 +164,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 8
+var correct_character_needed = 1
 var strikes = 0
 
 var is_holding = false
@@ -181,6 +183,7 @@ var red_alarm_already_activated = false
 var result_screen_shown = false
 
 var current_level = 1
+var max_level_reached_count = 3
 
 func _ready():
 	current_date.text = "04-10-2024"
@@ -412,6 +415,8 @@ func hide_dialogue():
 
 func fill_result_details():
 	result_screen_shown = true
+	accept_button.disabled = true
+	reject_button.disabled = true
 	countdown_timer.stop()
 	current_time = start_time
 	set_text_from_seconds(start_time)
@@ -500,7 +505,7 @@ func _on_animation_player_animation_started(animation_name):
 		else:
 			display_person_dni(selected_person["dni"])
 			dni_animation_player.play("dni_appear")
-			if current_level != 1 and selected_person["problem"] != "no_ticket":
+			if current_level != 1 and selected_person["problem"] != "no_ticket" and not result_screen_shown:
 				ticket_animation_player.play("ticket_appear")
 				
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
@@ -567,13 +572,20 @@ func _on_next_level_button_pressed():
 	result_animation_player.play("hide_results")
 	if correct_characters >= correct_character_needed:
 		handle_new_level_settings()
-	next_level()
+		
+	if current_level > max_level_reached_count:
+		display_end_screen()
+	else:
+		next_level()
+		
+func display_end_screen():
+	end_screen.visible = true
 	
 func handle_new_level_settings():
 	current_level += 1
 	if current_level == 2:
 		current_date.text = "05-10-2024"
-		correct_character_needed = 7
+		correct_character_needed = 1
 	elif current_level == 3:
 		current_date.text = "06-10-2024"
 		correct_character_needed = 8
