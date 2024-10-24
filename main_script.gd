@@ -164,7 +164,7 @@ var time_since_last_check = 0.0
 
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 1
+var correct_character_needed = 8
 var strikes = 0
 
 var is_holding = false
@@ -585,7 +585,7 @@ func handle_new_level_settings():
 	current_level += 1
 	if current_level == 2:
 		current_date.text = "05-10-2024"
-		correct_character_needed = 1
+		correct_character_needed = 7
 	elif current_level == 3:
 		current_date.text = "06-10-2024"
 		correct_character_needed = 8
