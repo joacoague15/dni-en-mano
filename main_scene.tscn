@@ -1655,12 +1655,31 @@ vertical_alignment = 1
 [node name="MenuAudioStreamPlayer" type="AudioStreamPlayer" parent="Menu"]
 stream = ExtResource("15_041t7")
 autoplay = true
+parameters/looping = true
 
 [node name="MenuAnimationPlayer" type="AnimationPlayer" parent="Menu"]
 root_node = NodePath("../MenuAudioStreamPlayer")
 libraries = {
 "": SubResource("AnimationLibrary_d0d14")
 }
+
+[node name="TutorialPanel" type="Panel" parent="Menu"]
+visible = false
+z_index = 6
+offset_left = -573.0
+offset_top = -338.0
+offset_right = 595.0
+offset_bottom = 336.0
+
+[node name="TutorialDisplay" type="TextureRect" parent="Menu/TutorialPanel"]
+visible = false
+z_index = 6
+layout_mode = 0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = 1930.0
+offset_bottom = 1092.0
+scale = Vector2(0.6, 0.6)
 
 [node name="MainCinematic" type="VideoStreamPlayer" parent="."]
 visible = false
@@ -1754,4 +1773,5 @@ autowrap_mode = 2
 [connection signal="pressed" from="Menu/Play" to="." method="_on_play_pressed"]
 [connection signal="mouse_entered" from="Menu/HowToPlay" to="." method="_on_how_to_play_mouse_entered"]
 [connection signal="mouse_exited" from="Menu/HowToPlay" to="." method="_on_how_to_play_mouse_exited"]
+[connection signal="pressed" from="Menu/HowToPlay" to="." method="_on_how_to_play_pressed"]
 [connection signal="finished" from="MainCinematic" to="." method="_on_main_cinematic_finished"]

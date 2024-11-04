@@ -81,6 +81,9 @@ extends Node2D
 
 @onready var end_screen = $EndScreen
 
+@onready var tutorial_panel = $Menu/TutorialPanel
+@onready var tutorial_display = $Menu/TutorialPanel/TutorialDisplay
+
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
 	{"name": "Romina", "image": preload("res://images/characters/character3.png"), "problem": "due_date", "dni": {"name": "Romina Gomez", "born_date": "25/07/2004", "due_date": "10/07/2024", "document_photo": preload("res://images/portraits/portrait3.png")}},
@@ -185,7 +188,21 @@ var result_screen_shown = false
 var current_level = 1
 var max_level_reached_count = 3
 
+var tutorial_images = []
+var current_tutorial_index = 0
+
 func _ready():
+	tutorial_images = [
+		preload("res://images/tutorial/tutorial1.png"),
+		preload("res://images/tutorial/tutorial2.png"),
+		preload("res://images/tutorial/tutorial3.png"),
+		preload("res://images/tutorial/tutorial4.png"),
+		preload("res://images/tutorial/tutorial5.png"),
+		preload("res://images/tutorial/tutorial6.png"),
+		preload("res://images/tutorial/tutorial7.png"),
+		preload("res://images/tutorial/tutorial8.png"),
+		preload("res://images/tutorial/tutorial9.png"),
+	]
 	current_date.text = "04-10-2024"
 	scanning_progress_bar.value = 0
 	correct_characters = 0
@@ -603,6 +620,17 @@ func _on_main_cinematic_finished():
 	next_person()
 	set_text_from_seconds(current_time)
 	countdown_timer.start()
+	
+func _input(event):
+	if tutorial_panel.is_visible():
+		if event is InputEventMouseButton and event.pressed:
+			current_tutorial_index += 1
+			if current_tutorial_index < tutorial_images.size():
+				tutorial_display.texture = tutorial_images[current_tutorial_index]
+			else:
+				tutorial_panel.hide()
+				tutorial_display.hide()
+
 
 func _on_play_mouse_entered():
 	play_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
@@ -615,3 +643,9 @@ func _on_how_to_play_mouse_entered():
 
 func _on_how_to_play_mouse_exited():
 	how_to_play_button.modulate = Color(1.0, 1.0, 1.0, 1)
+
+func _on_how_to_play_pressed():
+	current_tutorial_index = 0
+	tutorial_display.texture = tutorial_images[current_tutorial_index]
+	tutorial_panel.show()
+	tutorial_display.show()
