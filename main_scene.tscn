@@ -8,9 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://delxkwthmvi77" path="res://images/thumb_down.png" id="9_5kib1"]
 [ext_resource type="Texture2D" uid="uid://cq1ujbu8xeisg" path="res://images/nightclub_logo.png" id="12_w57fu"]
 [ext_resource type="Texture2D" uid="uid://bukv20ryi2nb1" path="res://images/person_icon.png" id="13_fgm3s"]
-[ext_resource type="Texture2D" uid="uid://bc1ywo7h4shdv" path="res://images/menu.png" id="13_v2kee"]
+[ext_resource type="Texture2D" uid="uid://cvrrdv55i2h5u" path="res://images/menu_background.png" id="13_ico3j"]
 [ext_resource type="Texture2D" uid="uid://c878r7uwyy1nw" path="res://images/play_button.png" id="14_7xau4"]
-[ext_resource type="Texture2D" uid="uid://den1tvx411g0u" path="res://images/phone_display.png" id="15_4qmgs"]
+[ext_resource type="Texture2D" uid="uid://den1tvx411g0u" path="res://images/phone_display_level_1.png" id="15_4qmgs"]
 [ext_resource type="AudioStream" uid="uid://rpxiwy0jfr0s" path="res://sounds/main_soundtrack.ogg" id="15_041t7"]
 [ext_resource type="Texture2D" uid="uid://cmphdk3pi0mgy" path="res://images/full_heart.png" id="15_q41q0"]
 [ext_resource type="VideoStream" path="res://main_cinematic.ogv" id="15_xscx3"]
@@ -1590,15 +1590,15 @@ texture = ExtResource("12_w57fu")
 z_index = 5
 position = Vector2(9.00003, -0.500001)
 scale = Vector2(0.610417, 0.626852)
-texture = ExtResource("13_v2kee")
+texture = ExtResource("13_ico3j")
 
 [node name="Play" type="Button" parent="Menu"]
 z_index = 6
-offset_left = -120.0
+offset_left = -150.0
 offset_top = -6.0
-offset_right = 355.0
+offset_right = 325.0
 offset_bottom = 132.0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")
@@ -1624,11 +1624,11 @@ vertical_alignment = 1
 
 [node name="HowToPlay" type="Button" parent="Menu"]
 z_index = 6
-offset_left = -120.0
+offset_left = -150.0
 offset_top = 80.0
-offset_right = 355.0
+offset_right = 325.0
 offset_bottom = 218.0
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.6, 0.6)
 theme_override_fonts/font = SubResource("FontVariation_xvukn")
 theme_override_font_sizes/font_size = 28
 theme_override_styles/focus = SubResource("StyleBoxFlat_gh0d6")

@@ -1,5 +1,6 @@
 extends Node2D
 
+@onready var phone = $Phone
 @onready var rules_label = $Phone/RulesLabel
 @onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
 @onready var show_rules_button = $Phone/ShowRulesButton
@@ -47,6 +48,9 @@ extends Node2D
 
 @onready var la_noche_llama = preload("res://sounds/la_noche_llama.ogg")
 @onready var noche_de_entrada = preload("res://sounds/noche_de_entrada.ogg")
+
+@onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
+@onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
 
 @onready var heart1 = $Heart1
 @onready var heart2 = $Heart2
@@ -203,6 +207,7 @@ func _ready():
 		preload("res://images/tutorial/tutorial8.png"),
 		preload("res://images/tutorial/tutorial9.png"),
 	]
+	phone.texture = phone_display_level_1
 	current_date.text = "04-10-2024"
 	scanning_progress_bar.value = 0
 	correct_characters = 0
@@ -602,6 +607,7 @@ func handle_new_level_settings():
 	if current_level == 2:
 		current_date.text = "05-10-2024"
 		correct_character_needed = 7
+		phone.texture = phone_display_level_2
 	elif current_level == 3:
 		current_date.text = "06-10-2024"
 		correct_character_needed = 8
