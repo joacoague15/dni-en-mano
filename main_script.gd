@@ -46,9 +46,6 @@ extends Node2D
 @onready var sube = preload("res://images/sube.png")
 @onready var ioma = preload("res://images/ioma.png")
 
-@onready var la_noche_llama = preload("res://sounds/la_noche_llama.ogg")
-@onready var noche_de_entrada = preload("res://sounds/noche_de_entrada.ogg")
-
 @onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
 @onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
 
@@ -87,6 +84,13 @@ extends Node2D
 
 @onready var tutorial_panel = $Menu/TutorialPanel
 @onready var tutorial_display = $Menu/TutorialPanel/TutorialDisplay
+
+@onready var start_first_level_screen = $StartFirstLevelScreen
+@onready var start_first_level_button = $StartFirstLevelScreen/PlayFirstLevelButton
+
+@onready var first_level_animation_player = $StartFirstLevelScreen/FirstLevelAnimationPlayer
+
+@onready var first_rules_notification = $StartFirstLevelScreen/FirstRulesNotification
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -249,6 +253,7 @@ func _process(delta):
 func _on_countdown_timer_timeout():
 	if current_time >= end_time:
 		countdown_timer.stop()
+		end_level()
 	else:
 		if current_time >= 120 and not yellow_alarm_already_activated:
 			countdown_label_animator.play("yellow_alarm")
@@ -617,11 +622,17 @@ func _on_play_pressed():
 	cinematic_animation_player.play("slowly_start_cinematic_music")
 	main_cinematic.visible = true
 	main_cinematic.play()
+	start_first_level_screen.visible = true
 	menu.visible = false
 
 func _on_main_cinematic_finished():
+	start_first_level_button.visible = true
+	first_rules_notification.visible = true
 	cinematic_animation_player.play("slowly_stop_cinematic_music")
 	main_cinematic.visible = false
+	phone.visible = true
+
+func start_first_level():
 	background_music.play()
 	next_person()
 	set_text_from_seconds(current_time)
@@ -655,3 +666,13 @@ func _on_how_to_play_pressed():
 	tutorial_display.texture = tutorial_images[current_tutorial_index]
 	tutorial_panel.show()
 	tutorial_display.show()
+
+func _on_play_first_level_button_pressed():
+	first_level_animation_player.play("hide_start_level_screen")
+	start_first_level()
+
+func _on_play_first_level_button_mouse_entered():
+	start_first_level_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
+
+func _on_play_first_level_button_mouse_exited():
+	start_first_level_button.modulate = Color(1.0, 1.0, 1.0, 1)
