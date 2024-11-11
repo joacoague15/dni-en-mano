@@ -6,7 +6,6 @@
 [ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="AudioStream" uid="uid://dy1b01a37fev" path="res://sounds/noche_de_entrada.ogg" id="6_6nby6"]
 [ext_resource type="Texture2D" uid="uid://delxkwthmvi77" path="res://images/thumb_down.png" id="9_5kib1"]
-[ext_resource type="Texture2D" uid="uid://cq1ujbu8xeisg" path="res://images/nightclub_logo.png" id="12_w57fu"]
 [ext_resource type="Texture2D" uid="uid://bukv20ryi2nb1" path="res://images/person_icon.png" id="13_fgm3s"]
 [ext_resource type="Texture2D" uid="uid://cvrrdv55i2h5u" path="res://images/menu_background.png" id="13_ico3j"]
 [ext_resource type="Texture2D" uid="uid://c878r7uwyy1nw" path="res://images/play_button.png" id="14_7xau4"]
@@ -36,7 +35,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LabelEffectScreen:visible")
+tracks/1/path = NodePath("../LabelEffectScreen:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -48,7 +47,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("LabelEffectScreen:position")
+tracks/2/path = NodePath("../LabelEffectScreen:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -265,6 +264,18 @@ tracks/7/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NewRuleNotification:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_e1jg5"]
 resource_name = "show_labels"
@@ -272,7 +283,7 @@ length = 4.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("LabelEffectScreen:position")
+tracks/0/path = NodePath("../LabelEffectScreen:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -300,7 +311,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("LabelEffectScreen:visible")
+tracks/1/path = NodePath("../LabelEffectScreen:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -893,6 +904,9 @@ _data = {
 "random_credential_disappear": SubResource("Animation_s75if")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1mi17"]
+load_path = "res://.godot/imported/nightclub_logo.png-59242b991926dcdadf6dfa25372ca2c6.ctex"
+
 [sub_resource type="Animation" id="Animation_ll8o2"]
 length = 0.001
 tracks/0/type = "value"
@@ -952,81 +966,6 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_ll8o2"),
 "slowly_stop_menu_music": SubResource("Animation_hy2ri")
-}
-
-[sub_resource type="Animation" id="Animation_bhk53"]
-resource_name = "hide_start_level_screen"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayFirstLevelButton:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FirstRulesNotification:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 0.294118, 1), Color(1, 1, 0.294118, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("FirstRulesNotification:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayFirstLevelButton:visible")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_aitw8"]
@@ -1099,6 +1038,81 @@ tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bhk53"]
+resource_name = "hide_start_level_screen"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayFirstLevelButton:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FirstRulesNotification:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 0.294118, 1), Color(1, 1, 0.294118, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FirstRulesNotification:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayFirstLevelButton:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -1439,14 +1453,32 @@ text = "Z pasaron incorrectamente"
 
 [node name="NextLevelButton" type="Button" parent="ResultScreen"]
 visible = false
-offset_left = -50.0
+offset_left = -100.0
 offset_top = 240.0
-offset_right = 71.0
-offset_bottom = 271.0
+offset_right = 375.0
+offset_bottom = 348.0
+scale = Vector2(0.4, 0.4)
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_x644t")
+icon = ExtResource("14_7xau4")
 
-[node name="LabelEffectScreen" type="ColorRect" parent="ResultScreen"]
+[node name="Label" type="Label" parent="ResultScreen/NextLevelButton"]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 30.0
+offset_right = 321.0
+offset_bottom = 73.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_a2yxb")
+theme_override_font_sizes/font_size = 32
+text = "asdasdasdasd"
+
+[node name="WinOrLooseImage" type="Sprite2D" parent="ResultScreen"]
+visible = false
+position = Vector2(0, -155)
+scale = Vector2(0.8, 0.8)
+
+[node name="LabelEffectScreen" type="ColorRect" parent="."]
 visible = false
 z_index = 1
 offset_left = -587.0
@@ -1454,11 +1486,6 @@ offset_top = -335.0
 offset_right = 574.0
 offset_bottom = 340.0
 color = Color(0, 0, 0, 1)
-
-[node name="WinOrLooseImage" type="Sprite2D" parent="ResultScreen"]
-visible = false
-position = Vector2(0, -150)
-scale = Vector2(0.25, 0.25)
 
 [node name="CharacterDisplay" type="ColorRect" parent="."]
 offset_left = -565.0
@@ -1733,16 +1760,16 @@ scale = Vector2(0.7, 0.7)
 texture = ExtResource("15_q41q0")
 
 [node name="NightClubLogo" type="Sprite2D" parent="."]
-position = Vector2(-380, 280)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("12_w57fu")
+position = Vector2(-420, 290)
+scale = Vector2(0.3, 0.3)
+texture = SubResource("CompressedTexture2D_1mi17")
 
 [node name="Menu" type="Node2D" parent="."]
 
 [node name="MenuBackground" type="Sprite2D" parent="Menu"]
 z_index = 5
 position = Vector2(9.00003, -0.500001)
-scale = Vector2(0.610417, 0.626852)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("13_ico3j")
 
 [node name="Play" type="Button" parent="Menu"]
@@ -1846,6 +1873,7 @@ color = Color(0, 0, 0, 1)
 [node name="PlayFirstLevelButton" type="Button" parent="StartFirstLevelScreen"]
 visible = false
 z_index = 6
+layout_mode = 0
 offset_left = 433.0
 offset_top = 340.0
 offset_right = 908.0
@@ -1997,11 +2025,13 @@ vertical_alignment = 1
 autowrap_mode = 2
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_mouse_entered"]
+[connection signal="mouse_exited" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_mouse_exited"]
 [connection signal="pressed" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_pressed"]
 [connection signal="animation_finished" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="animation_started" from="CharacterSprite/AnimationPlayer" to="." method="_on_animation_player_animation_started"]
 [connection signal="animation_finished" from="DNIInformation/DNIAnimationPlayer" to="." method="_on_dni_animation_player_animation_finished"]
-[connection signal="timeout" from="CountdownNode/CountdownTimer" to="CountdownNode" method="_on_countdown_timer_timeout"]
+[connection signal="timeout" from="CountdownNode/CountdownTimer" to="." method="_on_countdown_timer_timeout"]
 [connection signal="button_down" from="AcceptButton" to="." method="_on_accept_button_button_down"]
 [connection signal="button_up" from="AcceptButton" to="." method="_on_accept_button_button_up"]
 [connection signal="mouse_entered" from="AcceptButton" to="." method="_on_accept_button_mouse_entered"]

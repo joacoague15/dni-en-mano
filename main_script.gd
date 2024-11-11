@@ -14,6 +14,7 @@ extends Node2D
 @onready var correct_characters_count = $ResultScreen/CorrectCharactersCount
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
 @onready var next_level_button = $ResultScreen/NextLevelButton
+@onready var next_level_button_label = $ResultScreen/NextLevelButton/Label
 @onready var energy_label = $Phone/EnergyLabel
 @onready var correct_character_label = $CorrectCharactersLabel
 
@@ -91,6 +92,8 @@ extends Node2D
 @onready var first_level_animation_player = $StartFirstLevelScreen/FirstLevelAnimationPlayer
 
 @onready var first_rules_notification = $StartFirstLevelScreen/FirstRulesNotification
+
+@onready var new_rule_notification = $ResultScreen/NewRuleNotification
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -254,13 +257,6 @@ func _on_countdown_timer_timeout():
 	if current_time >= end_time:
 		countdown_timer.stop()
 		end_level()
-	else:
-		if current_time >= 120 and not yellow_alarm_already_activated:
-			countdown_label_animator.play("yellow_alarm")
-			yellow_alarm_already_activated = true
-		if current_time >= 150 and not red_alarm_already_activated:
-			countdown_label_animator.play("red_alarm")
-			red_alarm_already_activated = true
 
 func set_text_from_seconds(seconds):
 	var minutes = int(seconds) / 60
@@ -451,12 +447,14 @@ func fill_result_details():
 		win_or_loose_label.text = "PERDISTE"
 		win_or_loose_label.modulate = Color(1, 0, 0)
 		win_or_loose_screen.texture = loose_screen
-		next_level_button.text = "Vamos de nuevo..."
+		new_rule_notification.text = ""
+		next_level_button_label.text = "Vamos de nuevo..."
 	else:
 		win_or_loose_screen.texture = win_screen
 		win_or_loose_label.text = "GANASTE"
 		win_or_loose_label.modulate = Color(0, 1, 0)
-		next_level_button.text = "Dormir"
+		next_level_button_label.text = "Dormir"
+		new_rule_notification.text = "Nueva regla agregada al celular"
 	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
 	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
 	incorrect_characters_count.text = "Errores: " + str(incorrect_characters.size())
@@ -676,3 +674,9 @@ func _on_play_first_level_button_mouse_entered():
 
 func _on_play_first_level_button_mouse_exited():
 	start_first_level_button.modulate = Color(1.0, 1.0, 1.0, 1)
+
+func _on_next_level_button_mouse_entered():
+	next_level_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
+
+func _on_next_level_button_mouse_exited():
+	next_level_button.modulate = Color(1.0, 1.0, 1.0, 1)
