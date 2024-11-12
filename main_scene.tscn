@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=72 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://main_script.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://dpm1mll7rw4r" path="res://images/entire_background.png" id="2_edmgr"]
@@ -1328,9 +1328,6 @@ _data = {
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nu1mr"]
 bg_color = Color(0, 0, 0, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b31ab"]
-bg_color = Color(0, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bg64p"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
@@ -1393,6 +1390,7 @@ position = Vector2(570, 330)
 script = ExtResource("1_3f8pj")
 
 [node name="ResultScreen" type="Node2D" parent="."]
+z_as_relative = false
 
 [node name="ResultBackground" type="ColorRect" parent="ResultScreen"]
 offset_left = -605.0
@@ -1463,11 +1461,16 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_x644t")
 icon = ExtResource("14_7xau4")
 
 [node name="Label" type="Label" parent="ResultScreen/NextLevelButton"]
-layout_mode = 0
-offset_left = 110.0
-offset_top = 30.0
-offset_right = 321.0
-offset_bottom = 73.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.232
+anchor_top = 0.278
+anchor_right = 0.676
+anchor_bottom = 0.676
+offset_left = -0.200005
+offset_top = -0.0240021
+offset_right = -0.100037
+offset_bottom = -0.00800323
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_font_sizes/font_size = 32
@@ -1961,15 +1964,6 @@ offset_bottom = 171.0
 theme_override_fonts/font = ExtResource("3_a2yxb")
 theme_override_styles/normal = SubResource("StyleBoxFlat_nu1mr")
 
-[node name="EnergyLabel" type="Label" parent="Phone"]
-visible = false
-offset_left = -147.0
-offset_top = -216.0
-offset_right = -33.0
-offset_bottom = -190.0
-theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_styles/normal = SubResource("StyleBoxFlat_b31ab")
-
 [node name="ShowRulesButton" type="Button" parent="Phone"]
 offset_left = -246.0
 offset_top = -512.0
@@ -1989,6 +1983,12 @@ texture = ExtResource("16_h6xcr")
 libraries = {
 "": SubResource("AnimationLibrary_alayb")
 }
+
+[node name="TicketLogo" type="Sprite2D" parent="TicketInformation"]
+visible = false
+position = Vector2(-9, 4)
+scale = Vector2(0.116195, 0.116195)
+texture = SubResource("CompressedTexture2D_1mi17")
 
 [node name="EndScreen" type="Node2D" parent="."]
 visible = false

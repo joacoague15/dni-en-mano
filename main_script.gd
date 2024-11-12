@@ -28,9 +28,6 @@ extends Node2D
 
 @onready var wrong_choice_notification_label = $WrongChoiceNotificationLabel
 
-@onready var scanning_progress_bar = $ScanningProgressBar
-@onready var activate_scan_button = $ActivateScanButton
-
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
 @onready var background_music = $BackgroundMusicPlayer
@@ -94,6 +91,8 @@ extends Node2D
 @onready var first_rules_notification = $StartFirstLevelScreen/FirstRulesNotification
 
 @onready var new_rule_notification = $ResultScreen/NewRuleNotification
+
+@onready var ticket_logo = $TicketInformation/TicketLogo
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -185,8 +184,6 @@ var is_holding = false
 var progress = 0.0
 var progress_time = 1.4
 
-var	is_scan_activated = false
-
 var heart_sprites = []
 
 var start_time = 60
@@ -216,40 +213,17 @@ func _ready():
 	]
 	phone.texture = phone_display_level_1
 	current_date.text = "04-10-2024"
-	scanning_progress_bar.value = 0
 	correct_characters = 0
-	activate_scan_button.disabled = true
 	incorrect_characters = []
 	heart_sprites = [heart3, heart2, heart1]
 	for heart in heart_sprites:
 		heart.texture = full_heart_icon
-	energy_label.text = "Energia: " + str(energy)
 	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
 	apply_rules()
 	accept_button.disabled = true
 	reject_button.disabled = true
 	
 func _process(delta):
-	time_since_last_check += delta
-	if time_since_last_check >= check_interval:
-		time_since_last_check = 0.0
-		
-	if is_scan_activated:
-		progress += delta / progress_time
-		if progress >= 1.0:
-			progress = 1.0
-			scanning_progress_bar.visible = false
-			activate_scan_button.disabled = true
-			is_scan_activated = false
-			energy += 3
-			if energy > 10:
-				energy = 10
-			energy_label.text = "Energia: " + str(energy)
-	else:
-		if progress > 0:
-			progress = 0
-
-	scanning_progress_bar.value = progress * scanning_progress_bar.max_value
 	if not countdown_timer.is_stopped() and not result_screen_shown:
 		change_remaining_seconds(delta * 1.2)
 	
@@ -317,7 +291,6 @@ func handle_accept_reject(problem, wasAccepted):
 	var correct_choice = false
 	accept_button.disabled = true
 	reject_button.disabled = true
-	handle_energy()
 	if selected_person["problem"] == "no_dni":
 		random_credential_animation_player.play("random_credential_disappear")
 	else:
@@ -343,12 +316,6 @@ func handle_accept_reject(problem, wasAccepted):
 			handle_amount_correct_characters()
 	handle_character_enter_or_not_anim(wasAccepted)
 	
-func handle_energy():
-	if energy <= 1:
-		end_level()
-	energy -= 1
-	energy_label.text = "Energia: " + str(energy)
-	
 func handle_strikes():
 	if strikes < PERMITED_STRIKES:
 		rules_label_animation_player.play("twinkleHeart" + str(heart_sprites.size() - strikes))
@@ -366,7 +333,7 @@ func handle_incorrect_choice_notification(problem):
 		"born_date":
 			message = "No era mayor de edad"
 		"wrong_portrait":
-			message = "Lo retrato no era correcto"
+			message = "El retrato no era correcto"
 		"no_dni":
 			message = "Ni siquiera tenia DNI..."
 		"no_ticket":
@@ -438,8 +405,8 @@ func hide_dialogue():
 
 func fill_result_details():
 	result_screen_shown = true
-	accept_button.disabled = true
-	reject_button.disabled = true
+	accept_button.visible = false
+	reject_button.visible = false
 	countdown_timer.stop()
 	current_time = start_time
 	set_text_from_seconds(start_time)
@@ -450,10 +417,12 @@ func fill_result_details():
 		new_rule_notification.text = ""
 		next_level_button_label.text = "Vamos de nuevo..."
 	else:
+		if current_level == 1:
+			phone.texture = phone_display_level_2
 		win_or_loose_screen.texture = win_screen
 		win_or_loose_label.text = "GANASTE"
 		win_or_loose_label.modulate = Color(0, 1, 0)
-		next_level_button_label.text = "Dormir"
+		next_level_button_label.text = "Siguiente dia..."
 		new_rule_notification.text = "Nueva regla agregada al celular"
 	total_characters_count.text = "Clientes totales: " + str(correct_characters + incorrect_characters.size())
 	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
@@ -466,6 +435,8 @@ func _on_show_rules_button_pressed():
 		rules_visible = !rules_visible
 		
 func next_level():
+	accept_button.visible = true
+	reject_button.visible = true
 	countdown_timer.start()
 	
 	selected_index = -1
@@ -474,12 +445,10 @@ func next_level():
 	energy = 100
 	strikes = 0
 	progress = 0.0
-	is_scan_activated = false
 	heart_sprites = [heart3, heart2, heart1]
 	
 	for heart in heart_sprites:
 		heart.texture = full_heart_icon
-	energy_label.text = "Energia: " + str(energy)
 	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
 	win_or_loose_label.text = ""
 	wrong_choice_notification_label.text = ""
@@ -489,12 +458,7 @@ func next_level():
 	
 	result_screen_shown = false
 	
-	scanning_progress_bar.value = 0
-	
 	player_dialogue_label.text = ""		
-	
-	activate_scan_button.disabled = true
-	scanning_progress_bar.visible = false
 	
 	random_credential.visible = false
 	random_credential_animation_player.stop()
@@ -506,11 +470,8 @@ func next_level():
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
 		character_animation_player.play("character_idle")
-		activate_scan_button.disabled = false
-		scanning_progress_bar.visible = true
 		wrong_choice_notification_label.text = "" 
 	if animation_name == "character_enter" or animation_name == "character_no_enter":
-		activate_scan_button.disabled = true
 		background_music.set_bus("New Bus")
 		background_music.set_volume_db(0)
 		next_person()
@@ -529,12 +490,11 @@ func _on_animation_player_animation_started(animation_name):
 		else:
 			display_person_dni(selected_person["dni"])
 			dni_animation_player.play("dni_appear")
+			if current_level != 1 and selected_person["problem"] == "no_ticket_logo":
+				ticket_logo.visible = false
+				ticket_animation_player.play("ticket_appear")
 			if current_level != 1 and selected_person["problem"] != "no_ticket" and not result_screen_shown:
 				ticket_animation_player.play("ticket_appear")
-				
-	if animation_name == "character_enter" or animation_name == "character_no_enter":
-		activate_scan_button.disabled = true
-		scanning_progress_bar.visible = false
 		
 func handle_character_enter_or_not_anim(wasAccepted):
 	if wasAccepted:
@@ -557,9 +517,6 @@ func _on_random_credential_animation_player_animation_finished(animation_name):
 func _on_result_animation_player_animation_finished(animation_name):
 	if animation_name == "show_results":
 		result_animation_player.play("show_labels")
-
-func _on_activate_scan_button_pressed():
-	is_scan_activated = !is_scan_activated	
 
 func _on_accept_button_mouse_entered():
 	accept_button.modulate = Color(1.0, 1.0, 1.0, 0.8)
@@ -612,6 +569,7 @@ func handle_new_level_settings():
 		correct_character_needed = 7
 		phone.texture = phone_display_level_2
 	elif current_level == 3:
+		ticket_logo.visible = true
 		current_date.text = "06-10-2024"
 		correct_character_needed = 8
 
