@@ -1,12 +1,18 @@
 extends Node2D
 
+# --- UI ELEMENTS ---
+# Phone and Rules UI
 @onready var phone = $Phone
 @onready var rules_label = $Phone/RulesLabel
 @onready var rules_label_animation_player = $Phone/RulesAnimationPlayer
 @onready var show_rules_button = $Phone/ShowRulesButton
-@onready var character_sprite = $CharacterSprite
-@onready var character_animation_player = $CharacterSprite/AnimationPlayer
-@onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
+
+# Countdown Timer and Labels
+@onready var countdown_label = $CountdownNode/CountdownLabel
+@onready var countdown_label_animator = $CountdownNode/CountdownAnimationPlayer
+@onready var countdown_timer = $CountdownNode/CountdownTimer
+
+# Result Screen
 @onready var result_screen = $ResultScreen
 @onready var win_or_loose_label = $ResultScreen/WinOrLooseLabel
 @onready var result_animation_player = $ResultScreen/ResultAnimationPlayer
@@ -15,84 +21,92 @@ extends Node2D
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
 @onready var next_level_button = $ResultScreen/NextLevelButton
 @onready var next_level_button_label = $ResultScreen/NextLevelButton/Label
-@onready var correct_character_label = $CorrectCharactersLabel
+@onready var win_or_loose_screen = $ResultScreen/WinOrLooseImage
+@onready var new_rule_notification = $ResultScreen/NewRuleNotification
 
-@onready var countdown_label = $CountdownNode/CountdownLabel
-@onready var countdown_label_animator = $CountdownNode/CountdownAnimationPlayer
-@onready var countdown_timer = $CountdownNode/CountdownTimer
+# --- CHARACTER AND DIALOGUE ---
+# Character and Animation UI
+@onready var character_sprite = $CharacterSprite
+@onready var character_animation_player = $CharacterSprite/AnimationPlayer
 
+# Player Dialogue
 @onready var player_dialogue_label = $DialogueControl/CharacterDialogueLabel
 
-@onready var win_or_loose_screen = $ResultScreen/WinOrLooseImage
-
+# Wrong Choice Notification
 @onready var wrong_choice_notification_label = $WrongChoiceNotificationLabel
 
+# Accept and Reject Buttons
 @onready var accept_button = $AcceptButton
 @onready var reject_button = $RejectButton
-@onready var background_music = $BackgroundMusicPlayer
 
-@onready var thumb_down = preload("res://images/thumb_down.png")
-@onready var thumb_down_pressed = preload("res://images/thumb_down_pressed.png")
-
-@onready var thumb_up = preload("res://images/thumb_up.png")
-@onready var thumb_up_pressed = preload("res://images/thumb_up_pressed.png")
-
-@onready var full_heart_icon = preload("res://images/full_heart.png")
-@onready var empty_heart_icon = preload("res://images/empty_heart.png")
-
-@onready var sube = preload("res://images/sube.png")
-@onready var ioma = preload("res://images/ioma.png")
-@onready var pitusas = preload("res://images/pitusas.png")
-
-@onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
-@onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
-
-@onready var heart1 = $Heart1
-@onready var heart2 = $Heart2
-@onready var heart3 = $Heart3
-
+# --- DNI AND CREDENTIALS ---
+# DNI Information Display
+@onready var dni_animation_player = $DNIInformation/DNIAnimationPlayer
 @onready var name_label = $DNIInformation/NameLabel
 @onready var born_date_label = $DNIInformation/BornDateLabel
 @onready var due_date_label = $DNIInformation/DueDateLabel
 @onready var portrait_sprite = $DNIInformation/PortraitSprite
 
+# Current Date
 @onready var current_date = $CurrentDateLabel
 
+# Random Credential Display
 @onready var random_credential = $RandomCredential
 @onready var random_credential_animation_player = $RandomCredential/RandomCredentialAnimationPlayer
 
-@onready var menu = $Menu
-
-@onready var main_cinematic = $MainCinematic
-
+# Ticket Information
 @onready var ticket_information = $TicketInformation
 @onready var ticket_animation_player = $TicketInformation/TicketAnimationPlayer
+@onready var ticket_logo = $TicketInformation/TicketLogo
 
+# --- MENU ELEMENTS ---
+@onready var menu = $Menu
 @onready var play_button = $Menu/Play
 @onready var how_to_play_button = $Menu/HowToPlay
-
 @onready var menu_audio_stream_player = $Menu/MenuAudioStreamPlayer
-
 @onready var menu_animation_player = $Menu/MenuAnimationPlayer
 
+# --- CINEMATIC ---
+@onready var main_cinematic = $MainCinematic
 @onready var cinematic_audio_stream_player = $MainCinematic/CinematicAudioStreamPlayer
 @onready var cinematic_animation_player = $MainCinematic/CinematicAnimationPlayer
 
-@onready var end_screen = $EndScreen
-
+# --- TUTORIAL ELEMENTS ---
 @onready var tutorial_panel = $Menu/TutorialPanel
 @onready var tutorial_display = $Menu/TutorialPanel/TutorialDisplay
 
+# --- LEVEL START/END UI ---
+# First Level Start Screen
 @onready var start_first_level_screen = $StartFirstLevelScreen
 @onready var start_first_level_button = $StartFirstLevelScreen/PlayFirstLevelButton
-
 @onready var first_level_animation_player = $StartFirstLevelScreen/FirstLevelAnimationPlayer
-
 @onready var first_rules_notification = $StartFirstLevelScreen/FirstRulesNotification
 
-@onready var new_rule_notification = $ResultScreen/NewRuleNotification
+# End Screen
+@onready var end_screen = $EndScreen
 
-@onready var ticket_logo = $TicketInformation/TicketLogo
+# --- AUDIO ---
+@onready var background_music = $BackgroundMusicPlayer
+
+# --- ICONS AND TEXTURES ---
+@onready var thumb_down = preload("res://images/thumb_down.png")
+@onready var thumb_down_pressed = preload("res://images/thumb_down_pressed.png")
+@onready var thumb_up = preload("res://images/thumb_up.png")
+@onready var thumb_up_pressed = preload("res://images/thumb_up_pressed.png")
+@onready var full_heart_icon = preload("res://images/full_heart.png")
+@onready var empty_heart_icon = preload("res://images/empty_heart.png")
+@onready var sube = preload("res://images/sube.png")
+@onready var ioma = preload("res://images/ioma.png")
+@onready var pitusas = preload("res://images/pitusas.png")
+@onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
+@onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
+
+# --- HEART ICONS ---
+# Heart icons for lives
+@onready var heart1 = $Heart1
+@onready var heart2 = $Heart2
+@onready var heart3 = $Heart3
+@onready var correct_character_label = $CorrectCharactersLabel
 
 var persons_first_level = [
 	{"name": "Camila", "image": preload("res://images/characters/character1.png"), "problem": null, "dni": {"name": "Camila Gutierrez", "born_date": "15/03/2003", "due_date": "10/05/2025", "document_photo": preload("res://images/portraits/portrait1.png")}},
@@ -160,42 +174,51 @@ var dialogues = [
 	"¡No me hagas esperar más, por favor!"
 ]
 
+# --- SCREEN ASSETS ---
 var win_screen = preload("res://images/win_screen.jpg")
 var loose_screen = preload("res://images/LooseImage.jpg")
 
+# --- TYPING SETTINGS ---
 var typing_speed = 0.05
 
+# --- CHARACTER SELECTION ---
 var selected_index = -1
+var selected_person
 var correct_characters
 var incorrect_characters
-var selected_person
 
+# --- UI STATE TRACKERS ---
 var rules_visible = false
+var result_screen_shown = false
 
+# --- TIMING SETTINGS ---
 var check_interval = 0.1
 var time_since_last_check = 0.0
 
+# --- GAMEPLAY MECHANICS ---
 var energy = 100
 var PERMITED_STRIKES = 2
 var correct_character_needed = 8
 var strikes = 0
+var heart_sprites = []
 
+# --- PLAYER ACTION TRACKERS ---
 var is_holding = false
 var progress = 0.0
 var progress_time = 1.4
 
-var heart_sprites = []
-
+# --- TIMER SETTINGS ---
 var start_time = 60
 var end_time = 180
 var current_time = start_time
 var yellow_alarm_already_activated = false
 var red_alarm_already_activated = false
-var result_screen_shown = false
 
+# --- LEVEL SETTINGS ---
 var current_level = 1
 var max_level_reached_count = 3
 
+# --- TUTORIAL SETTINGS ---
 var tutorial_images = []
 var current_tutorial_index = 0
 
@@ -211,18 +234,23 @@ func _ready():
 		preload("res://images/tutorial/tutorial8.png"),
 		preload("res://images/tutorial/tutorial9.png"),
 	]
+	
 	phone.texture = phone_display_level_1
 	current_date.text = "04-10-2024"
+	
 	correct_characters = 0
 	incorrect_characters = []
+	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
+	
 	heart_sprites = [heart3, heart2, heart1]
 	for heart in heart_sprites:
 		heart.texture = full_heart_icon
-	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
+		
 	apply_rules()
 	accept_button.disabled = true
 	reject_button.disabled = true
 	
+# --- CORE GAME LOOP AND TIMING FUNCTIONS ---
 func _process(delta):
 	if not countdown_timer.is_stopped() and not result_screen_shown:
 		change_remaining_seconds(delta * 1.2)
@@ -242,28 +270,13 @@ func change_remaining_seconds(delta):
 	current_time = clamp(current_time, 0, end_time)
 	set_text_from_seconds(current_time)
 	
-func display_person_dni(dni):
-	if dni:
-		name_label.text = dni["name"]
-		born_date_label.text = dni["born_date"]
-		due_date_label.text = dni["due_date"]
-		portrait_sprite.texture = dni["document_photo"]
-		portrait_sprite.visible = true
-	else:
-		clear_display()
-
-func clear_display():
-	name_label.text = ""
-	born_date_label.text = ""
-	due_date_label.text = ""
-	portrait_sprite.visible = false
-
 func add_seconds(seconds):
 	change_remaining_seconds(seconds)
 
 func subtract_seconds(seconds):
 	change_remaining_seconds(-seconds)
-		
+	
+# --- CHARACTER SELECTION AND DISPLAY FUNCTIONS ---
 func new_selected_person():
 	selected_index += 1
 	if current_level == 1:
@@ -280,7 +293,24 @@ func next_person():
 	character_animation_player.play("character_appear")	
 	character_sprite.position = Vector2(-500, 0)	
 	character_sprite.texture = selected_person["image"]
-		
+	
+func display_person_dni(dni):
+	if dni:
+		name_label.text = dni["name"]
+		born_date_label.text = dni["born_date"]
+		due_date_label.text = dni["due_date"]
+		portrait_sprite.texture = dni["document_photo"]
+		portrait_sprite.visible = true
+	else:
+		clear_display()
+
+func clear_display():
+	name_label.text = ""
+	born_date_label.text = ""
+	due_date_label.text = ""
+	portrait_sprite.visible = false
+	
+# --- BUTTON HANDLERS AND DIALOGUE FUNCTIONS ---
 func _on_accept_button_pressed():
 	hide_dialogue()
 	handle_accept_reject(selected_person["problem"], true)
@@ -318,6 +348,10 @@ func handle_accept_reject(problem, wasAccepted):
 			handle_amount_correct_characters()
 	handle_character_enter_or_not_anim(wasAccepted)
 	
+func hide_dialogue():
+	player_dialogue_label.visible = false
+	
+# --- GAMEPLAY AND SCORING LOGIC ---
 func handle_strikes():
 	if strikes < PERMITED_STRIKES:
 		rules_label_animation_player.play("twinkleHeart" + str(heart_sprites.size() - strikes))
@@ -373,40 +407,37 @@ func end_level():
 	result_animation_player.play("show_results")
 	countdown_timer.stop()
 	result_screen_shown = true
-		
-func apply_rules():
-	var rules = [
-		"Solo mayores de edad (+18)",
-		"El DNI debe estar en regla",
-		"Entrada cierra 03:00hs"
-	]
-
-	var rules_text = "REGLAS" + "\n"
-	for rule in rules:
-		rules_text += rule + "\n"
 	
-	rules_label.text = rules_text
+# --- LEVEL AND GAME STATE ---
+func next_level():
+	accept_button.visible = true
+	reject_button.visible = true
+	countdown_timer.start()
 	
-func show_dialogue():
-	var randomIndex = randi() % dialogues.size()
-	if randomIndex < dialogues.size():
-		var dialogue = dialogues[randomIndex]
-		_start_typing(dialogue)
-		
-func _start_typing(dialogue):
-	var char_index = 0
+	selected_index = -1
+	correct_characters = 0
+	incorrect_characters = []
+	energy = 100
+	strikes = 0
+	progress = 0.0
+	heart_sprites = [heart3, heart2, heart1]
 	
+	for heart in heart_sprites:
+		heart.texture = full_heart_icon
+	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
+	win_or_loose_label.text = ""
+	wrong_choice_notification_label.text = ""
+	
+	accept_button.disabled = false
+	reject_button.disabled = false
+	result_screen_shown = false
 	player_dialogue_label.text = ""		
-	player_dialogue_label.visible = true
+	random_credential.visible = false
+	random_credential_animation_player.stop()
+	background_music.set_bus("Master")
+	background_music.set_volume_db(0)
+	next_person()
 	
-	while char_index < dialogue.length():
-		player_dialogue_label.text += dialogue[char_index]
-		char_index += 1
-		await get_tree().create_timer(typing_speed).timeout
-		
-func hide_dialogue():
-	player_dialogue_label.visible = false
-
 func fill_result_details():
 	result_screen_shown = true
 	accept_button.visible = false
@@ -432,44 +463,53 @@ func fill_result_details():
 	correct_characters_count.text = "Pasaron correctamente: " + str(correct_characters)
 	incorrect_characters_count.text = "Errores: " + str(incorrect_characters.size())
 		
+func handle_new_level_settings():
+	current_level += 1
+	if current_level == 2:
+		current_date.text = "05-10-2024"
+		correct_character_needed = 7
+		phone.texture = phone_display_level_2
+	elif current_level == 3:
+		ticket_logo.visible = true
+		current_date.text = "06-10-2024"
+		correct_character_needed = 8		
+		
+func display_end_screen():
+	end_screen.visible = true
+	
+# --- RULE AND DIALOGUE FUNCTIONS ---
+func apply_rules():
+	var rules = [
+		"Solo mayores de edad (+18)",
+		"El DNI debe estar en regla",
+		"Entrada cierra 03:00hs"
+	]
+	var rules_text = "REGLAS" + "\n"
+	for rule in rules:
+		rules_text += rule + "\n"
+	rules_label.text = rules_text
+	
+func show_dialogue():
+	var randomIndex = randi() % dialogues.size()
+	if randomIndex < dialogues.size():
+		var dialogue = dialogues[randomIndex]
+		_start_typing(dialogue)
+		
+func _start_typing(dialogue):
+	var char_index = 0
+	player_dialogue_label.text = ""		
+	player_dialogue_label.visible = true
+	while char_index < dialogue.length():
+		player_dialogue_label.text += dialogue[char_index]
+		char_index += 1
+		await get_tree().create_timer(typing_speed).timeout
+		
+# --- UI AND ANIMATION EVENT HANDLERS ---
 func _on_show_rules_button_pressed():
 	if not rules_label_animation_player.is_playing():
 		var animation = "rules_appear" if not rules_visible else "rules_disappear"
 		rules_label_animation_player.play(animation)
 		rules_visible = !rules_visible
-		
-func next_level():
-	accept_button.visible = true
-	reject_button.visible = true
-	countdown_timer.start()
-	
-	selected_index = -1
-	correct_characters = 0
-	incorrect_characters = []
-	energy = 100
-	strikes = 0
-	progress = 0.0
-	heart_sprites = [heart3, heart2, heart1]
-	
-	for heart in heart_sprites:
-		heart.texture = full_heart_icon
-	correct_character_label.text = str(correct_characters) + " / " + str(correct_character_needed)
-	win_or_loose_label.text = ""
-	wrong_choice_notification_label.text = ""
-	
-	accept_button.disabled = false
-	reject_button.disabled = false
-	
-	result_screen_shown = false
-	
-	player_dialogue_label.text = ""		
-	
-	random_credential.visible = false
-	random_credential_animation_player.stop()
-	
-	background_music.set_bus("Master")
-	background_music.set_volume_db(0)
-	next_person()
 
 func _on_animation_player_animation_finished(animation_name):
 	if animation_name == "character_appear":
@@ -566,20 +606,6 @@ func _on_next_level_button_pressed():
 		display_end_screen()
 	else:
 		next_level()
-		
-func display_end_screen():
-	end_screen.visible = true
-	
-func handle_new_level_settings():
-	current_level += 1
-	if current_level == 2:
-		current_date.text = "05-10-2024"
-		correct_character_needed = 7
-		phone.texture = phone_display_level_2
-	elif current_level == 3:
-		ticket_logo.visible = true
-		current_date.text = "06-10-2024"
-		correct_character_needed = 8
 
 func _on_play_pressed():
 	menu_animation_player.play("slowly_stop_menu_music")
@@ -611,8 +637,7 @@ func _input(event):
 			else:
 				tutorial_panel.hide()
 				tutorial_display.hide()
-
-
+				
 func _on_play_mouse_entered():
 	play_button.modulate = Color(1.0, 1.0, 1.0, 0.5)
 
