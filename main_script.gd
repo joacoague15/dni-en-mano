@@ -15,7 +15,6 @@ extends Node2D
 @onready var incorrect_characters_count = $ResultScreen/IncorrectCharactersCount
 @onready var next_level_button = $ResultScreen/NextLevelButton
 @onready var next_level_button_label = $ResultScreen/NextLevelButton/Label
-@onready var energy_label = $Phone/EnergyLabel
 @onready var correct_character_label = $CorrectCharactersLabel
 
 @onready var countdown_label = $CountdownNode/CountdownLabel
@@ -43,6 +42,7 @@ extends Node2D
 
 @onready var sube = preload("res://images/sube.png")
 @onready var ioma = preload("res://images/ioma.png")
+@onready var pitusas = preload("res://images/pitusas.png")
 
 @onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
 @onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
@@ -122,10 +122,10 @@ var persons_second_level = [
 ]
 
 var persons_third_level = [
-	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": null, "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
+	{"name": "Valentin", "image": preload("res://images/characters/character5.png"), "problem": "no_ticket_logo", "dni": {"name": "Valentin Gomez", "born_date": "01/04/1999", "due_date": "10/03/2025", "document_photo": preload("res://images/portraits/portrait5.png")}},
 	{"name": "Juliana", "image": preload("res://images/characters/character7.png"), "problem": null, "dni": {"name": "Juliana Rojas", "born_date": "10/06/2003", "due_date": "09/12/2025", "document_photo": preload("res://images/portraits/portrait7.png")}},
 	{"name": "Juan", "image": preload("res://images/characters/character4.png"), "problem": "born_date", "dni": {"name": "Juan Ramirez", "born_date": "02/12/2009", "due_date": "05/05/2026", "document_photo": preload("res://images/portraits/portrait4.png")}},
-	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": "no_ticket", "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
+	{"name": "Micaela", "image": preload("res://images/characters/character8.png"), "problem": "no_ticket_logo", "dni": {"name": "Micaela Fernandez", "born_date": "14/08/2000", "due_date": "02/12/2024", "document_photo": preload("res://images/portraits/portrait8.png")}},
 	{"name": "Tomás", "image": preload("res://images/characters/character12.png"), "problem": null, "dni": {"name": "Tomás Sánchez", "born_date": "01/01/2001", "due_date": "20/10/2025", "document_photo": preload("res://images/portraits/portrait12.png")}},
 	{"name": "Jorge", "image": preload("res://images/characters/character18.png"), "problem": "no_dni", "dni": {"name": "Jorge Jorji", "born_date": "01/04/1999", "due_date": "10/03/1998", "document_photo": preload("res://images/portraits/portrait18.png")}},
 	{"name": "Victoria", "image": preload("res://images/characters/character2.png"), "problem": null, "dni": {"name": "Victoria Ramirez", "born_date": "10/03/2002", "due_date": "20/12/2025", "document_photo": preload("res://images/portraits/portrait2.png")}},
@@ -274,6 +274,8 @@ func new_selected_person():
 		return persons_third_level[selected_index]
 	
 func next_person():
+	if current_level == 3 and not ticket_logo.visible:
+		ticket_logo.visible = true
 	selected_person = new_selected_person()
 	character_animation_player.play("character_appear")	
 	character_sprite.position = Vector2(-500, 0)	
@@ -298,7 +300,7 @@ func handle_accept_reject(problem, wasAccepted):
 		if current_level != 1 and selected_person["problem"] != "no_ticket":
 			ticket_animation_player.play("ticket_disappear")
 	
-	if problem in ["due_date", "born_date", "wrong_portrait", "no_dni", "no_ticket"]:
+	if problem in ["due_date", "born_date", "wrong_portrait", "no_dni", "no_ticket", "no_ticket_logo"]:
 		if wasAccepted:
 			incorrect_characters.append(problem)
 			handle_strikes()
@@ -338,6 +340,8 @@ func handle_incorrect_choice_notification(problem):
 			message = "Ni siquiera tenia DNI..."
 		"no_ticket":
 			message = "Faltaba el ticket de entrada"
+		"no_ticket_logo":
+			message = "El ticket no tenia el logo"
 		_:
 			message = "No habia nada de malo con el cliente"
 
@@ -481,9 +485,13 @@ func _on_animation_player_animation_started(animation_name):
 		show_dialogue()
 		
 		if current_level == 1:
+			random_credential.scale = Vector2(0.2, 0.2)
 			random_credential.texture = sube
 		elif current_level == 2:
 			random_credential.texture = ioma
+		elif current_level == 3:
+			random_credential.scale = Vector2(0.5, 0.5)
+			random_credential.texture = pitusas
 			
 		if selected_person["problem"] == "no_dni":
 			random_credential_animation_player.play("random_credential_appear")
