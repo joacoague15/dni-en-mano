@@ -100,6 +100,7 @@ extends Node2D
 @onready var pitusas = preload("res://images/pitusas.png")
 @onready var phone_display_level_1 = preload("res://images/phone_display_level_1.png")
 @onready var phone_display_level_2 = preload("res://images/phone_display_level_2.png")
+@onready var phone_display_level_3 = preload("res://images/phone_display_level_3.png")
 
 # --- HEART ICONS ---
 # Heart icons for lives
@@ -454,6 +455,8 @@ func fill_result_details():
 	else:
 		if current_level == 1:
 			phone.texture = phone_display_level_2
+		elif current_level == 2:
+			phone.texture = phone_display_level_3
 		win_or_loose_screen.texture = win_screen
 		win_or_loose_label.text = "GANASTE"
 		win_or_loose_label.modulate = Color(0, 1, 0)

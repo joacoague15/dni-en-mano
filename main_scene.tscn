@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bukv20ryi2nb1" path="res://images/person_icon.png" id="13_fgm3s"]
 [ext_resource type="Texture2D" uid="uid://cvrrdv55i2h5u" path="res://images/menu_background.png" id="13_ico3j"]
 [ext_resource type="Texture2D" uid="uid://c878r7uwyy1nw" path="res://images/play_button.png" id="14_7xau4"]
-[ext_resource type="Texture2D" uid="uid://den1tvx411g0u" path="res://images/phone_display_level_1.png" id="15_4qmgs"]
 [ext_resource type="AudioStream" uid="uid://rpxiwy0jfr0s" path="res://sounds/main_soundtrack.ogg" id="15_041t7"]
 [ext_resource type="Texture2D" uid="uid://cmphdk3pi0mgy" path="res://images/full_heart.png" id="15_q41q0"]
 [ext_resource type="VideoStream" path="res://main_cinematic.ogv" id="15_xscx3"]
@@ -1213,6 +1212,9 @@ _data = {
 "slowly_stop_cinematic_music": SubResource("Animation_q5q3p")
 }
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mtxkh"]
+load_path = "res://.godot/imported/phone_display_level_1.png-3e128c8e02430be679afa1a942ca5fc8.ctex"
+
 [sub_resource type="Animation" id="Animation_7ou0i"]
 length = 0.001
 tracks/0/type = "value"
@@ -1947,7 +1949,7 @@ visible = false
 z_index = 100
 position = Vector2(400, 485)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("15_4qmgs")
+texture = SubResource("CompressedTexture2D_mtxkh")
 
 [node name="RulesAnimationPlayer" type="AnimationPlayer" parent="Phone"]
 root_node = NodePath("../RulesLabel")
