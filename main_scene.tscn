@@ -6,8 +6,8 @@
 [ext_resource type="FontFile" uid="uid://ccvlwspbby7hc" path="res://roboto.ttf" id="3_a2yxb"]
 [ext_resource type="AudioStream" uid="uid://dy1b01a37fev" path="res://sounds/noche_de_entrada.ogg" id="6_6nby6"]
 [ext_resource type="Texture2D" uid="uid://delxkwthmvi77" path="res://images/thumb_down.png" id="9_5kib1"]
+[ext_resource type="Texture2D" uid="uid://dxnr0loc7r0g" path="res://images/menu_background.jpg" id="11_f7t1c"]
 [ext_resource type="Texture2D" uid="uid://bukv20ryi2nb1" path="res://images/person_icon.png" id="13_fgm3s"]
-[ext_resource type="Texture2D" uid="uid://cvrrdv55i2h5u" path="res://images/menu_background.png" id="13_ico3j"]
 [ext_resource type="Texture2D" uid="uid://c878r7uwyy1nw" path="res://images/play_button.png" id="14_7xau4"]
 [ext_resource type="AudioStream" uid="uid://rpxiwy0jfr0s" path="res://sounds/main_soundtrack.ogg" id="15_041t7"]
 [ext_resource type="Texture2D" uid="uid://cmphdk3pi0mgy" path="res://images/full_heart.png" id="15_q41q0"]
@@ -1776,7 +1776,7 @@ texture = SubResource("CompressedTexture2D_1mi17")
 z_index = 5
 position = Vector2(9.00003, -0.500001)
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("13_ico3j")
+texture = ExtResource("11_f7t1c")
 
 [node name="Play" type="Button" parent="Menu"]
 z_index = 6
@@ -1995,6 +1995,7 @@ texture = SubResource("CompressedTexture2D_1mi17")
 
 [node name="EndScreen" type="Sprite2D" parent="."]
 visible = false
+z_index = 200
 position = Vector2(8.99994, -0.499937)
 scale = Vector2(0.7, 0.700926)
 texture = ExtResource("17_qlm35")
