@@ -199,7 +199,7 @@ var time_since_last_check = 0.0
 # --- GAMEPLAY MECHANICS ---
 var energy = 100
 var PERMITED_STRIKES = 2
-var correct_character_needed = 8
+var correct_character_needed = 1
 var strikes = 0
 var heart_sprites = []
 
@@ -470,12 +470,12 @@ func handle_new_level_settings():
 	current_level += 1
 	if current_level == 2:
 		current_date.text = "05-10-2024"
-		correct_character_needed = 7
+		correct_character_needed = 1
 		phone.texture = phone_display_level_2
 	elif current_level == 3:
 		ticket_logo.visible = true
 		current_date.text = "06-10-2024"
-		correct_character_needed = 8		
+		correct_character_needed = 1
 		
 func display_end_screen():
 	end_screen.visible = true

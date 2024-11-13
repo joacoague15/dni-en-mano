@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b5aa8bbwpr8mm"]
+[gd_scene load_steps=73 format=3 uid="uid://b5aa8bbwpr8mm"]
 
 [ext_resource type="Script" path="res://main_script.gd" id="1_3f8pj"]
 [ext_resource type="Texture2D" uid="uid://dpm1mll7rw4r" path="res://images/entire_background.png" id="2_edmgr"]
@@ -16,6 +16,7 @@
 [ext_resource type="VideoStream" path="res://idle.ogv" id="16_lp6ko"]
 [ext_resource type="Texture2D" uid="uid://bsms5ga3jkg47" path="res://images/empty_heart.png" id="16_p0gkp"]
 [ext_resource type="AudioStream" uid="uid://bs7wkans0ciur" path="res://sounds/oso_pixel.ogg" id="17_1qiee"]
+[ext_resource type="Texture2D" uid="uid://dr1dgtghe4m6" path="res://images/final_background.png" id="17_qlm35"]
 
 [sub_resource type="Animation" id="Animation_5h8d7"]
 length = 0.001
@@ -1992,39 +1993,11 @@ position = Vector2(-9, 4)
 scale = Vector2(0.116195, 0.116195)
 texture = SubResource("CompressedTexture2D_1mi17")
 
-[node name="EndScreen" type="Node2D" parent="."]
+[node name="EndScreen" type="Sprite2D" parent="."]
 visible = false
-
-[node name="Background" type="ColorRect" parent="EndScreen"]
-z_index = 10
-offset_left = -577.0
-offset_top = -339.0
-offset_right = 595.0
-offset_bottom = 338.0
-color = Color(0, 0, 0, 1)
-
-[node name="Title" type="Label" parent="EndScreen"]
-z_index = 10
-offset_left = -529.0
-offset_top = -296.0
-offset_right = -27.0
-offset_bottom = -231.0
-theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_a2yxb")
-theme_override_font_sizes/font_size = 48
-text = "GRACIAS POR JUGAR!"
-
-[node name="Description" type="Label" parent="EndScreen"]
-z_index = 10
-offset_left = -419.0
-offset_top = -103.0
-offset_right = 438.0
-offset_bottom = -8.0
-theme_override_font_sizes/font_size = 32
-text = "Contanos todas las sugerencia que tengas y las cosas que te gustaron (y las que no)"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
+position = Vector2(8.99994, -0.499937)
+scale = Vector2(0.7, 0.700926)
+texture = ExtResource("17_qlm35")
 
 [connection signal="animation_finished" from="ResultScreen/ResultAnimationPlayer" to="." method="_on_result_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="ResultScreen/NextLevelButton" to="." method="_on_next_level_button_mouse_entered"]
