@@ -4,6 +4,6 @@
 <h2>Qué usamos para crearlo?</h2>
 <ul>
   <li>Engine: [Godot 4.3](https://godotengine.org)</li>
-  <li>Música: generada con [Suno]((https://suno.com)) y [Udio](https://www.udio.com)</li>
+  <li>Música: generada con [Suno](https://suno.com) y [Udio](https://www.udio.com)</li>
   <li>Arte: Photoshop</li>
 </ul>
